@@ -12,11 +12,6 @@ menu:
 
 projects:
 - {name: '#001 Iniciando um projeto git',   url: '001'}
-- {name: 'Project One',   url: 'proj-1'}
-- {name: 'Project Two',   url: 'proj-2'}
-- {name: 'Project Three', url: 'proj-3'}
-- {name: 'Project Four',  url: 'proj-4'}
-- {name: 'Project Five',  url: 'proj-5'}
 
 #-------------------------------
 # Contact Section

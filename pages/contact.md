@@ -1,9 +1,9 @@
 ---
 layout: page
-title: Contact
+title: Contato
 permalink: /contact
 ---
 
-# Contact
+# Contato
 
-You may contact me [through my email](mailto:l.nguyen.paul@gmail.com) or [tweet at me](https://twitter.com/intent/tweet?text=%40paululele) if you have any questions or would like to bring up any issues.
+Você pode [me mandar um e-mail](mailto:gitfichas@jtemporal.com) ou [me mandar um tweet](https://twitter.com/intent/tweet?text=%40jesstemporal).

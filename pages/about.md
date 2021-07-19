@@ -1,9 +1,17 @@
 ---
 layout: page
-title: About
+title: Sobre
 permalink: /about
 ---
 
 # Portfolio Jekyll Theme
 
-This is a personal portfolio theme that I built from the ground up, using the [DevTips Starter Kit](http://devtipsstarterkit.com/) as a foundation for starting, and following closely the amazing tutorial by [Travis Neilson over at DevTips](https://www.youtube.com/watch?v=T6jKLsxbFg4&list=PL0CB3OvPhDA_STygmp3sDenx3UpdOMk7P). You can [check out the demo](lenpaul.github.io/portfolio-jekyll-theme/), and [fork the repository](https://github.com/LeNPaul/portfolio-jekyll-theme/fork), to get started.
+Te desejo boas-vindas ao GitFichas!
+
+O GitFichas vai te ajudar a estudar git em Português!
+
+Este projeto foi criado e é mantido por [Jessica Temporal](https://jtemporal.com/).
+
+Se tiver alguma dúvida ou se tiver ideia de alguma ficha de estudo sobre git que você quer ver aqui [me manda um tweet](https://twitter.com/jesstemporal), as DMs estão abertas 😉.
+
+Esse tema foi criado por [LeNPaul](https://github.com/LeNPaul) e você pode achar [o código fonte para o tema aqui](https://github.com/LeNPaul/portfolio-jekyll-theme/).
