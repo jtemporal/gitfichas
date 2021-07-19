@@ -21,11 +21,11 @@ projects:
 # Contact Section
 
 social:
-- {icon: 'twitter',   link: 'https://twitter.com/paululele'}
-- {icon: 'instagram', link: 'https://instagram.com/paululele'}
-- {icon: 'github',    link: 'https://github.com/lenpaul'}
-- {icon: 'linkedin',  link: 'https://linkedin.com/in/lenpaul'}
-- {icon: 'envelope',  link: 'mailto:mailto:l.nguyen.paul@gmail.com'}
+- {icon: 'twitter',   link: 'https://twitter.com/jesstemporal'}
+- {icon: 'instagram', link: 'https://instagram.com/gitfichas'}
+- {icon: 'github',    link: 'https://github.com/jtemporal'}
+- {icon: 'linkedin',  link: 'https://linkedin.com/in/jessicatemporal'}
+- {icon: 'envelope',  link: 'mailto:mailto:gitfichas@jtemporal.com'}
 
 # social network icons available: 'twitter' / 'facebook' / 'github' / 'pinterest' 'google-plus' / 'linkedin' / 'youtube' / 'instagram' / 'dribbble' / 'behance' / 'soundcloud' / 'vine'
 
@@ -35,9 +35,9 @@ social:
 # NOTE: Providing SEO information will make this website more searchable on the internet.
 
 seo:
-  description: 'Personal portfolio powered by Jekyll and GitHub Pages '
-  rel-author: 'https://plus.google.com/u/0/#'
-  rel-publisher: 'https://plus.google.com/u/0/#'
+  description: 'Fichas de estudo sobre Git em Português 🇧🇷'
+  rel-author: 'https://jtemporal.com'
+  rel-publisher: 'https://jtemporal.com'
 
 #-------------------------------
 # Google Analytics Section
@@ -48,7 +48,7 @@ seo:
 # NOTE: If you want to use Google Analytics for basic web tracking: Just uncomment and enter your UA-Code here.
 
 # If you are not using Google Analytics, please change 'google-ID' to an empty string
-google-analytics-ua: 'UA-112060364-3'
+google-analytics-ua: 'UA-89599031-1'
 
 #-------------------------------
 # Disqus Section
@@ -56,4 +56,4 @@ google-analytics-ua: 'UA-112060364-3'
 # Change to true for Disqus comments
 disqus:
   comments: false
-  disqus_shortname: ''
+  disqus_shortname: 'jtemporal'
