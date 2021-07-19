@@ -3,7 +3,7 @@
 
 menu:
 - {name: 'Projects', url: ''}
-- {name: 'Blog',     url: 'blog'}
+- {name: 'Blog',     url: 'https://jtemporal.com'}
 - {name: 'About',    url: 'about'}
 - {name: 'Contact',  url: 'contact'}
 
