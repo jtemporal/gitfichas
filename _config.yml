@@ -3,11 +3,12 @@
 port: 4000
 markdown:  kramdown
 permalink: /:title
-plugins:   [jekyll-sitemap, jekyll-feed,  jekyll-seo-tag]
+plugins:   [jekyll-sitemap, jekyll-feed, jekyll-seo-tag, jekyll-redirect-from]
 mainimage: "/assets/img/thumbnail"
 
 # Customise atom feed settings (this is where Jekyll-Feed gets configuration information)
 
-title:		   "GitFichas"
+title:       "GitFichas"
 description: "Fichas de estudo sobre Git em Português 🇧🇷"
 author:      "Jessica Temporal"
+
