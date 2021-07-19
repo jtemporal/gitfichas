@@ -2,10 +2,10 @@
 # General Site Settings
 
 menu:
-- {name: 'Projects', url: ''}
+- {name: 'Fichas', url: ''}
 - {name: 'Blog',     url: 'https://jtemporal.com'}
-- {name: 'About',    url: 'about'}
-- {name: 'Contact',  url: 'contact'}
+- {name: 'Sobre',    url: 'about'}
+- {name: 'Contato',  url: 'contact'}
 
 #-------------------------------
 # Projects Section
