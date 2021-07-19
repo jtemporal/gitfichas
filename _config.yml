@@ -8,6 +8,6 @@ mainimage: "/assets/img/thumbnail"
 
 # Customise atom feed settings (this is where Jekyll-Feed gets configuration information)
 
-title:		   "GitFichas"
+title:       "GitFichas"
 description: "Fichas de estudo sobre Git em Português 🇧🇷"
 author:      "Jessica Temporal"
