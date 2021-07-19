@@ -11,3 +11,6 @@ mainimage: "/assets/img/thumbnail"
 title:       "GitFichas"
 description: "Fichas de estudo sobre Git em Português 🇧🇷"
 author:      "Jessica Temporal"
+
+plugins_dir:
+  - jekyll-redirect-from
