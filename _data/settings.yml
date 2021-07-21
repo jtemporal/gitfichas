@@ -11,7 +11,9 @@ menu:
 # Projects Section
 
 projects:
+- {name: '#002 Adicionando arquivos',   url: '002'}
 - {name: '#001 Iniciando um projeto git',   url: '001'}
+
 
 #-------------------------------
 # Contact Section
@@ -21,7 +23,7 @@ social:
 - {icon: 'instagram', link: 'https://instagram.com/gitfichas'}
 - {icon: 'github',    link: 'https://github.com/jtemporal'}
 - {icon: 'linkedin',  link: 'https://linkedin.com/in/jessicatemporal'}
-- {icon: 'envelope',  link: 'mailto:mailto:gitfichas@jtemporal.com'}
+- {icon: 'envelope',  link: 'mailto:gitfichas@jtemporal.com'}
 
 # social network icons available: 'twitter' / 'facebook' / 'github' / 'pinterest' 'google-plus' / 'linkedin' / 'youtube' / 'instagram' / 'dribbble' / 'behance' / 'soundcloud' / 'vine'
 
@@ -51,5 +53,5 @@ google-analytics-ua: 'G-QL2P5KTWT0'
 
 # Change to true for Disqus comments
 disqus:
-  comments: false
+  comments: tru
   disqus_shortname: 'jtemporal'
