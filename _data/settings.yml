@@ -11,8 +11,9 @@ menu:
 # Projects Section
 
 projects:
-- {name: '#001 Iniciando um projeto git',   url: '001'}
 - {name: '#002 Adicionando arquivos',   url: '002'}
+- {name: '#001 Iniciando um projeto git',   url: '001'}
+
 
 #-------------------------------
 # Contact Section
@@ -52,5 +53,5 @@ google-analytics-ua: 'G-QL2P5KTWT0'
 
 # Change to true for Disqus comments
 disqus:
-  comments: true
+  comments: tru
   disqus_shortname: 'jtemporal'
