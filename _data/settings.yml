@@ -22,7 +22,7 @@ social:
 - {icon: 'instagram', link: 'https://instagram.com/gitfichas'}
 - {icon: 'github',    link: 'https://github.com/jtemporal'}
 - {icon: 'linkedin',  link: 'https://linkedin.com/in/jessicatemporal'}
-- {icon: 'envelope',  link: 'mailto:mailto:gitfichas@jtemporal.com'}
+- {icon: 'envelope',  link: 'mailto:gitfichas@jtemporal.com'}
 
 # social network icons available: 'twitter' / 'facebook' / 'github' / 'pinterest' 'google-plus' / 'linkedin' / 'youtube' / 'instagram' / 'dribbble' / 'behance' / 'soundcloud' / 'vine'
 
