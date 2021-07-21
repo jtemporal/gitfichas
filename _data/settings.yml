@@ -12,6 +12,7 @@ menu:
 
 projects:
 - {name: '#001 Iniciando um projeto git',   url: '001'}
+- {name: '#002 Adicionando arquivos',   url: '002'}
 
 #-------------------------------
 # Contact Section
