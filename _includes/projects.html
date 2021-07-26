@@ -1,8 +1,8 @@
 <section>
   <div class="project-container">
     
-    {% assign grouped = site.projects %}
-    {% for project in site.projects | reverse %}
+    {% assign sorted = site.projects | sort: 'date' | reverse %}
+    {% for project in sorted %}
       <a href="{{ site.github.url }}{{ project.url }}">
         <div class="project-unit" data-folder="{{ site.github.url }}{{ project.url }}" style="background-image: url({{ site.github.url }}/assets/img{{ project.url }}/thumbnail.jpg)">
           <div class="project-overlay">
