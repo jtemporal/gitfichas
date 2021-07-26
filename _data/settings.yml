@@ -11,6 +11,7 @@ menu:
 # Projects Section
 
 projects:
+- {name: '#005 O que é staging',   url: '005'}
 - {name: '#004 Conferindo um commit',   url: '004'}
 - {name: '#003 Fazendo um commit',   url: '003'}
 - {name: '#002 Adicionando arquivos',   url: '002'}
