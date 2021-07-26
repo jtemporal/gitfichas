@@ -4,6 +4,7 @@ port: 4000
 markdown:  kramdown
 permalink: /:title
 plugins:   [jekyll-sitemap, jekyll-feed, jekyll-seo-tag, jekyll-redirect-from]
+exclude: ['templates', 'variables.yaml']
 mainimage: "/assets/img/thumbnail"
 
 # Customise atom feed settings (this is where Jekyll-Feed gets configuration information)
