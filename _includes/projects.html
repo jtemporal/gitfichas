@@ -3,8 +3,8 @@
     
     {% assign grouped = site.projects %}
     {% for project in site.projects %}
-      <a href="{{ site.github.url }}/projects/{{ project.url }}">
-        <div class="project-unit" data-folder="{{ site.github.url }}/projects/{{ project.url }}" style="background-image: url({{ site.github.url }}/assets/img/projects/{{ project.url }}/thumbnail.jpg)">
+      <a href="{{ site.github.url }}{{ project.url }}">
+        <div class="project-unit" data-folder="{{ site.github.url }}{{ project.url }}" style="background-image: url({{ site.github.url }}/assets/img{{ project.url }}/thumbnail.jpg)">
           <div class="project-overlay">
             <strong>{{ project.name }} <i class="fa fa-arrow-right" aria-hidden="true"></i></strong>
           </div>
