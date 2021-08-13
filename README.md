@@ -2,8 +2,6 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/66b3d264-55b3-4051-a693-49c7107a2b8f/deploy-status)](https://app.netlify.com/sites/gitfichas/deploys)
 
-Test PR
-
 ## Credits
 
 ### Creator of this template
