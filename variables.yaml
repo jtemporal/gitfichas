@@ -1,5 +1,5 @@
 [variables]
-ficha = 013
-date = 2021-08-23
-desc = HEAD
-alt = O que é o HEAD? um ponteiro para indicar em qual branch você está
+ficha = 018
+date = 2021-09-08
+desc = git clone url
+alt = O comando git clone url serve para baixar o projeto pra sua máquina, url é o caminho do projeto na cloud.
