@@ -50,11 +50,3 @@ seo:
 
 # If you are not using Google Analytics, please change 'google-ID' to an empty string
 google-analytics-ua: 'G-QL2P5KTWT0'
-
-#-------------------------------
-# Disqus Section
-
-# Change to true for Disqus comments
-disqus:
-  comments: tru
-  disqus_shortname: 'jtemporal'
