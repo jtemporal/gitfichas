@@ -1,0 +1,45 @@
+{% if page.next.url %}
+<a href="{{page.next.url | prepend: site.url}}" class="navigation navigation-next navigation-unique" aria-label="{{page.next.title}}" style="margin-right: 0px;">
+    <i class="fa fa-angle-left"></i>
+</a>
+{% endif %}
+{% if page.previous.url %}
+<a href="{{page.previous.url | prepend: site.url}}" class="navigation navigation-prev navigation-unique" aria-label="{{page.previous.title}}" style="margin-right: 0px;">
+    <i class="fa fa-angle-right"></i>
+</a>
+{% endif %}
+
+<style>
+    .navigation-next {
+        left:0;
+    }
+
+    .navigation-prev {
+        right:0;
+    }
+
+    .navigation {
+        position: absolute;
+        top: 50px;
+        bottom: 0;
+        margin: 0;
+        max-width: 150px;
+        min-width: 90px;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+        font-size: 40px;
+        color: #ccc;
+        text-align: center;
+        -webkit-transition: all 350ms ease;
+        -moz-transition: all 350ms ease;
+        -o-transition: all 350ms ease;
+        transition: all 350ms ease;
+    }
+
+    .navigation:hover {
+        text-decoration: none;
+        color: #444;
+    }
+</style>
