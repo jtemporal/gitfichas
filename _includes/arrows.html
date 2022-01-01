@@ -37,6 +37,24 @@
         -moz-transition: all 350ms ease;
         -o-transition: all 350ms ease;
         transition: all 350ms ease;
+
+        @media screen and (max-width: 1240px){
+            position: static;
+            top: auto;
+            max-width: 50%;
+            width: 50%;
+            display: inline-block;
+            float: left;
+            bottom: 0;
+            margin: 0;
+            min-width: 90px;
+            justify-content: center;
+            align-content: center;
+            flex-direction: column;
+            font-size: 40px;
+            color: #ccc;
+            text-align: center;
+        }
     }
 
     .navigation:hover {
