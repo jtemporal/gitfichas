@@ -2,6 +2,7 @@ FROM jekyll/jekyll:3.8
 
 WORKDIR /srv/jekyll
 COPY Gemfile.lock .
+RUN chmod a+w Gemfile.lock
 COPY Gemfile .
 
 RUN gem install bundler
