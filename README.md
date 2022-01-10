@@ -2,6 +2,20 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/66b3d264-55b3-4051-a693-49c7107a2b8f/deploy-status)](https://app.netlify.com/sites/gitfichas/deploys)
 
+## Docker stuff
+
+### Building image
+
+```console
+docker build -t gitfichas .
+```
+
+### Serving
+
+```console
+docker run --rm --volume="$PWD:/srv/jekyll"  -p 4000:4000 -it gitfichas jekyll serve --livereload
+```
+
 ## Credits
 
 ### Creator of this template
