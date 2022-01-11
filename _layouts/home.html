@@ -2,4 +2,8 @@
 layout: default
 ---
 
-{% include projects.html %}
+{% if page.lang == "pt" %}
+  {% include projects.html %}
+{% else %}
+  {% include projects-en.html %}
+{% endif %}
