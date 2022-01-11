@@ -1,0 +1,14 @@
+<section>
+  <div class="project-container">
+    {% assign sorted = site.posts | where: "lang", "en" | sort: 'date' | reverse %}
+    {% for post in sorted %}
+      <a href="{{ site.github.url }}{{ project.url }}">
+        <div class="project-unit" data-folder="{{ site.github.url }}{{ project.url }}" style="background-image: url({{ site.github.url }}{{post.image}})">
+          <div class="project-overlay">
+            <strong>{{ post.title }} <i class="fa fa-arrow-right" aria-hidden="true"></i></strong>
+          </div>
+        </div>
+      </a>
+    {%endfor%}
+  </div>
+</section>
