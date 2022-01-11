@@ -1,0 +1,15 @@
+{% if page.lang == "pt" %}
+  <!-- for portuguese pages provide the english version -->
+  {% if page.translated %}
+    <a href="{{ site.github.url }}{{ page.translated }}"> 🇺🇸 </a>
+  {% else %}
+    <a href="{{ site.github.url }}/en"> 🇺🇸 </a>
+  {% endif %}
+{% else %}
+  <!-- for english pages provide the portuguese version -->
+  {% if page.translated %}
+    <a href="{{ site.github.url }}{{ page.translated }}"> 🇧🇷 </a>
+  {% else %}
+    <a href="{{ site.github.url }}/"> 🇧🇷 </a>
+  {% endif %}
+{% endif %}
