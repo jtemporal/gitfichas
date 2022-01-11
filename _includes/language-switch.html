@@ -1,5 +1,12 @@
 {% if page.lang == "pt" %}
   <!-- for portuguese pages provide the english version -->
+  {% for item in site.data.settings.menu.pt %}
+    {% if item.url contains "https" %}
+      <a href="{{ item.url }}">{{ item.name }}</a>
+    {% else %}
+      <a href="{{ site.github.url }}/{{ item.url }}">{{ item.name }}</a>
+    {% endif %}
+  {% endfor %}
   {% if page.translated %}
     <a href="{{ site.github.url }}{{ page.translated }}"> 🇺🇸 </a>
   {% else %}
@@ -7,6 +14,13 @@
   {% endif %}
 {% else %}
   <!-- for english pages provide the portuguese version -->
+  {% for item in site.data.settings.menu.en %}
+    {% if item.url contains "https" %}
+      <a href="{{ item.url }}">{{ item.name }}</a>
+    {% else %}
+      <a href="{{ site.github.url }}/{{ item.url }}">{{ item.name }}</a>
+    {% endif %}
+  {% endfor %}
   {% if page.translated %}
     <a href="{{ site.github.url }}{{ page.translated }}"> 🇧🇷 </a>
   {% else %}

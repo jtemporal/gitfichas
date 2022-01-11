@@ -2,21 +2,16 @@
 # General Site Settings
 
 menu:
-- {name: 'Fichas', url: ''}
-- {name: 'Blog',     url: 'https://jtemporal.com'}
-- {name: 'Sobre',    url: 'about'}
-- {name: 'Contato',  url: 'contact'}
-
-#-------------------------------
-# Projects Section
-
-projects:
-- {name: '#005 O que é staging',   url: '005'}
-- {name: '#004 Conferindo um commit',   url: '004'}
-- {name: '#003 Fazendo um commit',   url: '003'}
-- {name: '#002 Adicionando arquivos',   url: '002'}
-- {name: '#001 Iniciando um projeto git',   url: '001'}
-
+  pt:
+  - {name: 'Fichas', url: ''}
+  - {name: 'Blog',     url: 'https://jtemporal.com'}
+  - {name: 'Sobre',    url: 'sobre'}
+  - {name: 'Contato',  url: 'contato'}
+  en:
+  - {name: 'Cards', url: 'en'}
+  - {name: 'Blog',     url: 'https://jtemporal.com/en'}
+  - {name: 'About',    url: 'about'}
+  - {name: 'Contact',  url: 'contact'}
 
 #-------------------------------
 # Contact Section

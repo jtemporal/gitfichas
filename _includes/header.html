@@ -3,13 +3,6 @@
     <a href="{{ site.github.url }}/">{{ site.title }}</a>
   </div>
   <nav>
-    {% for item in site.data.settings.menu %}
-      {% if item.url contains "https" %}
-        <a href="{{ item.url }}">{{ item.name }}</a>
-      {% else %}
-        <a href="{{ site.github.url }}/{{ item.url }}">{{ item.name }}</a>
-      {% endif %}
-    {% endfor %}
     {% include language-switch.html %}
   </nav>
 </header>
