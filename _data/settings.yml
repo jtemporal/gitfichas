@@ -31,9 +31,14 @@ social:
 # NOTE: Providing SEO information will make this website more searchable on the internet.
 
 seo:
-  description: 'Fichas de estudo sobre Git em Português 🇧🇷'
-  rel-author: 'https://jtemporal.com'
-  rel-publisher: 'https://jtemporal.com'
+  pt:
+    description: 'Fichas de estudo sobre Git em Português 🇧🇷'
+    rel-author: 'https://jtemporal.com'
+    rel-publisher: 'https://jtemporal.com'
+  en:
+    description: 'Git study cards in English 🇺🇸'
+    rel-author: 'https://jtemporal.com'
+    rel-publisher: 'https://jtemporal.com'
 
 #-------------------------------
 # Google Analytics Section
