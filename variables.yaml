@@ -1,7 +1,7 @@
 [variables]
-ficha = 018
-date = 2021-09-08
-desc = git clone url
-alt = O comando git clone url serve para baixar o projeto pra sua máquina, url é o caminho do projeto na cloud.
-previd = 017
-prevtitle = #017 clone
+ficha = 037
+date = 2022-01-14
+desc = git reset HEAD^
+alt = O comando git reset HEAD seguido de ^ é um atalho para desfazer o último commit mais recente.
+previd = 036
+prevtitle = #036 git reset HEAD~3
