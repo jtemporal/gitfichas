@@ -20,12 +20,14 @@ next:
 
 <img alt="{{ alt }}" src="/assets/img/projects/{{ ficha }}/full.jpg">
 
-{% if related == "true" %}
+{% if related == "true" %}Leia mais sobre esse comando no blog post a seguir:
+
 <a href="{{ relatedsrc }}">
   <strong>{{ relatedtext }}</strong>
 </a>
-{% else %}
-<!--
+{% else %}<!--
+Leia mais sobre esse comando no blog post a seguir:
+
 <a href="{{ relatedsrc }}">
   <strong>{{ relatedtext }}</strong>
 </a>
