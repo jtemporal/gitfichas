@@ -17,7 +17,6 @@ next:
   url: ""
   title: ""
 {% endif %}
-{% endif %}
 ---
 
 <img alt="{{ alten }}" src="/assets/img/projects/en/{{ ficha }}/full.jpg">
