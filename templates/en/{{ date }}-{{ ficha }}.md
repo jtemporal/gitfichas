@@ -20,7 +20,7 @@ next:
 {% endif %}
 ---
 
-<img alt="{{ alten }}" src="/assets/img/projects/{{ ficha }}/full.jpg">
+<img alt="{{ alten }}" src="/assets/img/projects/en/{{ ficha }}/full.jpg">
 
 {% if related == "true" %}
 <a href="{{ relatedsrcen }}">
