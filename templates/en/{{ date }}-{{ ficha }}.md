@@ -10,7 +10,7 @@ previous:
   title: "{{ prevtitleen }}"
 {% if next == "true" %}
 next:
-  url: "https://gitfichas.com/en/{{ nextiden }}"
+  url: "https://gitfichas.com/en/{{ nextid }}"
   title: "{{ nexttitleen }}"
 {% else %}
 next:
