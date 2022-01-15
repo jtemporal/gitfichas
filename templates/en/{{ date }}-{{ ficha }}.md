@@ -3,7 +3,7 @@ layout: post
 title: '#{{ ficha }} {{ descen }}'
 image: "/assets/img/projects/en/{{ ficha }}/thumbnail.jpg"
 translated: "/projects/{{ ficha }}"
-permalink: "/en/{{ ficha }}
+permalink: "/en/{{ ficha }}"
 lang: "en"
 previous:
   url: "https://gitfichas.com/en/{{ previd }}"
