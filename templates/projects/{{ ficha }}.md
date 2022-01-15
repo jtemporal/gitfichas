@@ -13,3 +13,9 @@ next:
 ---
 
 <img alt="{{ alt }}" src="/assets/img/projects/{{ ficha }}/full.jpg">
+
+{% if related == "true" %}
+<a href="{{ relatedsrc }}">
+  <strong>{{ relatedtext }}</strong>
+</a>
+{% endif %}

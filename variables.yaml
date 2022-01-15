@@ -1,7 +1,18 @@
 [variables]
-ficha = 018
-date = 2021-09-08
-desc = git clone url
-alt = O comando git clone url serve para baixar o projeto pra sua máquina, url é o caminho do projeto na cloud.
-previd = 017
-prevtitle = #017 clone
+ficha = 036
+date = 2022-01-14
+
+desc = teste teste
+alt = alguma descricao
+descen = test test
+alten = some description
+
+previd = 035
+prevtitle = #035 algum
+prevtitleen = #035 some
+
+related = false
+relatedsrc = https://jtemporal.com
+relatedtext = algum blog post
+relatedsrcen = https://jtemporal.com/en
+relatedtexten = some blog post
