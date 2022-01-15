@@ -8,9 +8,16 @@ lang: "en"
 previous:
   url: "https://gitfichas.com/en/{{ previd }}"
   title: "{{ prevtitleen }}"
+{% if next == "true" %}
+next:
+  url: "https://gitfichas.com/en/{{ nextiden }}"
+  title: "{{ nexttitleen }}"
+{% else %}
 next:
   url: ""
   title: ""
+{% endif %}
+{% endif %}
 ---
 
 <img alt="{{ alten }}" src="/assets/img/projects/{{ ficha }}/full.jpg">
@@ -19,4 +26,10 @@ next:
 <a href="{{ relatedsrcen }}">
   <strong>{{ relatedtexten }}</strong>
 </a>
+{% else %}
+<!--
+<a href="{{ relatedsrcen }}">
+  <strong>{{ relatedtexten }}</strong>
+</a>
+-->
 {% endif %}

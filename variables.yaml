@@ -1,18 +1,23 @@
 [variables]
-ficha = 036
+ficha = 038
 date = 2022-01-15
 
-desc = teste teste
-alt = alguma descricao
-descen = test test
-alten = some description
+desc = git reset HEAD^ --soft
+alt = Se você precisa desfazer um commit mas manter as alterações correspondentes use comando git reset HEAD^ --soft
+descen = git reset HEAD^ --soft
+alten = If you need to undo a commit but maintain the corresponding alterations alterations use the command git reset HEAD^ --soft
 
-previd = 035
-prevtitle = #035 algum
-prevtitleen = #035 some
+previd = 037
+prevtitle = #037 git reset HEAD^
+prevtitleen = #037 git reset HEAD^
+
+next = true
+nextid = 038
+nexttitle = #038 git commit -C ORIG_HEAD
+nexttitleen = #038 git commit -C ORIG_HEAD
 
 related = false
-relatedsrc = https://jtemporal.com
-relatedtext = algum blog post
-relatedsrcen = https://jtemporal.com/en
-relatedtexten = some blog post
+relatedsrc = https://jtemporal.com/desfazendo-o-ultimo-commit-e-reaproveitando-a-mensagem/
+relatedtext = Desfazendo o último commit e mantendo as alterações para um próximo commit
+relatedsrcen = FILL
+relatedtexten = FILL
