@@ -12,7 +12,7 @@ I welcome you to GitFichas!
 
 GitFichas is a collection of study cards about git!
 
-It's name comes from Portuguese version of the project and literary means GitCards. Feel free to refer to it either way.
+Its name comes from Portuguese version of the project and literary means GitCards. Feel free to refer to it either way.
 
 This project was created and is mantained by [Jessica Temporal](https://jtemporal.com/).
 
