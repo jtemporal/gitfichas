@@ -13,7 +13,7 @@ docker build -t gitfichas .
 ### Serving
 
 ```console
-docker run --rm --volume="$PWD:/srv/jekyll"  -p 4000:4000 -it gitfichas jekyll serve --livereload
+docker run --rm --volume="$PWD:/srv/jekyll"  -p 4001:4000 -it gitfichas jekyll serve --livereload
 ```
 
 ## Credits

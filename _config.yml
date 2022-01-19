@@ -5,7 +5,7 @@ markdown:  kramdown
 permalink: /:title
 plugins:   [jekyll-sitemap, jekyll-feed, jekyll-seo-tag, jekyll-redirect-from]
 exclude: ['templates', 'variables.yaml']
-mainimage: "/assets/img/thumbnail"
+mainimage: "/assets/img/thumbnail.png"
 
 collections:
   - projects
