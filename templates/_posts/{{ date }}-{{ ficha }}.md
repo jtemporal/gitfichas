@@ -1,7 +1,7 @@
 ---
 layout: post
 title: '#{{ ficha }} {{ desc }}'
-image: "/assets/img/projects/{{ ficha }}/thumbnail.jpg"
+image: "{{ thumbnail }}"
 permalink: "/projects/{{ ficha }}"
 translated: "/en/{{ ficha }}"
 lang: "pt"
@@ -12,14 +12,13 @@ previous:
 next:
   url: "https://gitfichas.com/projects/{{ nextid }}"
   title: "{{ nexttitle }}"
-{% else %}
-next:
+{% else %}next:
   url: ""
   title: ""
 {% endif %}
 ---
 
-<img alt="{{ alt }}" src="/assets/img/projects/{{ ficha }}/full.jpg">
+<img alt="{{ alt }}" src="{{ highres }}">
 
 {% if related == "true" %}Leia mais sobre esse comando no blog post a seguir:
 
