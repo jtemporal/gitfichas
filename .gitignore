@@ -1,5 +1,8 @@
 # Created by http://www.gitignore.io
 
+### working copy ###
+**/clipboard.txt
+
 ### OSX ###
 .DS_Store
 .AppleDouble
