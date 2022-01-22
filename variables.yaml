@@ -7,6 +7,11 @@ alt = Se você precisa desfazer um commit mas manter as alterações corresponde
 descen = git reset HEAD^ --soft
 alten = If you need to undo a commit but maintain the corresponding alterations alterations use the command git reset HEAD^ --soft
 
+highres = https://jtemporal.com/
+thumbnail = https://jtemporal.com/
+highresen = https://jtemporal.com/
+thumbnailen = https://jtemporal.com/
+
 previd = 037
 prevtitle = #037 git reset HEAD^
 prevtitleen = #037 git reset HEAD^
