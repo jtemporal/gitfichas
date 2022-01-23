@@ -1,25 +1,25 @@
 [variables]
-ficha = 038
-date = 2022-01-15
+ficha = 040
+date = 2022-01-19
 
-desc = git reset HEAD^ --soft
-alt = Se você precisa desfazer um commit mas manter as alterações correspondentes use comando git reset HEAD^ --soft
-descen = git reset HEAD^ --soft
-alten = If you need to undo a commit but maintain the corresponding alterations alterations use the command git reset HEAD^ --soft
+desc = O que é stash?
+alt = Um stash é um conjunto de mudanças armazenadas para serem usados depois e cada stash tem um índice.
+descen = What is stash?
+alten = A stash is a bundle of changes stored to be used later and each stash has an index.
 
-highres = https://jtemporal.com/
-thumbnail = https://jtemporal.com/
-highresen = https://jtemporal.com/
-thumbnailen = https://jtemporal.com/
+highres = https://res.cloudinary.com/jesstemporal/image/upload/v1642964758/gitfichas/pt/040/full_uphbon.jpg
+thumbnail = https://res.cloudinary.com/jesstemporal/image/upload/v1642964758/gitfichas/pt/040/thumbnail_rnpb3c.jpg
+highresen = https://res.cloudinary.com/jesstemporal/image/upload/v1642964723/gitfichas/en/040/full_uq54to.jpg
+thumbnailen = https://res.cloudinary.com/jesstemporal/image/upload/v1642964722/gitfichas/en/040/thumbnail_efctyk.jpg
 
-previd = 037
-prevtitle = #037 git reset HEAD^
-prevtitleen = #037 git reset HEAD^
+previd = 039
+prevtitle = #039 git commit -C ORIG_HEAD
+prevtitleen = #039 git commit -C ORIG_HEAD
 
 next = true
-nextid = 038
-nexttitle = #038 git commit -C ORIG_HEAD
-nexttitleen = #038 git commit -C ORIG_HEAD
+nextid = 041
+nexttitle = #041 git stash push
+nexttitleen = #041 git stash push
 
 related = false
 relatedsrc = https://jtemporal.com/desfazendo-o-ultimo-commit-e-reaproveitando-a-mensagem/
