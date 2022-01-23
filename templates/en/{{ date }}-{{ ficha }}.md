@@ -14,7 +14,7 @@ previous:
 {% else %}next:
   url: ""
   title: ""
-{% endif %}---{% if subtitleen %}
+{% endif %}---{% if subs == "true" %}
 ##### {{ subtitleen }}{% endif %}
 
 <img alt="{{ alten }}" src="{{ highresen }}"><br><br>

@@ -1,25 +1,29 @@
 [variables]
-ficha = 040
-date = 2022-01-19
+ficha = 041
+date = 2022-01-20
 
-desc = O que é stash?
-alt = Um stash é um conjunto de mudanças armazenadas para serem usados depois e cada stash tem um índice.
-descen = What is stash?
-alten = A stash is a bundle of changes stored to be used later and each stash has an index.
+desc = git stash push
+alt = Para criar um stas, use o comando git stash push
+descen = git stash push
+alten = To create a stash, use the command git stash push.
 
-highres = https://res.cloudinary.com/jesstemporal/image/upload/v1642964758/gitfichas/pt/040/full_uphbon.jpg
-thumbnail = https://res.cloudinary.com/jesstemporal/image/upload/v1642964758/gitfichas/pt/040/thumbnail_rnpb3c.jpg
-highresen = https://res.cloudinary.com/jesstemporal/image/upload/v1642964723/gitfichas/en/040/full_uq54to.jpg
-thumbnailen = https://res.cloudinary.com/jesstemporal/image/upload/v1642964722/gitfichas/en/040/thumbnail_efctyk.jpg
+subs = true
+subtitle = Guardando alterações para depois
+subtitleen = Saving changes for later
 
-previd = 039
-prevtitle = #039 git commit -C ORIG_HEAD
-prevtitleen = #039 git commit -C ORIG_HEAD
+highres = https://res.cloudinary.com/jesstemporal/image/upload/v1642964758/gitfichas/pt/041/full_m1zqzv.jpg
+thumbnail = https://res.cloudinary.com/jesstemporal/image/upload/v1642964758/gitfichas/pt/041/thumbnail_kf7ksj.jpg
+highresen = https://res.cloudinary.com/jesstemporal/image/upload/v1642964723/gitfichas/en/041/full_iswlps.jpg
+thumbnailen = https://res.cloudinary.com/jesstemporal/image/upload/v1642964722/gitfichas/en/041/thumbnail_uu3g28.jpg
+
+previd = 040
+prevtitle = #040 o que é stash?
+prevtitleen = #040 what is stash?
 
 next = true
-nextid = 041
-nexttitle = #041 git stash push
-nexttitleen = #041 git stash push
+nextid = 042
+nexttitle = #042 git stash -m “alterações”
+nexttitleen = #042 git stash -m “changes”
 
 related = false
 relatedsrc = https://jtemporal.com/desfazendo-o-ultimo-commit-e-reaproveitando-a-mensagem/
