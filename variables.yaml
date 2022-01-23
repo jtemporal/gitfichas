@@ -1,25 +1,29 @@
 [variables]
-ficha = 038
-date = 2022-01-15
+ficha = 044
+date = 2022-01-23
 
-desc = git reset HEAD^ --soft
-alt = Se você precisa desfazer um commit mas manter as alterações correspondentes use comando git reset HEAD^ --soft
-descen = git reset HEAD^ --soft
-alten = If you need to undo a commit but maintain the corresponding alterations alterations use the command git reset HEAD^ --soft
+desc = git stash pop
+alt = Para remover um stash da lista e ao mesmo tempo aplicar as mudanças contidas nele, use o comando git stash pop
+descen = git stash pop
+alten = To remove a stash entry from the pile and apply the changes it contains at the same time, use the command git stash pop
 
-highres = https://jtemporal.com/
-thumbnail = https://jtemporal.com/
-highresen = https://jtemporal.com/
-thumbnailen = https://jtemporal.com/
+subs = true
+subtitle = Removendo um stash da pilha e aplicando ele
+subtitleen = Removing a stash from the pile and applying it
 
-previd = 037
-prevtitle = #037 git reset HEAD^
-prevtitleen = #037 git reset HEAD^
+highres = https://res.cloudinary.com/jesstemporal/image/upload/v1642964759/gitfichas/pt/044/full_sbhjsb.jpg
+thumbnail = https://res.cloudinary.com/jesstemporal/image/upload/v1642964759/gitfichas/pt/044/thumbnail_fq4szz.jpg
+highresen = https://res.cloudinary.com/jesstemporal/image/upload/v1642964724/gitfichas/en/044/full_hvzjs2.jpg
+thumbnailen = https://res.cloudinary.com/jesstemporal/image/upload/v1642964723/gitfichas/en/044/thumbnail_qscsac.jpg
 
-next = true
-nextid = 038
-nexttitle = #038 git commit -C ORIG_HEAD
-nexttitleen = #038 git commit -C ORIG_HEAD
+previd = 043
+prevtitle = #043 git stash list
+prevtitleen = #043 git stash list
+
+next = false
+nextid = 044
+nexttitle = #044 git stash pop
+nexttitleen = #044 git stash pop
 
 related = false
 relatedsrc = https://jtemporal.com/desfazendo-o-ultimo-commit-e-reaproveitando-a-mensagem/

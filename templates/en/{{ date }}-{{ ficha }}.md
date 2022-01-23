@@ -8,24 +8,32 @@ lang: "en"
 previous:
   url: "https://gitfichas.com/en/{{ previd }}"
   title: "{{ prevtitleen }}"
-{% if next == "true" %}
-next:
+{% if next == "true" %}next:
   url: "https://gitfichas.com/en/{{ nextid }}"
   title: "{{ nexttitleen }}"
 {% else %}next:
   url: ""
   title: ""
-{% endif %}
----
+{% endif %}---{% if subs == "true" %}
+##### {{ subtitleen }}{% endif %}
 
-<img alt="{{ alten }}" src="{{ highresen }}">
+<img alt="{{ alten }}" src="{{ highresen }}"><br><br>
 
-{% if related == "true" %}Read more about this command in the following blog post:
+| Command | Description |
+|---------|-------------|
+
+{: .styled-table}
+
+{% if related == "true" %}<br>
+
+Read more about this command in the following blog post:
 
 <a href="{{ relatedsrcen }}">
   <strong>{{ relatedtexten }}</strong>
 </a>
 {% else %}<!--
+<br>
+
 Read more about this command in the following blog post:
 
 <a href="{{ relatedsrcen }}">
