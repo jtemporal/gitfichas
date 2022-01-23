@@ -1,26 +1,26 @@
 [variables]
-ficha = 043
-date = 2022-01-22
+ficha = 044
+date = 2022-01-23
 
-desc = git stash list
-alt = Parar listar os stashes criados, use o comando git stash list.
-descen = git stash list
-alten = To list stash entreis, use the command git stash list.
+desc = git stash pop
+alt = Para remover um stash da lista e ao mesmo tempo aplicar as mudanças contidas nele, use o comando git stash pop
+descen = git stash pop
+alten = To remove a stash entry from the pile and apply the changes it contains at the same time, use the command git stash pop
 
 subs = true
-subtitle = Como listar os stashes existentes
-subtitleen = How to list existing stash entries
+subtitle = Removendo um stash da pilha e aplicando ele
+subtitleen = Removing a stash from the pile and applying it
 
-highres = https://res.cloudinary.com/jesstemporal/image/upload/v1642964759/gitfichas/pt/043/full_uuuiaz.jpg
-thumbnail = https://res.cloudinary.com/jesstemporal/image/upload/v1642964759/gitfichas/pt/043/thumbnail_j82cyb.jpg
-highresen = https://res.cloudinary.com/jesstemporal/image/upload/v1642964722/gitfichas/en/043/full_qdsc7t.jpg
-thumbnailen = https://res.cloudinary.com/jesstemporal/image/upload/v1642964722/gitfichas/en/043/thumbnail_rclvmu.jpg
+highres = https://res.cloudinary.com/jesstemporal/image/upload/v1642964759/gitfichas/pt/044/full_sbhjsb.jpg
+thumbnail = https://res.cloudinary.com/jesstemporal/image/upload/v1642964759/gitfichas/pt/044/thumbnail_fq4szz.jpg
+highresen = https://res.cloudinary.com/jesstemporal/image/upload/v1642964724/gitfichas/en/044/full_hvzjs2.jpg
+thumbnailen = https://res.cloudinary.com/jesstemporal/image/upload/v1642964723/gitfichas/en/044/thumbnail_qscsac.jpg
 
-previd = 042
-prevtitle = #042 git stash -m “alterações”
-prevtitleen = #042 git stash -m “changes”
+previd = 043
+prevtitle = #043 git stash list
+prevtitleen = #043 git stash list
 
-next = true
+next = false
 nextid = 044
 nexttitle = #044 git stash pop
 nexttitleen = #044 git stash pop
