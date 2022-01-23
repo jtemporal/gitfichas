@@ -5,7 +5,7 @@ markdown:  kramdown
 permalink: /:title
 plugins:   [jekyll-sitemap, jekyll-feed, jekyll-seo-tag, jekyll-redirect-from]
 exclude: ['templates', 'variables.yaml']
-mainimage: "/assets/img/thumbnail.png"
+mainimage: "https://gitfichas.com/assets/img/thumbnail.png"
 
 collections:
   - projects
@@ -13,6 +13,5 @@ collections:
 # Customise atom feed settings (this is where Jekyll-Feed gets configuration information)
 
 title:       "GitFichas"
-description: "Fichas de estudo sobre Git em Português 🇧🇷"
 author:      "Jessica Temporal"
 
