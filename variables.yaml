@@ -1,29 +1,29 @@
 [variables]
-ficha = 042
-date = 2022-01-21
+ficha = 043
+date = 2022-01-22
 
-desc = git stash -m “alterações”
-alt = Para criar um stash nomeado, use o comando git stash -m seguido da mensagem descrevendo as mudanças
-descen = git stash -m “changes”
-alten = To create a 'named' stash, use the command git stash -m followed by the message describing the stash.
+desc = git stash list
+alt = Parar listar os stashes criados, use o comando git stash list.
+descen = git stash list
+alten = To list stash entreis, use the command git stash list.
 
 subs = true
-subtitle = Dando nome a um stash
-subtitleen = Naming a stash
+subtitle = Como listar os stashes existentes
+subtitleen = How to list existing stash entries
 
-highres = https://res.cloudinary.com/jesstemporal/image/upload/v1642964759/gitfichas/pt/042/full_zd11ve.jpg
-thumbnail = https://res.cloudinary.com/jesstemporal/image/upload/v1642964758/gitfichas/pt/042/thumbnail_g1sl7r.jpg
-highresen = https://res.cloudinary.com/jesstemporal/image/upload/v1642964723/gitfichas/en/042/full_noz8tf.jpg
-thumbnailen = https://res.cloudinary.com/jesstemporal/image/upload/v1642964722/gitfichas/en/042/thumbnail_m431s2.jpg
+highres = https://res.cloudinary.com/jesstemporal/image/upload/v1642964759/gitfichas/pt/043/full_uuuiaz.jpg
+thumbnail = https://res.cloudinary.com/jesstemporal/image/upload/v1642964759/gitfichas/pt/043/thumbnail_j82cyb.jpg
+highresen = https://res.cloudinary.com/jesstemporal/image/upload/v1642964722/gitfichas/en/043/full_qdsc7t.jpg
+thumbnailen = https://res.cloudinary.com/jesstemporal/image/upload/v1642964722/gitfichas/en/043/thumbnail_rclvmu.jpg
 
-previd = 041
-prevtitle = #041 git stash push
-prevtitleen = #041 git stash push
+previd = 042
+prevtitle = #042 git stash -m “alterações”
+prevtitleen = #042 git stash -m “changes”
 
 next = true
-nextid = 043
-nexttitle = #043 git stash list
-nexttitleen = #043 git stash list
+nextid = 044
+nexttitle = #044 git stash pop
+nexttitleen = #044 git stash pop
 
 related = false
 relatedsrc = https://jtemporal.com/desfazendo-o-ultimo-commit-e-reaproveitando-a-mensagem/
