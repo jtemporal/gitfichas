@@ -1,7 +1,7 @@
 ---
 layout: home
 title: Home
-image: "/assets/img/thumbnail.png"
+image: "https://gitfichas.com/assets/img/thumbnail.png"
 permalink: "/en"
 lang: "en"
 ---
