@@ -11,7 +11,7 @@ pv:
 {% if next == "true" %}nt:
   url: "/projects/{{ nextid }}"
   title: "{{ nexttitle }}"
-{% else %}next:
+{% else %}nt:
   url: "https://gitfichas.com/"
   title: "GitFichas"
 {% endif %}---{% if subs == "true" %}

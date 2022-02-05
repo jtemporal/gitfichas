@@ -11,7 +11,7 @@ pv:
 {% if next == "true" %}nt:
   url: "/en/{{ nextid }}"
   title: "{{ nexttitleen }}"
-{% else %}next:
+{% else %}nt:
   url: "https://gitfichas.com/en"
   title: "GitStudyCards | GitFichas"
 {% endif %}---{% if subs == "true" %}
