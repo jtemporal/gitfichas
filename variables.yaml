@@ -1,20 +1,20 @@
 [variables]
-ficha = 044
-date = 2022-01-23
+ficha = 045
+date = 2022-02-05
 
-desc = git stash pop
-alt = Para remover um stash da lista e ao mesmo tempo aplicar as mudanças contidas nele, use o comando git stash pop
-descen = git stash pop
-alten = To remove a stash entry from the pile and apply the changes it contains at the same time, use the command git stash pop
+desc = git stash drop stash@{2}
+alt = Para apagar um stash da lista, use o comando git stash drop seguido do índice do stash
+descen = git stash drop stash@{2}
+alten = To remove a stash entry from the pile, use the command git stash drop followed by the stash name
 
 subs = true
-subtitle = Removendo um stash da pilha e aplicando ele
-subtitleen = Removing a stash from the pile and applying it
+subtitle = Jogando um stash fora
+subtitleen = Throwing out a stash
 
-highres = https://res.cloudinary.com/jesstemporal/image/upload/v1642964759/gitfichas/pt/044/full_sbhjsb.jpg
-thumbnail = https://res.cloudinary.com/jesstemporal/image/upload/v1642964759/gitfichas/pt/044/thumbnail_fq4szz.jpg
-highresen = https://res.cloudinary.com/jesstemporal/image/upload/v1642964724/gitfichas/en/044/full_hvzjs2.jpg
-thumbnailen = https://res.cloudinary.com/jesstemporal/image/upload/v1642964723/gitfichas/en/044/thumbnail_qscsac.jpg
+highres = https://res.cloudinary.com/jesstemporal/image/upload/v1644068607/gitfichas/pt/045/full_enaicn.jpg
+thumbnail = https://res.cloudinary.com/jesstemporal/image/upload/v1644068606/gitfichas/pt/045/thumbnail_wyz3e4.jpg
+highresen = https://res.cloudinary.com/jesstemporal/image/upload/v1644068571/gitfichas/en/045/full_cxdmts.jpg
+thumbnailen = https://res.cloudinary.com/jesstemporal/image/upload/v1644068568/gitfichas/en/045/thumbnail_q3ru65.jpg
 
 previd = 044
 prevtitle = #044 git stash pop
