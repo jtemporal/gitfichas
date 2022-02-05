@@ -12,8 +12,8 @@ previous:
   url: "https://gitfichas.com/en/{{ nextid }}"
   title: "{{ nexttitleen }}"
 {% else %}next:
-  url: ""
-  title: ""
+  url: "https://gitfichas.com/en"
+  title: "GitStudyCards | GitFichas"
 {% endif %}---{% if subs == "true" %}
 ##### {{ subtitleen }}{% endif %}
 
