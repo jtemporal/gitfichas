@@ -11,17 +11,16 @@ pv:
 {% if next == "true" %}nt:
   url: "/en/{{ nextid }}"
   title: "{{ nexttitleen }}"
-{% else %}next:
-  url: ""
-  title: ""
+{% else %}nt:
+  url: "https://gitfichas.com/en"
+  title: "GitStudyCards | GitFichas"
 {% endif %}---{% if subs == "true" %}
 ##### {{ subtitleen }}{% endif %}
 
 <img alt="{{ alten }}" src="{{ highresen }}"><br><br>
 
 | Command | Description |
-|---------|-------------|
-
+|---------|-------------|{{ tableen }}
 {: .styled-table}
 
 {% if related == "true" %}<br>

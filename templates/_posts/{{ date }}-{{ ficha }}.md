@@ -12,16 +12,15 @@ pv:
   url: "/projects/{{ nextid }}"
   title: "{{ nexttitle }}"
 {% else %}nt:
-  url: ""
-  title: ""
+  url: "https://gitfichas.com/"
+  title: "GitFichas"
 {% endif %}---{% if subs == "true" %}
 ##### {{ subtitle }}{% endif %}
 
 <img alt="{{ alt }}" src="{{ highres }}"><br><br>
 
 | Comando | Descrição |
-|---------|-----------|
-
+|---------|-----------|{{ table }}
 {: .styled-table}
 
 {% if related == "true" %}<br>
