@@ -20,8 +20,7 @@ previous:
 <img alt="{{ alten }}" src="{{ highresen }}"><br><br>
 
 | Command | Description |
-|---------|-------------|
-
+|---------|-------------|{{ tableen }}
 {: .styled-table}
 
 {% if related == "true" %}<br>

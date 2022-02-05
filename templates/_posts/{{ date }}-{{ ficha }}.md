@@ -20,8 +20,7 @@ previous:
 <img alt="{{ alt }}" src="{{ highres }}"><br><br>
 
 | Comando | Descrição |
-|---------|-----------|
-
+|---------|-----------|{{ table }}
 {: .styled-table}
 
 {% if related == "true" %}<br>
