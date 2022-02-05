@@ -1,15 +1,15 @@
-{% if page.next.url %}
-<a href="{{page.next.url}}" class="navigation navigation-next navigation-unique" aria-label="{{page.next.title}}" style="margin-right: 0px;">
+{% if page.nt.url %}
+<a href="{{page.nt.url}}" class="navigation navigation-next navigation-unique" aria-label="{{page.nt.title}}" style="margin-right: 0px;">
     <i class="fa fa-angle-left"></i>
 </a>
 {% endif %}
-{% if page.previous.url %}
-<a href="{{page.previous.url}}" class="navigation navigation-prev navigation-unique" aria-label="{{page.previous.title}}" style="margin-right: 0px;">
+{% if page.pv.url %}
+<a href="{{page.pv.url}}" class="navigation navigation-prev navigation-unique" aria-label="{{page.pv.title}}" style="margin-right: 0px;">
     <i class="fa fa-angle-right"></i>
 </a>
 {% endif %}
 
-{% if page.next.url or page.previous.url %}
+{% if page.nt.url or page.pv.url %}
 <style>
     .navigation-next {
         left:0;
