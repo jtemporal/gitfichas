@@ -5,13 +5,13 @@ image: "{{ thumbnail }}"
 permalink: "/projects/{{ ficha }}"
 translated: "/en/{{ ficha }}"
 lang: "pt"
-previous:
-  url: "https://gitfichas.com/projects/{{ previd }}"
+pv:
+  url: "/projects/{{ previd }}"
   title: "{{ prevtitle }}"
-{% if next == "true" %}next:
-  url: "https://gitfichas.com/projects/{{ nextid }}"
+{% if next == "true" %}nt:
+  url: "/projects/{{ nextid }}"
   title: "{{ nexttitle }}"
-{% else %}next:
+{% else %}nt:
   url: ""
   title: ""
 {% endif %}---{% if subs == "true" %}
