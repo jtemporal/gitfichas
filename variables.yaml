@@ -1,34 +1,36 @@
 [variables]
-ficha = 045
-date = 2022-02-05
+ficha = 046
+date = 2022-02-06
 
-desc = git stash drop stash@{2}
-alt = Para apagar um stash da lista, use o comando git stash drop seguido do índice do stash
-descen = git stash drop stash@{2}
-alten = To remove a stash entry from the pile, use the command git stash drop followed by the stash name
+desc = git stash apply stash@{2}
+alt = Para aplicar um stash da lista, use o comando git stash apply seguido do índice do stash de interesse
+descen = git stash apply stash@{2}
+alten = To use a stash entry from the pile, use the command git stash apply followed by the stash name
 
 subs = true
 subtitle = Jogando um stash fora
 subtitleen = Throwing out a stash
 
-highres = https://res.cloudinary.com/jesstemporal/image/upload/v1644068607/gitfichas/pt/045/full_enaicn.jpg
-thumbnail = https://res.cloudinary.com/jesstemporal/image/upload/v1644068606/gitfichas/pt/045/thumbnail_wyz3e4.jpg
-highresen = https://res.cloudinary.com/jesstemporal/image/upload/v1644068571/gitfichas/en/045/full_cxdmts.jpg
-thumbnailen = https://res.cloudinary.com/jesstemporal/image/upload/v1644068568/gitfichas/en/045/thumbnail_q3ru65.jpg
+highres = https://res.cloudinary.com/jesstemporal/image/upload/v1644151679/gitfichas/pt/046/full_mutfuw.jpg
+thumbnail = https://res.cloudinary.com/jesstemporal/image/upload/v1644151679/gitfichas/pt/046/thumbnail_gcrnbm.jpg
+highresen = https://res.cloudinary.com/jesstemporal/image/upload/v1644151690/gitfichas/en/046/full_bucxwr.jpg
+thumbnailen = https://res.cloudinary.com/jesstemporal/image/upload/v1644151690/gitfichas/en/046/thumbnail_exlc8r.jpg
 
-previd = 044
-prevtitle = #044 git stash pop
-prevtitleen = #044 git stash pop
+previd = 045
+prevtitle = #044 git stash drop stash@{2}
+prevtitleen = #044 git stash drop stash@{2}
 
 table =
-  | stash | comando para gerenciar stashes |
-  | drop | remove o stash da pilha |
-  | stash@{1} | índice do penúltimo stash |
+  | `stash` | comando para gerenciar stashes |
+  | `apply` | aplica as mudanças de um stash sem remover ele da pilha |
+  | `stash@{2}` | índice do antepenúltimo stash |
+  | _informação extra_ | sem passar um índice a stash mais recente é usada |
 
 tableen =
-  | stash | command to manage stashes |
-  | drop | removes a stash from the pile |
-  | stash@{1} | second to last stash |
+  | `stash` | command to manage stashes |
+  | `apply` | apply the changes from stash without removing it from the pile |
+  | `stash@{2}` | third to last stash |
+  | _extra information_ | without passing an index the most recent stash is used |
 
 next = false
 nextid = 044
