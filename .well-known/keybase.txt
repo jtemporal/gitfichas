@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/temporal
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://gitfichas.com
+  * I am temporal (https://keybase.io/temporal) on keybase.
+  * I have a public key ASBQvco2xkvKpSFCD76TYpToWbo7S62oC3ZjIEZrW9QeHAo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "012050bdca36c64bcaa521420fbe936294e859ba3b4bada80b766320466b5bd41e1c0a",
+      "host": "keybase.io",
+      "kid": "012050bdca36c64bcaa521420fbe936294e859ba3b4bada80b766320466b5bd41e1c0a",
+      "uid": "e4540a7c8404b1becfed2f0ca242be19",
+      "username": "temporal"
+    },
+    "merkle_root": {
+      "ctime": 1653440714,
+      "hash": "dbe7903e2d6d0e4036172d26875890b5a13b7543f6aab38ef6861943c89ad1185ccb8080d71d9c417bef6e7970699bda5bbd692bd8365dbe339badee5b56e462",
+      "hash_meta": "e58c611d7e70dad328f74a644b05c4c373730481ae511dc2639c095946a3b733",
+      "seqno": 22549229
+    },
+    "service": {
+      "entropy": "OOtc6xoRESeUlJR8VCpxotKE",
+      "hostname": "gitfichas.com",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "5.9.0"
+  },
+  "ctime": 1653440834,
+  "expire_in": 504576000,
+  "prev": "1fce69d61d4482b59ddce3bf14cda6c1e66695a0c12d0c84be7fc6bfc0386a5d",
+  "seqno": 85,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgUL3KNsZLyqUhQg++k2KU6Fm6O0utqAt2YyBGa1vUHhwKp3BheWxvYWTESpcCVcQgH85p1h1EgrWd3OO/FM2mweZmlaDBLQyEvn/Gv8A4al3EIBEIqIRtfIDedidde1qyUdM0g/lN7NEAmi+G9PJVBbQ9AgHCo3NpZ8RATtQlXxIlVSWP6P7QhFI8Cwl5aJdi24fTcyFkyBuNJJmARRBCXN6hfqp+sjVgpKWI9UfhkNQ6Y1mDQ8Z3vBeVDahzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIBrRh+pMSmIpEexzn0RnTRfvqfNr9pXXqx3lkzbAz4kko3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/temporal
+
+==================================================================
