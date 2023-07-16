@@ -3,13 +3,13 @@
 
 menu:
   pt:
-  - {name: 'Fichas', url: ''}
-  - {name: 'Blog',     url: 'https://jtemporal.com'}
+  - {name: 'Fichas',   url: ''}
+  - {name: 'Blog',     url: 'https://jtemporal.com/?utm_source=gitfichas'}
   - {name: 'Sobre',    url: 'sobre'}
-  - {name: 'Contato',  url: 'contato'}
+  - {name: 'Livro',    url: 'https://jtemporal.com/microlivrodegit?utm_source=gitfichas'}
   en:
   - {name: 'Cards', url: 'en'}
-  - {name: 'Blog',     url: 'https://jtemporal.com/en'}
+  - {name: 'Blog',     url: 'https://jtemporal.com/en?utm_source=gitfichas'}
   - {name: 'About',    url: 'about'}
   - {name: 'Contact',  url: 'contact'}
 
