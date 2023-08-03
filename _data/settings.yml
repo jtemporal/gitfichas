@@ -11,7 +11,7 @@ menu:
   - {name: 'Cards', url: 'en'}
   - {name: 'Blog',     url: 'https://jtemporal.com/en?utm_source=gitfichas'}
   - {name: 'About',    url: 'about'}
-  - {name: 'Contact',  url: 'contact'}
+  - {name: 'Book',    url: 'https://jtemporal.com/gitmicrobook?utm_source=gitfichas'}
 
 #-------------------------------
 # Contact Section
