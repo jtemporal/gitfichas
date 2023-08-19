@@ -36,3 +36,6 @@ _site
 
 ### Gemfile ###
 Gemfile.lock
+
+### Python ###
+.env
