@@ -1,41 +1,41 @@
 [variables]
-ficha = 046
-date = 2022-02-06
+ficha = 052
+date = 2023-08-06
 
-desc = git stash apply stash@{2}
-alt = Para aplicar um stash da lista, use o comando git stash apply seguido do índice do stash de interesse
-descen = git stash apply stash@{2}
-alten = To use a stash entry from the pile, use the command git stash apply followed by the stash name
+desc = git mv origem destino
+alt = Para renomear um arquivo e automaticamente adicionar essa mudança para o stage de commit, use o comando 'git mv origem destino', onde origem é o nome atual do arquivo e destino é o novo nome.
+descen = git mv source target
+alten = To rename an file and automatically add this change to staging for committing use the command 'git mv source target', where source is the current file name and target is the new name
 
-subs = true
-subtitle = Jogando um stash fora
-subtitleen = Throwing out a stash
-
-highres = https://res.cloudinary.com/jesstemporal/image/upload/v1644151679/gitfichas/pt/046/full_mutfuw.jpg
-thumbnail = https://res.cloudinary.com/jesstemporal/image/upload/v1644151679/gitfichas/pt/046/thumbnail_gcrnbm.jpg
-highresen = https://res.cloudinary.com/jesstemporal/image/upload/v1644151690/gitfichas/en/046/full_bucxwr.jpg
-thumbnailen = https://res.cloudinary.com/jesstemporal/image/upload/v1644151690/gitfichas/en/046/thumbnail_exlc8r.jpg
-
-previd = 045
-prevtitle = #044 git stash drop stash@{2}
-prevtitleen = #044 git stash drop stash@{2}
-
-table =
-  | `stash` | comando para gerenciar stashes |
-  | `apply` | aplica as mudanças de um stash sem remover ele da pilha |
-  | `stash@{2}` | índice do antepenúltimo stash |
-  | _informação extra_ | sem passar um índice a stash mais recente é usada |
-
-tableen =
-  | `stash` | command to manage stashes |
-  | `apply` | apply the changes from stash without removing it from the pile |
-  | `stash@{2}` | third to last stash |
-  | _extra information_ | without passing an index the most recent stash is used |
+previd = 051
+prevtitle = #051 git commit --allow-empty
+prevtitleen = #051 git commit --allow-empty
 
 next = false
-nextid = 044
-nexttitle = #044 git stash pop
-nexttitleen = #044 git stash pop
+nextid = 052
+nexttitle = #052 git mv origem destino
+nexttitleen = #052 git mv source target
+
+table =
+  | `mv` | comando para “mover” arquivos |
+  | `origem` | nome atual do arquivo |
+  | `destino` | novo nome do arquivo |
+  | _informação extra_ | esse comando pode ser usado para mover arquivos entre pastas |
+
+tableen =
+  | `mv` | command to "move" files |
+  | `source` | current file name |
+  | `target` | new file name |
+  | _extra information_ | this command can be used to move files between folders |
+
+subs = true
+subtitle = Renomeando um arquivo
+subtitleen = Renaming a file
+
+highres = https://res.cloudinary.com/jesstemporal/image/upload/v1692466986/gitfichas/pt/052/052-full_likrj0.jpg
+thumbnail = https://res.cloudinary.com/jesstemporal/image/upload/v1692466986/gitfichas/pt/052/052-thumbnail_wjpw5r.jpg
+highresen = https://res.cloudinary.com/jesstemporal/image/upload/v1692466960/gitfichas/en/052/052-full_l6yjdm.jpg
+thumbnailen = https://res.cloudinary.com/jesstemporal/image/upload/v1692466960/gitfichas/en/052/052-thumbnail_poa7ir.jpg
 
 related = false
 relatedsrc = https://jtemporal.com/desfazendo-o-ultimo-commit-e-reaproveitando-a-mensagem/
