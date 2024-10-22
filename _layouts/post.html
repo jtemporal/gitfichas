@@ -4,7 +4,7 @@ layout: default
 
 <section>
   <div class="post-container">
-    {% if post.mermaid %}
+    {% if page.mermaid %}
     <h4 class="project-title">{%if page.pretitle %}{{ page.pretitle }} {%endif%}{{ page.title }}{%if page.subtitle %} {{ page.subtitle }}{%endif%}</h4>
     <div class="project-load">{{ content }}</div>
     {% else %}
