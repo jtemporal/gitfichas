@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Solid&family=Shadows+Into+Light+Two&family=Borel&family=Chilanka');
+
+.mermaid-container {
+    padding: 40px;
+    margin: 20px auto;
+    border: 1px solid #c0c0c0;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+.title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-top: 10px;
+    max-width: 95%;
+}
+
+.title-container h1 {
+    font-family: 'Londrina Solid'; /*Londrina Shadow*/
+    color: #D88FB7;
+    font-size: 7vw;
+    letter-spacing: 5px;
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.title-container .pretitle {
+    font-family: 'Shadows Into Light Two';
+    font-size: 2vw;
+    color: #C67D9B;
+    margin: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: left;
+    padding-left: calc(50% - (var(--h1-width) / 2));
+    top: -2.5vw;
+}
+
+.title-container .subtitle {
+    font-family: 'Shadows Into Light Two';
+    font-size: 2vw;
+    color: #C67D9B;
+    margin: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: right;
+    padding-right: calc(50% - (var(--h1-width) / 2));
+    top: 7vw;
+}
+
+.mermaid {
+    margin-top: 2vh;
+    background-color: transparent;
+    border: none;
+    font-size: 2rem;
+    width: 80vw;
+    max-height: 65vh;
+    overflow: hidden;
+    text-align: center;
+    width: 100%;
+}
+
+.mermaid-footer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 0;
+    box-sizing: border-box;
+    font-size: 2rem;
+    color: #C67D9B;
+    font-family: 'Shadows Into Light Two';
+    margin-top: -80px;
+    margin-bottom: -60px;
+}
+
+.mermaid-footer .number {
+    color: #5f5f5f
+}

@@ -1,0 +1,123 @@
+<div class="mermaid-container">
+  <div class="title-container">
+    {% if page.pretitle %}<p class="pretitle">{{ page.pretitle }}</p>{% endif %}
+    <h1>{{ page.title }}</h1>
+    {% if page.subtitle %}<p class="subtitle">{{ page.subtitle }}</p>{% endif %}
+  </div>
+{% if page.command %}
+  {% assign command_parts = page.command | split: " " %}
+  <div class="mermaid">
+    block-beta
+    columns 1
+    
+    {% if command_parts.size == 3 %}
+    block:notes
+      space:2 f["{{ page.descriptors[1].part1 }}"]
+    end
+
+    block:command
+      a("{{ command_parts[0] }}") b("{{ command_parts[1] }}") c("{{ command_parts[2] }}")
+    end
+
+    block:notes2
+      space g["{{ page.descriptors[0].command }}"] space
+    end
+
+    {% elsif command_parts.size == 4 %}
+    block:notes
+      space:2 f["{{ page.descriptors[1].part1 }}"] space
+    end
+
+    block:command
+      a("{{ command_parts[0] }}") b("{{ command_parts[1] }}") c("{{ command_parts[2] }}") d("{{ command_parts[3] }}")
+    end
+
+    block:notes2
+      space g["{{ page.descriptors[0].command }}"] space h["{{ page.descriptors[2].part2 }}"]
+    end
+
+    {% elsif command_parts.size == 5 %}
+    block:notes
+      space:2 f["{{ page.descriptors[1].part1 }}"] space i["{{ page.descriptors[3].part3 }}"]
+    end
+
+    block:command
+      a("{{ command_parts[0] }}") b("{{ command_parts[1] }}") c("{{ command_parts[2] }}") d("{{ command_parts[3] }}") e("{{ command_parts[4] }}")
+    end
+
+    block:notes2
+      space g["{{ page.descriptors[0].command }}"] space h["{{ page.descriptors[2].part2 }}"]
+    end
+
+    {% elsif command_parts.size == 6 %}
+    block:notes
+      space:2 f["{{ page.descriptors[1].part1 }}"] space i["{{ page.descriptors[3].part3 }}"] space
+    end
+
+    block:command
+      a("{{ command_parts[0] }}") b("{{ command_parts[1] }}") c("{{ command_parts[2] }}") d("{{ command_parts[3] }}") e("{{ command_parts[4] }}") k("{{ command_parts[4] }}")
+    end
+
+    block:notes2
+      space g["{{ page.descriptors[0].command }}"] space h["{{ page.descriptors[2].part2 }}"] space l["{{ page.descriptors[4].part4 }}"] 
+    end
+    
+    {% endif %}
+
+  {% if page.info %}
+  block:info
+    j["{{ page.info }}"]
+  end
+  {% endif %}
+
+  %% arrows %%
+  c --> f
+  b --> g
+  {% if command_parts.size == 4 %}d --> h{% endif %}
+  {% if command_parts.size == 5 %}e --> i{% endif %}
+  {% if command_parts.size == 6 %}k --> l{% endif %}
+
+  %% styling %%
+  classDef transparent fill:#fff, stroke:#fff;
+  class a,b,c,d,e,f,g,h,i,j,k,l,notes,notes2,command,info transparent
+  classDef commandFont font-family:'Borel', font-size:1.6em;
+  class a,b,c,d,e,k commandFont
+  classDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#fff;
+  class f,g,h,i,j,l textFont
+</div> 
+{% elsif page.concept %}
+  <div class="mermaid">
+  block-beta
+  columns 1
+  block:notes
+    a["{{ page.parts[0].part1 }}"]
+  end
+  {% if page.parts.size == 2 %}
+  block:notes2
+    b["{{ page.parts[1].part2 }}"]
+  end
+  {% elsif page.parts.size == 3 %}
+  block:notes2
+    c["{{ page.parts[2].part3 }}"]
+  end  
+  {% endif %}
+  {% if page.info %}
+  block:info
+    f["{{ page.info }}"]
+  end
+  {% endif %}
+
+  %% styling %%
+  classDef transparent fill:#fff, stroke:#fff;
+  class a,b,c,d,e,f,notes,notes2,info transparent
+  classDef commandFont font-family:'Chilanka', font-size:1.4em;
+  class a,b,c,d commandFont
+  </div> 
+{% endif %}
+
+<div class="mermaid-footer">
+<p class="number">#{{ page.number }}</p>
+<p>{{ page.author }}</p>
+</div>
+
+</div>

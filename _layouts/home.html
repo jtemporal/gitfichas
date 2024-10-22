@@ -3,6 +3,16 @@ layout: default
 ---
 
 <section>
+  <div class="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    {% if page.lang == "pt" or post.lang == "pt" %}
+    O <strong>GitFichas</strong> agora é open-source e está sob construção. Agradecemos a paciência.
+    Você pode <a href="https://github.com/jtemporal/gitfichas" style="color: white; text-decoration: underline;">conferir mais sobre as mudanças aqui</a>.
+    {% else %}
+    <strong>GitFichas</strong> is now open-source and undergoing some construction. Thanks for the patience.
+    You can learn more about <a href="https://github.com/jtemporal/gitfichas" style="color: white; text-decoration: underline;">the changes happening here</a>.
+    {% endif %}
+  </div>
     <div class="project-container">
       {% if page.lang == "en" %}
         {% assign sorted = site.posts | where: "lang", "en" | sort: 'date' | reverse %}
@@ -11,13 +21,21 @@ layout: default
       {% endif %}
       {% for project in sorted %}
         <a href="{{ site.github.url }}{{ project.url }}">
+          {% if project.mermaid %}
+            <div class="project-unit" data-folder="{{ site.github.url }}{{ project.url }}">
+              {{ project.content }}
+              <div class="project-overlay">
+                <strong>{{ project.number }} {{ project.command }} <i class="fa fa-arrow-right" aria-hidden="true"></i></strong>
+              </div>
+            </div>
+          {% else %}
           <div class="project-unit" data-folder="{{ site.github.url }}{{ project.url }}" style="background-image: url({{ site.github.url }}{{project.image}})">
             <div class="project-overlay">
               <strong>{{ project.title }} <i class="fa fa-arrow-right" aria-hidden="true"></i></strong>
             </div>
           </div>
+          {% endif %}
         </a>
       {%endfor%}
     </div>
   </section>
-  

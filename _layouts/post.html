@@ -4,8 +4,22 @@ layout: default
 
 <section>
   <div class="post-container">
+    {% if page.mermaid %}
+    <h4 class="project-title">{%if page.pretitle %}{{ page.pretitle }} {%endif%}{{ page.title }}{%if page.subtitle %} {{ page.subtitle }}{%endif%}</h4>
+    <div class="project-load">{{ content }}</div>
+    {% else %}
     <h4 class="project-title">{{ page.title }}</h4>
     <div class="project-load">{{ content }}</div>
+    {% endif %}
+    {% if page.related %}
+    <br>
+    {% if page.lang == "pt"%}
+    <p>Leia também:</p>
+    {% endif %}
+    <a href="{{page.related_url}}">
+      <strong>{{page.related_title}}</strong>
+    </a>
+    {% endif %}
   </div>
 </section>
 {% include arrows.html %}
