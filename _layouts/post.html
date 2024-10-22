@@ -10,6 +10,16 @@ layout: default
     {% else %}
     <h4 class="project-title">{{ page.title }}</h4>
     <div class="project-load">{{ content }}</div>
+    {% endif %}
+    {% if page.related %}
+    <br>
+    {% if page.lang == "pt"%}
+    <p>Leia também:</p>
+    {% endif %}
+    <a href="{{page.related_url}}">
+      <strong>{{page.related_title}}</strong>
+    </a>
+    {% endif %}
   </div>
 </section>
 {% include arrows.html %}
