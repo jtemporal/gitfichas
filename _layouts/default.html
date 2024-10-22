@@ -19,6 +19,8 @@
     <title>
       {% if page.title == "Home" %}
         {{ site.title }}
+      {% elsif page.pretitle or page.subtitle %}
+        {% if page.pretitle %}{{page.pretitle}}{% endif %} {{ page.title}} {%if page.subtitle %}{{ page.subtitle }}{%endif%} | {{ site.title }}
       {% else %}
         {{ page.title }} | {{ site.title }}
       {% endif %}
