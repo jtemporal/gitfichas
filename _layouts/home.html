@@ -11,13 +11,21 @@ layout: default
       {% endif %}
       {% for project in sorted %}
         <a href="{{ site.github.url }}{{ project.url }}">
+          {% if project.mermaid %}
+            <div class="project-unit" data-folder="{{ site.github.url }}{{ project.url }}">
+              {{ project.content }}
+              <div class="project-overlay">
+                <strong>{{ project.number }} {{ project.command }} <i class="fa fa-arrow-right" aria-hidden="true"></i></strong>
+              </div>
+            </div>
+          {% else %}
           <div class="project-unit" data-folder="{{ site.github.url }}{{ project.url }}" style="background-image: url({{ site.github.url }}{{project.image}})">
             <div class="project-overlay">
               <strong>{{ project.title }} <i class="fa fa-arrow-right" aria-hidden="true"></i></strong>
             </div>
           </div>
+          {% endif %}
         </a>
       {%endfor%}
     </div>
   </section>
-  
