@@ -22,7 +22,7 @@ layout: default
       {% for project in sorted %}
         <a href="{{ site.github.url }}{{ project.url }}">
           {% if project.mermaid %}
-            <div class="project-unit" data-folder="{{ site.github.url }}{{ project.url }}">
+            <div class="project-unit card" data-folder="{{ site.github.url }}{{ project.url }}">
               {{ project.content }}
               <div class="project-overlay">
                 <strong>{{ project.number }} {{ project.command }} <i class="fa fa-arrow-right" aria-hidden="true"></i></strong>
