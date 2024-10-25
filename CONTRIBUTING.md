@@ -142,8 +142,52 @@ docker run --rm --volume="$PWD:/srv/jekyll"  -p 4001:4000 -it gitfichas jekyll s
 
 ## The Basics of Contributing
 
+All contributions are welcome. ☺️
+
 There are a bunch of issues already open, you can either work on one of them or you can add to the project based on your experience and usage.
 
 Ideally you can discuss the topic via a issue before you start working.
 
-All contributions are welcomed. ☺️
+[_Shout out to Serenata de Amor for having a great contributing guide that inspired this one_](https://github.com/okfn-brasil/serenata-de-amor/blob/main/CONTRIBUTING.md).
+
+### The Git basics
+
+[**1. _Fork_ this repository**](https://github.com/jtemporal/gitfichas/fork)
+
+**2. Clone your fork of the repository**
+
+```console
+git clone http://github.com/<YOUR-GITHUB-USERNAME>/gitfichas.git
+```
+
+**3. Create a feature branch**
+
+```console
+git switch -c <YOUR-GITHUB-USERNAME>-<description-or-issue-number>
+```
+
+Please, note that we prefix branch names with GitHub usernames, this helps us in keeping track of changes and who is working on them.
+
+**4. Do what you do best**
+
+Now it's your time to shine and write meaningful code to raise the bar of the project!
+
+**5. Commit your changes**
+
+```console
+git commit -m '<Add the description of your changes>'
+```
+
+Aim to have small changes per commit that way is easier to understand what you are making when reviewing your pull request.
+
+**6. Push to the branch to your fork**
+
+```consle
+git push -u origin <YOUR-GITHUB-USERNAME>-<description-or-issue-number>
+```
+
+**7. Create a new _Pull Request_**
+
+From your fork at GitHub usually there is a button to open pull requests.
+
+Remember to [link your issue in your pull request](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue).
