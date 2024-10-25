@@ -6,7 +6,7 @@
 
 All contributions are welcome. ☺️
 
-You'll find details on how to run the website and how to contribute in [CONTRIBUTING.md](/jtemporal/gifichas/blob/main/CONTRIBUTING.md).
+You'll find details on how to run the website and how to contribute in [CONTRIBUTING.md](/CONTRIBUTING.md).
 
 If you have any questions open an issue and I'll be happy to answer.
 
