@@ -2,6 +2,14 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/66b3d264-55b3-4051-a693-49c7107a2b8f/deploy-status)](https://app.netlify.com/sites/gitfichas/deploys)
 
+## Contributing
+
+All contributions are welcome. ☺️
+
+You'll find details on how to run the website and how to contribute in [CONTRIBUTING.md](/jtemporal/gifichas/blob/main/CONTRIBUTING.md).
+
+If you have any questions open an issue and I'll be happy to answer.
+
 ## Credits
 
 ### Creator of this template
