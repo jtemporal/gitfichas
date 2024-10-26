@@ -13,6 +13,7 @@ collections:
 # Customise atom feed settings (this is where Jekyll-Feed gets configuration information)
 
 title:       "GitFichas"
+title_en:    "GitStudyCards"
 author:      "Jessica Temporal"
 
 include: [.well-known]
