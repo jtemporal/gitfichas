@@ -55,13 +55,12 @@
     end
 
     block:command
-      a("{{ command_parts[0] }}") b("{{ command_parts[1] }}") c("{{ command_parts[2] }}") d("{{ command_parts[3] }}") e("{{ command_parts[4] }}") k("{{ command_parts[4] }}")
+      a("{{ command_parts[0] }}") b("{{ command_parts[1] }}") c("{{ command_parts[2] }}") d("{{ command_parts[3] }}") e("{{ command_parts[4] }}") k("{{ command_parts[5] }}")
     end
 
     block:notes2
       space g["{{ page.descriptors[0].command }}"] space h["{{ page.descriptors[2].part2 }}"] space l["{{ page.descriptors[4].part4 }}"] 
     end
-    
     {% endif %}
 
   {% if page.info %}
