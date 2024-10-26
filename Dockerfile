@@ -5,7 +5,7 @@ COPY Gemfile.lock .
 RUN chmod a+w Gemfile.lock
 COPY Gemfile .
 
-RUN gem install bundler
+RUN gem install bundler -v 2.4.22
 
 RUN bundle install
 
