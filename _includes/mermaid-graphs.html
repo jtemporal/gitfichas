@@ -46,7 +46,7 @@
     end
 
     block:notes2
-      space g["{{ page.descriptors[0].command }}"] space h["{{ page.descriptors[2].part2 }}"]
+      space g["{{ page.descriptors[0].command }}"] space h["{{ page.descriptors[2].part2 }}"] space
     end
 
     {% elsif command_parts.size == 6 %}
@@ -55,13 +55,12 @@
     end
 
     block:command
-      a("{{ command_parts[0] }}") b("{{ command_parts[1] }}") c("{{ command_parts[2] }}") d("{{ command_parts[3] }}") e("{{ command_parts[4] }}") k("{{ command_parts[4] }}")
+      a("{{ command_parts[0] }}") b("{{ command_parts[1] }}") c("{{ command_parts[2] }}") d("{{ command_parts[3] }}") e("{{ command_parts[4] }}") k("{{ command_parts[5] }}")
     end
 
     block:notes2
       space g["{{ page.descriptors[0].command }}"] space h["{{ page.descriptors[2].part2 }}"] space l["{{ page.descriptors[4].part4 }}"] 
     end
-    
     {% endif %}
 
   {% if page.info %}
@@ -71,18 +70,26 @@
   {% endif %}
 
   %% arrows %%
-  c --> f
   b --> g
-  {% if command_parts.size == 4 %}d --> h{% endif %}
-  {% if command_parts.size == 5 %}e --> i{% endif %}
-  {% if command_parts.size == 6 %}k --> l{% endif %}
+  c --> f
+  classDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#fff, line-height:2em;
+  {% if command_parts.size == 4 %}
+  d --> h
+  {% elsif command_parts.size == 5 %}
+  d --> h
+  e --> i
+  {% elsif command_parts.size == 6 %}
+  d --> h
+  e --> i
+  k --> l
+  classDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#fff, line-height:2.2em;
+  {% endif %}
 
   %% styling %%
   classDef transparent fill:#fff, stroke:#fff;
   class a,b,c,d,e,f,g,h,i,j,k,l,notes,notes2,command,info transparent
-  classDef commandFont font-family:'Borel', font-size:1.6em;
+  classDef commandFont font-family:'Borel', font-size:1.6em, line-height:2.2em;
   class a,b,c,d,e,k commandFont
-  classDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#fff;
   class f,g,h,i,j,l textFont
 </div> 
 {% elsif page.concept %}
@@ -113,9 +120,9 @@
 
   %% styling %%
   classDef transparent fill:#fff, stroke:#fff;
-  class a,b,c,d,e,f,notes,notes2,notes3,info transparent
-  classDef commandFont font-family:'Chilanka', font-size:1.4em;
-  class a,b,c,d commandFont
+  class a,b,c,notes,notes2,notes3,info transparent
+  classDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#fff, line-height:1.4em;
+  class a,b,c,notes,notes2,notes3,info textFont
   </div> 
 {% endif %}
 
