@@ -98,6 +98,10 @@
   end
   {% elsif page.parts.size == 3 %}
   block:notes2
+    b["{{ page.parts[1].part2 }}"]
+  end
+
+  block:notes3
     c["{{ page.parts[2].part3 }}"]
   end  
   {% endif %}
@@ -109,7 +113,7 @@
 
   %% styling %%
   classDef transparent fill:#fff, stroke:#fff;
-  class a,b,c,d,e,f,notes,notes2,info transparent
+  class a,b,c,d,e,f,notes,notes2,notes3,info transparent
   classDef commandFont font-family:'Chilanka', font-size:1.4em;
   class a,b,c,d commandFont
   </div> 
