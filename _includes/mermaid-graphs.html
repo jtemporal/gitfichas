@@ -70,11 +70,20 @@
   {% endif %}
 
   %% arrows %%
-  c --> f
   b --> g
-  {% if command_parts.size == 4 %}d --> h{% endif %}
-  {% if command_parts.size == 5 %}e --> i{% endif %}
-  {% if command_parts.size == 6 %}k --> l{% endif %}
+  c --> f
+  classDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#fff, line-height:2em;
+  {% if command_parts.size == 4 %}
+  d --> h
+  {% elsif command_parts.size == 5 %}
+  d --> h
+  e --> i
+  {% elsif command_parts.size == 6 %}
+  d --> h
+  e --> i
+  k --> l
+  classDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#fff, line-height:2.2em;
+  {% endif %}
 
   %% styling %%
   classDef transparent fill:#fff, stroke:#fff;
