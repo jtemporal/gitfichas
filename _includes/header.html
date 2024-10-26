@@ -1,6 +1,10 @@
 <header>
   <div class="logo">
+    {% if page.lang == "pt" %}
     <a href="{{ site.github.url }}/">{{ site.title }}</a>
+    {% else %}
+    <a href="{{ site.github.url }}/">{{ site.title_en }}</a>
+    {% endif %}
   </div>
   <nav>
     {% include language-switch.html %}

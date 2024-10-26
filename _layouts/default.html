@@ -11,18 +11,18 @@
     <meta name="description" content="{{ site.data.settings.seo.pt.description }}">
     <meta rel="author" href="{{ site.data.settings.seo.pt.rel-author }}">
     <meta rel="publisher" href="{{ site.data.settings.seo.pt.rel-publisher }}">
+    {% assign main_title = site.title %}
     {% else %}
     <meta name="description" content="{{ site.data.settings.seo.en.description }}">
     <meta rel="author" href="{{ site.data.settings.seo.en.rel-author }}">
     <meta rel="publisher" href="{{ site.data.settings.seo.en.rel-publisher }}">
+    {% assign main_title = site.title_en %}
     {% endif %}
     <title>
-      {% if page.title == "Home" %}
-        {{ site.title }}
-      {% elsif page.pretitle or page.subtitle %}
-        {% if page.pretitle %}{{page.pretitle}}{% endif %} {{ page.title}} {%if page.subtitle %}{{ page.subtitle }}{%endif%} | {{ site.title }}
+      {% if page.layout == "home" %}
+        {{ main_title }}
       {% else %}
-        {{ page.title }} | {{ site.title }}
+        {% if page.pretitle %}{{page.pretitle}}{% endif %} {{ page.title}} {%if page.subtitle %}{{ page.subtitle }}{%endif%}  | {{ main_title }}
       {% endif %}
     </title>
     <link rel="stylesheet" href="{{ site.github.url }}/assets/css/all.css">
