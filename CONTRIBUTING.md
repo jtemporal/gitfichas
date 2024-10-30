@@ -1,4 +1,8 @@
-# Contributing Guide
+# Contributing Guide | Guia de Contribuição
+
+| Table of content | Índice |
+| ------- | --------- |
+| &nbsp;&nbsp;• [Before You Start](#before-you-start)<br>&nbsp;&nbsp;• [Cards Types](#cards-types)<br>&nbsp;&nbsp;• [Running the Project](#running-the-project)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Local way](#local-way)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Install dependencies](#install-dependencies)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Run the project](#run-the-project)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Docker way](#docker-way)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Building image](#building-image)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Serving](#serving)<br>&nbsp;&nbsp;• [The Basics of Contributing](#the-basics-of-contributing)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [The Git basics](#the-git-basics) | &nbsp;&nbsp;• [Antes de Começar](#antes-de-começar)<br>&nbsp;&nbsp;• [Tipos de Fichas](#tipos-de-fichas)<br>&nbsp;&nbsp;• [Rodando o Projeto](#rodando-o-projeto)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Localmente](#localmente)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Instalando depedências](#instalando-depedências)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Rodar o projeto](#rodar-o-projeto)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Com Docker](#com-docker)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Montando a imagem](#montando-a-imagem)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Servindo](#servindo)<br>&nbsp;&nbsp;• [O Básico de Contribuições](#o-básico-de-contribuições)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [O básico de git](#o-básico-de-git) |
 
 ## Before You Start
 
@@ -144,6 +148,8 @@ docker run --rm --volume="$PWD:/srv/jekyll"  -p 4001:4000 -it gitfichas jekyll s
 
 All contributions are welcome. ☺️
 
+I wrote this [blog post that has a detailed step-by-step on how to make pull requests](https://jtemporal.com/making-pull-requests-with-github-codespaces/) for this project.
+
 There are a bunch of issues already open, you can either work on one of them or you can add to the project based on your experience and usage.
 
 Ideally you can discuss the topic via a issue before you start working.
@@ -191,3 +197,199 @@ git push -u origin <YOUR-GITHUB-USERNAME>-<description-or-issue-number>
 From your fork at GitHub usually there is a button to open pull requests.
 
 Remember to [link your issue in your pull request](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue).
+
+---
+
+## Antes de Começar
+
+Obrigada por querer contribuir com o GitFichas. Aqui você encontrará a maioria das informações que precisará para contribuir.
+
+Se tiver alguma dúvida, crie uma issue.
+
+## Tipos de Fichas
+
+Existem dois tipos de fichas:
+
+1. **Comando**: explica um comando como "git add -p" ou "git commit --allow-empty";
+2. **Conceito**: explica conceitos relacionados ao git e versionamento, como "pull requests" e "conflitos";
+
+Aqui está uma lista de todos os campos que você pode encontrar em ambos os tipos:
+
+| Chave Front-Matter | Ficha de Conceito | Ficha de Comando | Descrição |
+| ---------------- | ------------ | ------------ | ----------- |
+| `layout` | `obrigatório` | `obrigatório` | Sempre presente `post` |
+| `pretitle` | `opcional` | `opcional` | Texto antes da parte principal do título da ficha |
+| `title` | `obrigatório` | `obrigatório` | Parte principal do título da ficha |
+| `subtitle` | `opcional` | `opcional` | Texto após a parte principal do título da ficha |
+| `command` | - | `obrigatório` | Comando escrito por extenso, por exemplo: `git init` |
+| `descriptors` | `obrigatório` | `obrigatório` | Seção com as descrições para cada parte do comando |
+| `descriptors.command` | - | `opcional` | Descrição do comando |
+| `descriptors.part{}` | - | `opcional` | Descrição das partes extras de um comando (por exemplo: opções). Cada parte extra será chamada de "part" seguida pelo índice |
+| `concept` | `obrigatório` | - | Sempre presente `true` |
+| `parts` | `obrigatório` | - | Seção com as descrições para o conceito |
+| `parts.part{}` | `obrigatório` | - | Descrições para o conceito que podem ser divididas em blocos, cada um chamado de part seguido pelo índice |
+| `info` | `opcional` | `opcional` | Informação extra para uma ficha. |
+| `author` | `obrigatório` | `obrigatório` | Nome de usuário do GitHub da pessoa que criou a ficha, por exemplo: `@jtemporal` |
+| `number` | `obrigatório` | `obrigatório` | Número da ficha, por exemplo: `"001"`. As aspas são necessárias para o zero à esquerda |
+| `mermaid` | `obrigatório` | `obrigatório` | Sempre presente `true` |
+| `permalink` | `obrigatório` | `obrigatório` | Segue `/projects/{number}` para fichas em pt e `/en/{number}` para fichas em en |
+| `lang` | `obrigatório` | `obrigatório` | `"pt"` ou `"en"`. Estes são os únicos idiomas suportados no momento |
+| `translated` | `opcional` | `opcional` | Caminho para a ficha traduzida, por exemplo: `/projects/{number}` |
+| `pv` | `obrigatório` | `obrigatório` | Informação sobre a ficha anterior para linkagem com setas |
+| `pv.url` | `obrigatório` | `obrigatório` | Caminho para a ficha anterior, por exemplo: `/projects/{number}` |
+| `pv.title` | `obrigatório` | `obrigatório` | Comando da ficha anterior, por exemplo: `#001 git init` |
+| `nt` | `obrigatório` | `obrigatório` | Informação sobre a próxima ficha para linkagem com setas |
+| `nt.url` | `obrigatório` | `obrigatório` | Caminho para a próxima ficha, por exemplo: `/projects/{number}` |
+| `nt.title` | `obrigatório` | `obrigatório` | Comando da próxima ficha, por exemplo: `#001 git init` |
+
+### Exemplo de Ficha de Comando
+
+Fichas de comando têm esta estrutura:
+
+```yaml
+---
+layout: post
+pretitle: 
+title: Renomeando
+subtitle: um arquivo
+command: git mv origem destino
+descriptors:
+  - command: comando para \nmover arquivos
+  - part1: nome atual \ndo arquivo
+  - part2: novo nome \ndo arquivo
+info: esse comando pode ser usado \npara mover arquivos entre pastas
+number: "052"
+author: "@jtemporal"
+mermaid: true
+permalink: "/projects/052"
+lang: "pt"
+translated: "/en/052"
+pv:
+  url: "/projects/051"
+  title: "#051 git commit --allow-empty"
+nt:
+  url: "/projects/053"
+  title: "#053 git log --all --grep='palavra'"
+---
+
+{% include mermaid-graphs.html %}
+```
+
+### Exemplo de Ficha de Conceito
+
+Fichas de comando têm esta estrutura de front-matter:
+
+```yaml
+---
+layout: post
+pretitle: O que é um
+title: conflito
+subtitle:
+concept: true
+parts:
+  - part1: acontece quando duas ou mais alterações são realizadas\nno mesmo pedaço de um arquivo e o git\nnão sabe como aplicar a alteração mais recente
+  - part2: conflitos são indicados pelos marcadores \n >>>  === e <<<
+number: "030"
+author: "@jtemporal"
+mermaid: true
+permalink: "/projects/030"
+translated: "/en/030"
+lang: "pt"
+pv:
+  url: "/projects/029"
+  title: "#029 git restore --staged nome"
+nt:
+  url: "/projects/031"
+  title: "#031 git commit --amend"
+---
+
+{% include mermaid-graphs.html %}
+```
+
+## Rodando o Projeto
+
+O site é executado no Jekyll, mas também está preparado para rodar no Docker (embora já faz um tempo desde que eu usei o Dockerfile para desenvolvimento).
+
+### Localmente
+
+Instale o [Bundler](https://bundler.io/guides/getting_started.html) e siga os passos abaixo.
+
+#### Instalando depedências 
+
+```console
+bundle install
+```
+
+#### Rodar o projeto
+
+```console
+bundle exec jekyll s
+```
+
+### Com Docker
+
+#### Montando a imagem
+
+```console
+docker build -t gitfichas .
+```
+
+#### Servindo
+
+```console
+docker run --rm --volume="$PWD:/srv/jekyll"  -p 4001:4000 -it gitfichas jekyll serve --livereload
+```
+
+## Fazendo Contribuições
+
+Todas as contribuições são bem-vindas. ☺️
+
+Eu escrevi esse [blog post que tem o passo a passo detalhado de como fazer pull requests](https://jtemporal.com/fazendo-pull-requests-com-github-codespaces/) para esse projeto.
+
+Existem várias issues já abertas, você pode trabalhar em uma delas ou adicionar ao projeto com base na sua experiência e uso.
+
+Idealmente, você pode discutir o tópico através de uma issue antes de começar a trabalhar.
+
+[_Agradecimento ao Serenata de Amor por ter um ótimo guia de contribuição que inspirou este_](https://github.com/okfn-brasil/serenata-de-amor/blob/main/CONTRIBUTING.md).
+
+### O básico de git
+
+[**1. Faça um _Fork_ desse repositório**](https://github.com/jtemporal/gitfichas/fork)
+
+**2. Clone o seu fork do repositório**
+
+```console
+git clone http://github.com/<YOUR-GITHUB-USERNAME>/gitfichas.git
+```
+
+**3. Crie uma branch nova**
+
+```console
+git switch -c <NOME-DE-USUÁRIO-NO-GITHUB>-<descrição-ou-número-da-issue>
+```
+
+Note que os nomes das branches começam com o nome de usuário do GitHub, isso nos ajuda a acompanhar as mudanças e quem está trabalhando nelas.
+
+**4. Faça o que você faz de melhor**
+
+Agora é a sua hora de brilhar e escrever um código significativo para elevar o nível do projeto!
+
+**5. Comite suas mudanças**
+
+```console
+git commit -m '<Adicione a descrição das suas mudanças>'
+```
+
+Tente fazer pequenas mudanças por commit, assim é mais fácil entender o que você está fazendo ao revisar seu pull request.
+
+**6. Envie as mudanças para o seu fork**
+
+```consle
+git push -u origin <NOME-DE-USUÁRIO-NO-GITHUB>-<descrição-ou-número-da-issue>
+```
+
+**7. Crie um _Pull Request_**
+
+Do seu fork no GitHub, geralmente há um botão para abrir pull requests.
+
+Lembre-se de [linkar a sua issue no seu pull request](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue).
