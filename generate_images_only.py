@@ -26,6 +26,8 @@ import re
 import yaml
 import subprocess
 import sys
+import requests
+import base64
 from pathlib import Path
 from typing import Dict, List, Any, Optional
 
@@ -53,6 +55,121 @@ class MermaidImageOnlyGenerator:
         if level == "ERROR" or self.verbose:
             prefix = f"[{level}]" if level != "INFO" else ""
             print(f"{prefix} {message}")
+    
+    def _download_and_embed_fonts(self) -> str:
+        """Download Google Fonts and return base64 embedded CSS."""
+        fonts_to_embed = [
+            "https://fonts.googleapis.com/css2?family=Chilanka&display=swap",
+            "https://fonts.googleapis.com/css2?family=Borel&display=swap"
+        ]
+        
+        embedded_css = ""
+        
+        for font_url in fonts_to_embed:
+            try:
+                # Get the CSS file
+                response = requests.get(font_url, headers={
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+                })
+                css_content = response.text
+                
+                # Find all font URLs in the CSS
+                font_urls = re.findall(r'url\((https://[^)]+)\)', css_content)
+                
+                # Download each font file and replace with base64
+                for font_file_url in font_urls:
+                    font_response = requests.get(font_file_url)
+                    if font_response.status_code == 200:
+                        # Convert to base64
+                        font_base64 = base64.b64encode(font_response.content).decode('utf-8')
+                        
+                        # Determine font format from URL
+                        if '.woff2' in font_file_url:
+                            format_type = 'woff2'
+                        elif '.woff' in font_file_url:
+                            format_type = 'woff'
+                        elif '.ttf' in font_file_url:
+                            format_type = 'truetype'
+                        else:
+                            format_type = 'woff2'  # default
+                        
+                        data_url = f"data:font/{format_type};base64,{font_base64}"
+                        css_content = css_content.replace(font_file_url, data_url)
+                
+                embedded_css += css_content + "\n"
+                self.log(f"✓ Embedded font from: {font_url}")
+                
+            except Exception as e:
+                self.log(f"✗ Error embedding font {font_url}: {e}", "ERROR")
+                # Continue with other fonts even if one fails
+                continue
+                
+        return embedded_css
+    
+    def _generate_embedded_theme(self) -> tuple[Path, Path]:
+        """Generate a theme file and CSS file with embedded base64 fonts."""
+        theme_path = self.root_dir / 'gitfichas-theme-embedded.json'
+        css_path = self.root_dir / 'gitfichas-embedded-fonts.css'
+        
+        # Read the existing mermaid.css file from assets as base
+        assets_css_path = self.root_dir / 'assets' / 'css' / 'mermaid.css'
+        base_css = ""
+        if assets_css_path.exists():
+            with open(assets_css_path, 'r', encoding='utf-8') as f:
+                base_css = f.read()
+        
+        # Get embedded font CSS
+        embedded_fonts_css = self._download_and_embed_fonts()
+        
+        # Additional CSS for styling with original font sizes for 1200x675 dimensions
+        mermaid_css = (
+            "/* Simple class-based styling without child combinators - original fonts for 1200x675 */ "
+            ".textFont { font-family: 'Chilanka', cursive !important; font-size: 14px !important; color: #000 !important; } "
+            ".commandFont { font-family: 'Borel', cursive !important; font-size: 16px !important; color: #000 !important; } "
+            ".transparent { fill: #fff !important; stroke: #fff !important; } "
+            "/* Force font inheritance on all text elements with original sizes */ "
+            ".nodeLabel { font-family: inherit !important; font-size: 14px !important; } "
+            "foreignObject { font-family: inherit !important; font-size: 14px !important; } "
+            "foreignObject div { font-family: inherit !important; font-size: 14px !important; } "
+            "foreignObject span { font-family: inherit !important; font-size: 14px !important; } "
+            "span { font-family: inherit !important; font-size: 14px !important; } "
+            "tspan { fill: inherit !important; font-family: inherit !important; font-size: 14px !important; }"
+        )
+        
+        # Write combined CSS file with base CSS from assets, embedded fonts, and mermaid-specific styles
+        with open(css_path, 'w', encoding='utf-8') as f:
+            f.write("/* Base CSS from assets/css/mermaid.css */\n")
+            f.write(base_css + "\n\n")
+            f.write("/* Embedded fonts for SVG generation */\n")
+            f.write(embedded_fonts_css + "\n\n")
+            f.write("/* Mermaid SVG-specific styles */\n")
+            f.write(mermaid_css)
+        
+        # Create simple theme without embedded CSS
+        theme_config = {
+            "theme": "base",
+            "themeVariables": {
+                "primaryColor": "#ffffff",
+                "primaryTextColor": "#000000",
+                "primaryBorderColor": "#ffffff",
+                "lineColor": "#000000",
+                "secondaryColor": "#ffffff",
+                "tertiaryColor": "#ffffff",
+                "background": "#ffffff",
+                "mainBkg": "#ffffff",
+                "secondBkg": "#ffffff",
+                "tertiaryBkg": "#ffffff"
+            }
+        }
+        
+        # Write theme file
+        import json
+        with open(theme_path, 'w', encoding='utf-8') as f:
+            json.dump(theme_config, f, indent=2)
+        
+        self.log(f"✓ Generated embedded font theme: {theme_path}")
+        self.log(f"✓ Generated embedded font CSS: {css_path}")
+        return theme_path, css_path
     
     def extract_front_matter(self, content: str) -> tuple[Dict[str, Any], str]:
         """Extract YAML front matter from markdown content."""
@@ -91,7 +208,7 @@ class MermaidImageOnlyGenerator:
         """Escape quotes in text for Mermaid syntax."""
         if not text:
             return ""
-        return text.replace('"', '\\"').replace("'", "\\'")
+        return text.replace('"', '\"').replace("'", "\'")
     
     def _generate_command_diagram(self, fm: Dict[str, Any]) -> str:
         """Generate Mermaid syntax for command-based diagrams."""
@@ -217,7 +334,7 @@ class f,g,h,i,j,l textFont
         parts = fm.get('parts', [])
         info = fm.get('info', '')
         
-        mermaid = "block-beta\ncolumns 1\n"
+        mermaid = "block-beta\ncolumns 1\n\n"
         
         if len(parts) >= 1:
             part1 = self._escape_quotes(parts[0].get('part1', ''))
@@ -259,28 +376,35 @@ class a,b,c,notes,notes2,notes3,info textFont
         return mermaid
     
     def generate_image(self, mermaid_syntax: str, output_path: Path) -> bool:
-        """Generate image from Mermaid syntax using Mermaid CLI."""
+        """Generate image from Mermaid syntax using Mermaid CLI with embedded font theme."""
         try:
             # Create temporary file for mermaid syntax
             temp_file = output_path.with_suffix('.mmd')
             with open(temp_file, 'w', encoding='utf-8') as f:
                 f.write(mermaid_syntax)
             
-            # Run mermaid CLI to generate image
+            # Generate theme with embedded fonts
+            theme_path, css_path = self._generate_embedded_theme()
+            
+            # Run mermaid CLI to generate image with embedded font theme and CSS
             cmd = [
                 'npx', '@mermaid-js/mermaid-cli', 
                 '-i', str(temp_file),
                 '-o', str(output_path),
                 '-b', 'white',
                 '--width', '1200',
-                '--height', '800',
-                '-e', 'svg'
+                '--height', '675',
+                '-e', 'svg',
+                '--configFile', str(theme_path),
+                '--cssFile', str(css_path)
             ]
             
             result = subprocess.run(cmd, capture_output=True, text=True)
             
-            # Clean up temp file
+            # Clean up temp files
             temp_file.unlink(missing_ok=True)
+            theme_path.unlink(missing_ok=True)
+            css_path.unlink(missing_ok=True)
             
             if result.returncode == 0:
                 self.log(f"✓ Generated image: {output_path}")
@@ -293,7 +417,7 @@ class a,b,c,notes,notes2,notes3,info textFont
             self.log(f"✗ Exception generating image: {e}", "ERROR")
             return False
     
-    def process_file(self, file_path: Path) -> bool:
+    def process_file(self, file_path: Path, force: bool = False) -> bool:
         """Process a single markdown file - ONLY generate image, don't modify file."""
         self.log(f"\nProcessing: {file_path}")
         
@@ -327,7 +451,7 @@ class a,b,c,notes,notes2,notes3,info textFont
             image_path = self.images_dir / image_filename
             
             # Check if image already exists
-            if image_path.exists():
+            if image_path.exists() and not force:
                 self.log(f"  Image already exists: {image_path}")
                 self.stats['total_skipped'] += 1
                 return False
@@ -366,7 +490,7 @@ class a,b,c,notes,notes2,notes3,info textFont
                         continue
                     
                 self.stats['total_processed'] += 1
-                self.process_file(file_path)
+                self.process_file(file_path, force)
         
         self.print_summary()
     
@@ -375,7 +499,7 @@ class a,b,c,notes,notes2,notes3,info textFont
         print(f"\n=== Summary ===")
         print(f"Total files processed: {self.stats['total_processed']}")
         print(f"Images generated: {self.stats['total_success']}")
-        print(f"Skipped (not mermaid/already exists): {self.stats['total_skipped']}")
+        print(f"Skipped: {self.stats['total_skipped']}")
         print(f"Failed: {self.stats['total_errors']}")
         
         if self.stats['total_success'] > 0:
