@@ -1,0 +1,2 @@
+- Always start the jekyll server with `bundle exec jekyll serve` no extra flags.
+- The Jekyll site preview URL is: https://solid-barnacle-5pggr79pv637pq4-4000.app.github.dev/

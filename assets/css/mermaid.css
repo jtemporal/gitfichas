@@ -70,6 +70,17 @@
     width: 100%;
 }
 
+.mermaid-image {
+    margin-top: 2vh;
+    background-color: transparent;
+    border: none;
+    width: 80vw;
+    max-height: 65vh;
+    object-fit: contain;
+    text-align: center;
+    width: 100%;
+}
+
 .mermaid-footer {
     display: flex;
     justify-content: space-between;
