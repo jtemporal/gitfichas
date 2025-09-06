@@ -11,11 +11,11 @@ automatically detect and use static images when available, falling back to
 dynamic rendering when not.
 
 Usage:
-    python3 generate_images_only.py [filter]
+    python3 scripts/generate_images_only.py [filter]
     
 Examples:
-    python3 generate_images_only.py           # Generate images for all mermaid posts
-    python3 generate_images_only.py "053.md"  # Generate images only for posts with "053.md" in filename
+    python3 scripts/generate_images_only.py           # Generate images for all mermaid posts
+    python3 scripts/generate_images_only.py "053.md"  # Generate images only for posts with "053.md" in filename
 
 Author: GitHub Copilot
 License: MIT
@@ -42,6 +42,12 @@ class MermaidImageOnlyGenerator:
         self.images_dir = self.root_dir / "assets" / "img" / "mermaid"
         self.images_dir.mkdir(parents=True, exist_ok=True)
         
+        # CSS file paths - create combined CSS with embedded fonts
+        self.base_mermaid_css_path = self.root_dir / 'assets' / 'css' / 'embedded-svg.css'
+        self.embedded_fonts_css_path = self.root_dir / 'assets' / 'css' / 'embedded-fonts.css'
+        self.combined_css_path = self.root_dir / 'combined-mermaid.css'
+        self.theme_path = self.root_dir / 'gitfichas-mermaid-theme.json'
+        
         # Statistics
         self.stats = {
             'total_processed': 0,
@@ -50,126 +56,61 @@ class MermaidImageOnlyGenerator:
             'total_errors': 0
         }
         
+        # Initialize combined CSS file only (theme file is standalone)
+        self._validate_theme_file()
+        self._create_combined_css()
+        
     def log(self, message: str, level: str = "INFO"):
         """Log message with optional verbose output."""
         if level == "ERROR" or self.verbose:
             prefix = f"[{level}]" if level != "INFO" else ""
             print(f"{prefix} {message}")
     
-    def _download_and_embed_fonts(self) -> str:
-        """Download Google Fonts and return base64 embedded CSS."""
-        fonts_to_embed = [
-            "https://fonts.googleapis.com/css2?family=Chilanka&display=swap",
-            "https://fonts.googleapis.com/css2?family=Borel&display=swap"
-        ]
+    def _validate_theme_file(self):
+        """Validate that the standalone theme file exists."""
+        if not self.theme_path.exists():
+            raise FileNotFoundError(f"Theme file not found: {self.theme_path}. Please ensure gitfichas-mermaid-theme.json exists in the project root.")
         
-        embedded_css = ""
-        
-        for font_url in fonts_to_embed:
-            try:
-                # Get the CSS file
-                response = requests.get(font_url, headers={
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-                })
-                css_content = response.text
+        # Validate it's valid JSON
+        try:
+            import json
+            with open(self.theme_path, 'r', encoding='utf-8') as f:
+                json.load(f)
+            self.log(f"✓ Using theme file: {self.theme_path}")
+        except json.JSONDecodeError as e:
+            raise ValueError(f"Invalid JSON in theme file {self.theme_path}: {e}")
+
+    def _create_combined_css(self):
+        """Create combined CSS file with embedded fonts for Mermaid CLI."""
+        try:
+            # Read the embedded-svg.css file (which includes the @import for embedded fonts)
+            with open(self.base_mermaid_css_path, 'r', encoding='utf-8') as f:
+                svg_css = f.read()
+            
+            # Remove the @import line and replace with actual embedded fonts CSS
+            svg_css_without_import = re.sub(r'^@import.*?;.*?\n', '', svg_css, flags=re.MULTILINE)
+            
+            # Read the embedded fonts CSS file directly
+            embedded_fonts_css = ""
+            if self.embedded_fonts_css_path.exists():
+                with open(self.embedded_fonts_css_path, 'r', encoding='utf-8') as f:
+                    embedded_fonts_css = f.read()
+            
+            # Combine: embedded fonts first, then SVG-specific CSS
+            combined_css = embedded_fonts_css + "\n\n" + svg_css_without_import
+            
+            # Write combined CSS file
+            with open(self.combined_css_path, 'w', encoding='utf-8') as f:
+                f.write(combined_css)
                 
-                # Find all font URLs in the CSS
-                font_urls = re.findall(r'url\((https://[^)]+)\)', css_content)
-                
-                # Download each font file and replace with base64
-                for font_file_url in font_urls:
-                    font_response = requests.get(font_file_url)
-                    if font_response.status_code == 200:
-                        # Convert to base64
-                        font_base64 = base64.b64encode(font_response.content).decode('utf-8')
-                        
-                        # Determine font format from URL
-                        if '.woff2' in font_file_url:
-                            format_type = 'woff2'
-                        elif '.woff' in font_file_url:
-                            format_type = 'woff'
-                        elif '.ttf' in font_file_url:
-                            format_type = 'truetype'
-                        else:
-                            format_type = 'woff2'  # default
-                        
-                        data_url = f"data:font/{format_type};base64,{font_base64}"
-                        css_content = css_content.replace(font_file_url, data_url)
-                
-                embedded_css += css_content + "\n"
-                self.log(f"✓ Embedded font from: {font_url}")
-                
-            except Exception as e:
-                self.log(f"✗ Error embedding font {font_url}: {e}", "ERROR")
-                # Continue with other fonts even if one fails
-                continue
-                
-        return embedded_css
-    
-    def _generate_embedded_theme(self) -> tuple[Path, Path]:
-        """Generate a theme file and CSS file with embedded base64 fonts."""
-        theme_path = self.root_dir / 'gitfichas-theme-embedded.json'
-        css_path = self.root_dir / 'gitfichas-embedded-fonts.css'
-        
-        # Read the existing mermaid.css file from assets as base
-        assets_css_path = self.root_dir / 'assets' / 'css' / 'mermaid.css'
-        base_css = ""
-        if assets_css_path.exists():
-            with open(assets_css_path, 'r', encoding='utf-8') as f:
-                base_css = f.read()
-        
-        # Get embedded font CSS
-        embedded_fonts_css = self._download_and_embed_fonts()
-        
-        # Additional CSS for styling with original font sizes for 1200x675 dimensions
-        mermaid_css = (
-            "/* Simple class-based styling without child combinators - original fonts for 1200x675 */ "
-            ".textFont { font-family: 'Chilanka', cursive !important; font-size: 14px !important; color: #000 !important; } "
-            ".commandFont { font-family: 'Borel', cursive !important; font-size: 16px !important; color: #000 !important; } "
-            ".transparent { fill: #fff !important; stroke: #fff !important; } "
-            "/* Force font inheritance on all text elements with original sizes */ "
-            ".nodeLabel { font-family: inherit !important; font-size: 14px !important; } "
-            "foreignObject { font-family: inherit !important; font-size: 14px !important; } "
-            "foreignObject div { font-family: inherit !important; font-size: 14px !important; } "
-            "foreignObject span { font-family: inherit !important; font-size: 14px !important; } "
-            "span { font-family: inherit !important; font-size: 14px !important; } "
-            "tspan { fill: inherit !important; font-family: inherit !important; font-size: 14px !important; }"
-        )
-        
-        # Write combined CSS file with base CSS from assets, embedded fonts, and mermaid-specific styles
-        with open(css_path, 'w', encoding='utf-8') as f:
-            f.write("/* Base CSS from assets/css/mermaid.css */\n")
-            f.write(base_css + "\n\n")
-            f.write("/* Embedded fonts for SVG generation */\n")
-            f.write(embedded_fonts_css + "\n\n")
-            f.write("/* Mermaid SVG-specific styles */\n")
-            f.write(mermaid_css)
-        
-        # Create simple theme without embedded CSS
-        theme_config = {
-            "theme": "base",
-            "themeVariables": {
-                "primaryColor": "#ffffff",
-                "primaryTextColor": "#000000",
-                "primaryBorderColor": "#ffffff",
-                "lineColor": "#000000",
-                "secondaryColor": "#ffffff",
-                "tertiaryColor": "#ffffff",
-                "background": "#ffffff",
-                "mainBkg": "#ffffff",
-                "secondBkg": "#ffffff",
-                "tertiaryBkg": "#ffffff"
-            }
-        }
-        
-        # Write theme file
-        import json
-        with open(theme_path, 'w', encoding='utf-8') as f:
-            json.dump(theme_config, f, indent=2)
-        
-        self.log(f"✓ Generated embedded font theme: {theme_path}")
-        self.log(f"✓ Generated embedded font CSS: {css_path}")
-        return theme_path, css_path
+            self.log(f"✓ Created combined CSS file: {self.combined_css_path}")
+            
+        except Exception as e:
+            self.log(f"Error creating combined CSS: {e}", "ERROR")
+
+    def _cleanup_temp_files(self):
+        """Clean up temporary files at the end."""
+        self.combined_css_path.unlink(missing_ok=True)
     
     def extract_front_matter(self, content: str) -> tuple[Dict[str, Any], str]:
         """Extract YAML front matter from markdown content."""
@@ -376,17 +317,14 @@ class a,b,c,notes,notes2,notes3,info textFont
         return mermaid
     
     def generate_image(self, mermaid_syntax: str, output_path: Path) -> bool:
-        """Generate image from Mermaid syntax using Mermaid CLI with embedded font theme."""
+        """Generate image from Mermaid syntax using Mermaid CLI with mermaid.css file directly."""
         try:
             # Create temporary file for mermaid syntax
             temp_file = output_path.with_suffix('.mmd')
             with open(temp_file, 'w', encoding='utf-8') as f:
                 f.write(mermaid_syntax)
             
-            # Generate theme with embedded fonts
-            theme_path, css_path = self._generate_embedded_theme()
-            
-            # Run mermaid CLI to generate image with embedded font theme and CSS
+            # Run mermaid CLI to generate image using mermaid.css directly
             cmd = [
                 'npx', '@mermaid-js/mermaid-cli', 
                 '-i', str(temp_file),
@@ -395,16 +333,14 @@ class a,b,c,notes,notes2,notes3,info textFont
                 '--width', '1200',
                 '--height', '675',
                 '-e', 'svg',
-                '--configFile', str(theme_path),
-                '--cssFile', str(css_path)
+                '--configFile', str(self.theme_path),
+                '--cssFile', str(self.combined_css_path)
             ]
             
             result = subprocess.run(cmd, capture_output=True, text=True)
             
-            # Clean up temp files
+            # Clean up only the temporary mermaid file
             temp_file.unlink(missing_ok=True)
-            theme_path.unlink(missing_ok=True)
-            css_path.unlink(missing_ok=True)
             
             if result.returncode == 0:
                 self.log(f"✓ Generated image: {output_path}")
@@ -505,6 +441,9 @@ class a,b,c,notes,notes2,notes3,info textFont
         if self.stats['total_success'] > 0:
             print(f"\n✅ Generated images in: {self.images_dir}")
             print(f"\n💡 To use static images, add 'use_static_image: true' to post front matter")
+        
+        # Clean up temporary files
+        self._cleanup_temp_files()
 
 def check_dependencies():
     """Check if required dependencies are available."""

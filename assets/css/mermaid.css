@@ -105,33 +105,3 @@
         margin: auto;
     }
 }
-
-/* Mermaid SVG styling for static images */
-.textFont {
-    font-family: 'Chilanka', cursive !important;
-    font-size: 1.2em !important;
-    fill: #000 !important;
-}
-
-.commandFont {
-    font-family: 'Borel', cursive !important;
-    font-size: 1.6em !important;
-}
-
-.transparent {
-    fill: #fff !important;
-    stroke: #fff !important;
-}
-
-/* Mermaid block styling for SVG generation */
-text[class*="textFont"] {
-    font-family: 'Chilanka', cursive !important;
-    font-size: 1.2em !important;
-    fill: #000 !important;
-}
-
-text[class*="commandFont"] {
-    font-family: 'Borel', cursive !important;
-    font-size: 1.6em !important;
-    fill: #000 !important;
-}

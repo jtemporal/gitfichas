@@ -40,13 +40,15 @@ use_static_image: true  # ← Add this line
 Run the script to generate images for posts that need them:
 
 ```bash
-python3 generate_images_only.py
+python3 scripts/generate_images_only.py
 ```
 
 ## 📁 Files Structure
 
 ```
-├── generate_images_only.py           # New non-destructive script
+├── scripts/
+│   ├── generate_images_only.py       # New non-destructive script
+│   └── generate_embedded_fonts.py    # Font embedding utility
 ├── generate_mermaid_images.py        # Original script (destructive)
 ├── generate_mermaid_images_v2.py     # Enhanced original (destructive)
 ├── _includes/mermaid-graphs.html     # Updated with smart detection
@@ -62,23 +64,23 @@ python3 generate_images_only.py
 
 ```bash
 # Generate images for all Mermaid posts
-python3 generate_images_only.py
+python3 scripts/generate_images_only.py
 
 # Generate images for specific posts
-python3 generate_images_only.py "053.md"
+python3 scripts/generate_images_only.py "053.md"
 
 # Verbose output
-python3 generate_images_only.py --verbose
+python3 scripts/generate_images_only.py --verbose
 
 # Force regeneration of existing images
-python3 generate_images_only.py --force
+python3 scripts/generate_images_only.py --force
 ```
 
 ### Step-by-Step Migration
 
 1. **Generate static images:**
    ```bash
-   python3 generate_images_only.py "053.md"
+   python3 scripts/generate_images_only.py "053.md"
    ```
 
 2. **Add opt-in flag to post front matter:**
@@ -144,7 +146,7 @@ The CSS has been updated to support both approaches:
 - Keep original rendering for less critical posts
 
 ### Strategy 2: Bulk Migration
-- Generate all images at once: `python3 generate_images_only.py`
+- Generate all images at once: `python3 scripts/generate_images_only.py`
 - Add `use_static_image: true` to all posts programmatically
 - Test thoroughly before deploying
 
@@ -210,7 +212,7 @@ The include automatically detects the flag and serves the static image!
 
 ### Debug Mode
 ```bash
-python3 generate_images_only.py --verbose "053.md"
+python3 scripts/generate_images_only.py --verbose "053.md"
 ```
 
 ## 🔮 Future Enhancements

@@ -1,0 +1,16 @@
+{
+  "_comment": "Mermaid theme configuration for SVG generation. Used by scripts/generate_images_only.py to create static GitFichas diagrams with white background and black text.",
+  "theme": "base",
+  "themeVariables": {
+    "primaryColor": "#ffffff",
+    "primaryTextColor": "#000000",
+    "primaryBorderColor": "#ffffff",
+    "lineColor": "#000000",
+    "secondaryColor": "#ffffff",
+    "tertiaryColor": "#ffffff",
+    "background": "#ffffff",
+    "mainBkg": "#ffffff",
+    "secondBkg": "#ffffff",
+    "tertiaryBkg": "#ffffff"
+  }
+}
