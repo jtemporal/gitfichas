@@ -12,7 +12,7 @@
 {% if page.lang == 'en' %}
   {% assign image_filename = page.number | append: '-en' %}
 {% endif %}
-{% assign static_image_path = '/assets/img/mermaid/' | append: image_filename | append: '.png' %}
+{% assign static_image_path = '/assets/img/mermaid/' | append: image_filename | append: '.svg' %}
 
 {% comment %}
   For now, we'll use a simple approach - if you want to use static images,

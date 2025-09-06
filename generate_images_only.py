@@ -3,7 +3,7 @@
 GitFichas Mermaid Image Generator (Non-Destructive)
 ===================================================
 
-This script generates static PNG images from Mermaid diagrams in Jekyll posts
+This script generates static SVG images from Mermaid diagrams in Jekyll posts
 WITHOUT modifying the original markdown files.
 
 The Jekyll include file (_includes/mermaid-graphs.html) has been updated to
@@ -273,7 +273,8 @@ class a,b,c,notes,notes2,notes3,info textFont
                 '-o', str(output_path),
                 '-b', 'white',
                 '--width', '1200',
-                '--height', '800'
+                '--height', '800',
+                '-e', 'svg'
             ]
             
             result = subprocess.run(cmd, capture_output=True, text=True)
@@ -319,9 +320,9 @@ class a,b,c,notes,notes2,notes3,info textFont
             lang = front_matter.get('lang', 'pt')
             
             if lang == 'en':
-                image_filename = f"{number}-en.png"
+                image_filename = f"{number}-en.svg"
             else:
-                image_filename = f"{number}.png"
+                image_filename = f"{number}.svg"
             
             image_path = self.images_dir / image_filename
             

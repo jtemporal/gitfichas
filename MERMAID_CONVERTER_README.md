@@ -1,6 +1,6 @@
-# GitFichas Mermaid to Static Images (Non-Destructive Approach)
+# Mermaid to Static SVG Converter
 
-This repository contains a **non-destructive** solution to convert dynamic Mermaid diagrams in Jekyll posts to static images, improving website performance while preserving all original markdown files.
+This tool converts dynamic Mermaid diagrams to static SVG images for better performance and accessibility.
 
 ## 🎯 Key Benefits
 
@@ -9,6 +9,7 @@ This repository contains a **non-destructive** solution to convert dynamic Merma
 - ✅ **Fallback support**: Dynamic rendering still works for unconverted posts
 - ✅ **Performance boost**: Static images load faster and reduce JavaScript overhead
 - ✅ **Better SEO**: Images are accessible to search engines and work without JavaScript
+- ✅ **SVG format**: Vector graphics scale perfectly at any size and are accessible to screen readers
 
 ## 🔧 How It Works
 
@@ -17,7 +18,7 @@ The `_includes/mermaid-graphs.html` file now includes smart detection logic:
 
 ```liquid
 {% if page.use_static_image %}
-  <img src="/assets/img/mermaid/{{ page.number }}.png" alt="{{ page.title }}" class="mermaid-image" />
+  <img src="/assets/img/mermaid/{{ page.number }}.svg" alt="{{ page.title }}" class="mermaid-image" />
 {% elsif page.command %}
   <!-- Original dynamic Mermaid rendering -->
 {% endif %}

@@ -79,6 +79,8 @@
     object-fit: contain;
     text-align: center;
     width: 100%;
+    /* SVG-specific styling for better accessibility */
+    overflow: visible;
 }
 
 .mermaid-footer {
