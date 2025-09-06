@@ -190,7 +190,7 @@ end
 %% arrows %%
 b --> g
 c --> f
-classDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#fff, line-height:2em;
+classDef textFont font-family:'Chilanka', font-size:1.2em, color:#000, line-height:2em;
 """
         
         if len(command_parts) == 4:
@@ -198,7 +198,7 @@ classDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#fff, line
         elif len(command_parts) == 5:
             mermaid += "d --> h\ne --> i\n"
         elif len(command_parts) == 6:
-            mermaid += "d --> h\ne --> i\nk --> l\nclassDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#fff, line-height:2.2em;\n"
+            mermaid += "d --> h\ne --> i\nk --> l\nclassDef textFont font-family:'Chilanka', font-size:1.2em, color:#000, line-height:2.2em;\n"
         
         # Add styling
         mermaid += """
@@ -252,7 +252,7 @@ end
 %% styling %%
 classDef transparent fill:#fff, stroke:#fff;
 class a,b,c,notes,notes2,notes3,info transparent
-classDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#fff, line-height:1.4em;
+classDef textFont font-family:'Chilanka', font-size:1.2em, color:#000, line-height:1.4em;
 class a,b,c,notes,notes2,notes3,info textFont
 """
         
