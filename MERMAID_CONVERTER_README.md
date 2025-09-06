@@ -46,19 +46,43 @@ python3 scripts/generate_images_only.py
 ## 📁 Files Structure
 
 ```
-├── scripts/
-│   ├── generate_images_only.py       # New non-destructive script
-│   └── generate_embedded_fonts.py    # Font embedding utility
+├── scripts/                          # Modular script architecture
+│   ├── generate_images_only.py       # Main non-destructive script
+│   ├── generate_embedded_fonts.py    # Font embedding utility
+│   ├── mermaid_generator.py          # Mermaid diagram generation logic
+│   ├── config_manager.py             # Configuration and path management
+│   └── utils.py                      # Statistics tracking and logging
 ├── generate_mermaid_images.py        # Original script (destructive)
 ├── generate_mermaid_images_v2.py     # Enhanced original (destructive)
 ├── _includes/mermaid-graphs.html     # Updated with smart detection
+├── assets/css/
+│   ├── mermaid.css                   # Web-specific styles
+│   ├── embedded-svg.css              # SVG-specific styles
+│   └── embedded-fonts.css            # Base64 embedded fonts (auto-generated)
+├── gitfichas-mermaid-theme.json      # Standalone theme configuration
 └── assets/img/mermaid/              # Generated static images
-    ├── 053.png                      # Portuguese version
-    ├── 053-en.png                   # English version
+    ├── 053.svg                      # Portuguese version (SVG format)
+    ├── 053-en.svg                   # English version (SVG format)
     └── ...
 ```
 
 ## 🚀 Usage
+
+### Script Architecture
+
+The generator uses a **modular architecture** for better maintainability:
+
+- **`generate_images_only.py`**: Main orchestrator script
+- **`mermaid_generator.py`**: Handles Mermaid syntax generation from front matter
+- **`config_manager.py`**: Manages paths, CSS files, and CLI configuration
+- **`utils.py`**: Provides statistics tracking and logging utilities
+- **`generate_embedded_fonts.py`**: Separate utility for font embedding
+
+This modular design makes the code more:
+- 📦 **Maintainable**: Each module has a single responsibility
+- 🧪 **Testable**: Components can be tested independently
+- 🔧 **Extensible**: Easy to add new diagram types or features
+- 🐛 **Debuggable**: Issues are easier to isolate and fix
 
 ### Basic Usage
 
@@ -94,6 +118,29 @@ python3 scripts/generate_images_only.py --force
    - Check that styling is preserved
 
 4. **Repeat for other posts as needed**
+
+### Font Management
+
+The system uses **embedded Google Fonts** (Chilanka and Borel) for consistent rendering:
+
+```bash
+# Generate embedded fonts (run when fonts need updating)
+python3 scripts/generate_embedded_fonts.py
+
+# Regenerate all SVG images with new fonts
+python3 scripts/generate_images_only.py --force
+```
+
+**Font Architecture:**
+- **`embedded-fonts.css`**: Base64-encoded font definitions (auto-generated)
+- **`embedded-svg.css`**: SVG-specific styles that import embedded fonts
+- **`mermaid.css`**: Web-specific styles for interactive diagrams
+
+This separation ensures:
+- ✅ **Consistent rendering** across all platforms
+- ✅ **No external font dependencies** in SVG files
+- ✅ **Faster loading** with embedded fonts
+- ✅ **Offline compatibility** for generated images
 
 ## 📋 Requirements
 
@@ -200,45 +247,75 @@ The include automatically detects the flag and serves the static image!
 
 1. **Image not loading:**
    - Check if image file exists in `assets/img/mermaid/`
-   - Verify filename matches pattern: `{number}.png` or `{number}-en.png`
+   - Verify filename matches pattern: `{number}.svg` or `{number}-en.svg`
+   - Ensure the SVG format is being used (not PNG)
 
 2. **Still seeing dynamic rendering:**
    - Ensure `use_static_image: true` is in front matter
    - Check Jekyll server logs for errors
+   - Verify image file was generated successfully
 
 3. **Image generation fails:**
    - Install required system libraries
    - Check Mermaid CLI installation: `npx @mermaid-js/mermaid-cli --version`
+   - Verify theme file exists: `gitfichas-mermaid-theme.json`
+   - Check embedded fonts: `assets/css/embedded-fonts.css`
+
+4. **Font rendering issues:**
+   - Regenerate embedded fonts: `python3 scripts/generate_embedded_fonts.py`
+   - Force regenerate images: `python3 scripts/generate_images_only.py --force`
+
+5. **Module import errors:**
+   - Ensure all scripts are in the `scripts/` directory
+   - Check that Python path includes the scripts directory
+   - Verify all module files exist: `config_manager.py`, `mermaid_generator.py`, `utils.py`
 
 ### Debug Mode
 ```bash
+# Verbose output for detailed debugging
 python3 scripts/generate_images_only.py --verbose "053.md"
+
+# Test individual components
+python3 -c "
+import sys; sys.path.append('scripts')
+from mermaid_generator import MermaidDiagramGenerator
+print('✓ Mermaid generator working')
+"
 ```
 
-## 🔮 Future Enhancements
-
-- [ ] Automatic detection of outdated images
-- [ ] Batch front matter updates
-- [ ] Performance monitoring integration
-- [ ] SVG output support
-- [ ] Custom image dimensions per post
+### Development Testing
+```bash
+# Test the modular architecture
+cd scripts
+python3 -c "
+from config_manager import ConfigManager
+from utils import StatsTracker, Logger
+print('✓ All modules importing correctly')
+"
+```
 
 ## 🎉 Benefits Summary
 
 ### Performance
-- ⚡ Faster page loads (no client-side rendering)
-- 📱 Better mobile experience
-- 🔋 Reduced CPU usage on client devices
+- ⚡ **Faster page loads** (no client-side rendering)
+- 📱 **Better mobile experience**
+- 🔋 **Reduced CPU usage** on client devices
+- 🎯 **SVG format** for perfect scaling and accessibility
 
 ### Reliability
-- 🌐 Works without JavaScript
-- 🔒 Consistent rendering across browsers
-- 📱 Better accessibility support
+- 🌐 **Works without JavaScript**
+- 🔒 **Consistent rendering** across browsers
+- 📱 **Better accessibility** support
+- 🎨 **Embedded fonts** ensure consistent typography
 
 ### Development
-- 🛡️ Non-destructive migration
-- 🔄 Easy rollback (just remove the flag)
-- 🧪 A/B testing friendly
+- 🛡️ **Non-destructive migration**
+- 🔄 **Easy rollback** (just remove the flag)
+- 🧪 **A/B testing friendly**
+- 📦 **Modular architecture** for easier maintenance
+- 🔧 **Extensible design** for future enhancements
+- 🐛 **Better debugging** with separated concerns
+- 📊 **Comprehensive logging** and statistics tracking
 
 ## 📝 License
 
