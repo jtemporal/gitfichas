@@ -25,8 +25,14 @@
   <div class="mermaid">
     block-beta
     columns 1
-    
-    {% if command_parts.size == 3 %}
+    {% if command_parts.size == 2 %}
+    block:notes
+      space:1 f["{{ page.descriptors[0].command }}"]
+    end
+    block:command
+      a("{{ command_parts[0] }}") b("{{ command_parts[1] }}")
+    end
+    {% elsif command_parts.size == 3 %}
     block:notes
       space:2 f["{{ page.descriptors[1].part1 }}"]
     end
@@ -86,10 +92,13 @@
   {% endif %}
 
   %% arrows %%
+  {% if command_parts.size == 2 %}
+  b --> f
+  {% elsif command_parts.size == 3 %}
   b --> g
   c --> f
   classDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#fff, line-height:2em;
-  {% if command_parts.size == 4 %}
+  {% elsif command_parts.size == 4 %}
   d --> h
   {% elsif command_parts.size == 5 %}
   d --> h
