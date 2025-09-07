@@ -156,6 +156,9 @@ The project includes Python scripts in the `scripts/` folder:
 
 - **`scripts/generate_images_only.py`**: Main script for generating SVG images from Mermaid diagrams
 - **`scripts/generate_embedded_fonts.py`**: Utility script for embedding fonts into CSS (run when fonts need updating)
+- **`scripts/setup-mermaid.sh`**: Automated setup script for new codespaces (installs dependencies and configures the environment)
+
+> 💡 **New to the project?** Run `scripts/setup-mermaid.sh` to automatically set up all dependencies and test the environment.
 
 ### Development Workflow
 
@@ -408,6 +411,9 @@ O projeto inclui scripts Python na pasta `scripts/`:
 
 - **`scripts/generate_images_only.py`**: Script principal para gerar imagens SVG dos diagramas Mermaid
 - **`scripts/generate_embedded_fonts.py`**: Script utilitário para incorporar fontes no CSS (execute quando as fontes precisarem ser atualizadas)
+- **`scripts/setup-mermaid.sh`**: Script automatizado de configuração para novos codespaces (instala dependências e configura o ambiente)
+
+> 💡 **Novo no projeto?** Execute `scripts/setup-mermaid.sh` para configurar automaticamente todas as dependências e testar o ambiente.
 
 ### Fluxo de Desenvolvimento
 

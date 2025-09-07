@@ -29,6 +29,11 @@ import sys
 from pathlib import Path
 from typing import Dict, List, Any, Optional
 
+# Add the scripts directory to Python path for imports
+script_dir = Path(__file__).parent
+if str(script_dir) not in sys.path:
+    sys.path.insert(0, str(script_dir))
+
 # Import our new modules
 from config_manager import ConfigManager
 from mermaid_generator import MermaidDiagramGenerator
