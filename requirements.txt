@@ -1,0 +1,4 @@
+# GitFichas Mermaid Generator Requirements
+# Python dependencies for the image generation system
+
+PyYAML>=6.0
