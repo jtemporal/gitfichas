@@ -15,7 +15,7 @@ The easiest way to get started is using the provided devcontainer configuration:
 If not using devcontainers, run the setup script:
 
 ```bash
-bash .devcontainer/scripts/post-create.sh
+bash scripts/setup.sh
 ```
 
 This will install all required dependencies and test the setup.
@@ -170,7 +170,7 @@ If you're setting up in a fresh codespace, you can use the automated setup scrip
 
 ```bash
 # Automated setup (recommended) - can be run from anywhere
-scripts/setup-mermaid.sh
+scripts/setup.sh
 ```
 
 Or manually run this setup sequence:
@@ -322,7 +322,7 @@ The include automatically detects the flag and serves the static image!
    sudo apt-get install -y libasound2t64 libatk-bridge2.0-0t64 libatk1.0-0t64 libdrm2 libgtk-3-0t64 libgbm1 libnss3 libxss1 libxtst6 xvfb
    
    # Or run the setup script which handles this automatically:
-   scripts/setup-mermaid.sh
+   scripts/setup.sh
    ```
 
 2. **Import errors in new codespace:**

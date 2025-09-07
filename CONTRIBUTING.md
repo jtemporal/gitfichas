@@ -8,6 +8,14 @@
 
 Thank you for wanting to contribute to GitFichas | GitStudyCards. Here you'll find most of the information you'll need for contributing.
 
+**🚀 Quick Setup:** Before you begin, run the setup script to install all required dependencies:
+
+```bash
+bash scripts/setup.sh
+```
+
+This script will automatically configure your development environment with all necessary tools including Node.js dependencies, Python packages, and Mermaid diagram generation capabilities.
+
 If you have any questions create an issue.
 
 ## Cards Types
@@ -170,9 +178,9 @@ The project includes Python scripts in the `scripts/` folder:
 
 - **`scripts/generate_images_only.py`**: Main script for generating SVG images from Mermaid diagrams
 - **`scripts/generate_embedded_fonts.py`**: Utility script for embedding fonts into CSS (run when fonts need updating)
-- **`scripts/setup-mermaid.sh`**: Automated setup script for new codespaces (installs dependencies and configures the environment)
+- **`scripts/setup.sh`**: Automated setup script for new codespaces (installs dependencies and configures the environment)
 
-> 💡 **New to the project?** Run `scripts/setup-mermaid.sh` to automatically set up all dependencies and test the environment.
+> 💡 **New to the project?** Run `scripts/setup.sh` to automatically set up all dependencies and test the environment.
 
 ### Development Workflow
 
@@ -276,6 +284,14 @@ Remember to [link your issue in your pull request](https://docs.github.com/en/is
 ## Antes de Começar
 
 Obrigada por querer contribuir com o GitFichas. Aqui você encontrará a maioria das informações que precisará para contribuir.
+
+**🚀 Configuração Rápida:** Antes de começar, execute o script de configuração para instalar todas as dependências necessárias:
+
+```bash
+bash scripts/setup.sh
+```
+
+Este script configurará automaticamente seu ambiente de desenvolvimento com todas as ferramentas necessárias, incluindo dependências Node.js, pacotes Python e capacidades de geração de diagramas Mermaid.
 
 Se tiver alguma dúvida, crie uma issue.
 
@@ -439,9 +455,9 @@ O projeto inclui scripts Python na pasta `scripts/`:
 
 - **`scripts/generate_images_only.py`**: Script principal para gerar imagens SVG dos diagramas Mermaid
 - **`scripts/generate_embedded_fonts.py`**: Script utilitário para incorporar fontes no CSS (execute quando as fontes precisarem ser atualizadas)
-- **`scripts/setup-mermaid.sh`**: Script automatizado de configuração para novos codespaces (instala dependências e configura o ambiente)
+- **`scripts/setup.sh`**: Script automatizado de configuração para novos codespaces (instala dependências e configura o ambiente)
 
-> 💡 **Novo no projeto?** Execute `scripts/setup-mermaid.sh` para configurar automaticamente todas as dependências e testar o ambiente.
+> 💡 **Novo no projeto?** Execute `scripts/setup.sh` para configurar automaticamente todas as dependências e testar o ambiente.
 
 ### Fluxo de Desenvolvimento
 
