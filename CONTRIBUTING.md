@@ -2,7 +2,7 @@
 
 | Table of content | Índice |
 | ------- | --------- |
-| &nbsp;&nbsp;• [Before You Start](#before-you-start)<br>&nbsp;&nbsp;• [Cards Types](#cards-types)<br>&nbsp;&nbsp;• [Running the Project](#running-the-project)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Local way](#local-way)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Install dependencies](#install-dependencies)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Run the project](#run-the-project)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Docker way](#docker-way)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Building image](#building-image)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Serving](#serving)<br>&nbsp;&nbsp;• [The Basics of Contributing](#the-basics-of-contributing)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [The Git basics](#the-git-basics) | &nbsp;&nbsp;• [Antes de Começar](#antes-de-começar)<br>&nbsp;&nbsp;• [Tipos de Fichas](#tipos-de-fichas)<br>&nbsp;&nbsp;• [Rodando o Projeto](#rodando-o-projeto)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Localmente](#localmente)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Instalando depedências](#instalando-depedências)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Rodar o projeto](#rodar-o-projeto)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Com Docker](#com-docker)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Montando a imagem](#montando-a-imagem)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Servindo](#servindo)<br>&nbsp;&nbsp;• [O Básico de Contribuições](#o-básico-de-contribuições)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [O básico de git](#o-básico-de-git) |
+| &nbsp;&nbsp;• [Before You Start](#before-you-start)<br>&nbsp;&nbsp;• [Cards Types](#cards-types)<br>&nbsp;&nbsp;• [Running the Project](#running-the-project)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Local way](#local-way)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Install dependencies](#install-dependencies)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Run the project](#run-the-project)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Docker way](#docker-way)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Building image](#building-image)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Serving](#serving)<br>&nbsp;&nbsp;• [Working with Mermaid Diagrams](#working-with-mermaid-diagrams)<br>&nbsp;&nbsp;• [The Basics of Contributing](#the-basics-of-contributing)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [The Git basics](#the-git-basics) | &nbsp;&nbsp;• [Antes de Começar](#antes-de-começar)<br>&nbsp;&nbsp;• [Tipos de Fichas](#tipos-de-fichas)<br>&nbsp;&nbsp;• [Rodando o Projeto](#rodando-o-projeto)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Localmente](#localmente)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Instalando depedências](#instalando-depedências)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Rodar o projeto](#rodar-o-projeto)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Com Docker](#com-docker)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Montando a imagem](#montando-a-imagem)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Servindo](#servindo)<br>&nbsp;&nbsp;• [Trabalhando com Diagramas Mermaid](#trabalhando-com-diagramas-mermaid)<br>&nbsp;&nbsp;• [Fazendo Contribuições](#fazendo-contribuições)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [O básico de git](#o-básico-de-git) |
 
 ## Before You Start
 
@@ -143,6 +143,62 @@ docker build -t gitfichas .
 ```console
 docker run --rm --volume="$PWD:/srv/jekyll"  -p 4001:4000 -it gitfichas jekyll serve --livereload
 ```
+
+## Working with Mermaid Diagrams
+
+GitFichas uses Mermaid diagrams for visualizing Git concepts and commands. The project includes scripts to generate static SVG images from these diagrams.
+
+> 📖 **For detailed technical information** about the Mermaid conversion system, see the [Mermaid Converter README](MERMAID_CONVERTER_README.md).
+
+### Image Generation Scripts
+
+The project includes Python scripts in the `scripts/` folder:
+
+- **`scripts/generate_images_only.py`**: Main script for generating SVG images from Mermaid diagrams
+- **`scripts/generate_embedded_fonts.py`**: Utility script for embedding fonts into CSS (run when fonts need updating)
+
+### Development Workflow
+
+When working on cards with Mermaid diagrams:
+
+1. **Add/edit your Mermaid diagram** in the post's front matter
+2. **Generate SVG images** for your changes:
+   ```bash
+   # Generate images for all posts
+   python3 scripts/generate_images_only.py
+   
+   # Generate images for specific post (faster for testing)
+   python3 scripts/generate_images_only.py "053.md"
+   
+   # Force regeneration of existing images
+   python3 scripts/generate_images_only.py --force
+   ```
+3. **Test locally** using Jekyll serve to see both interactive and static versions
+4. **Commit both** the post changes and generated SVG files
+
+### Font Management
+
+The project uses embedded Google Fonts (Chilanka and Borel) for consistent rendering. If you need to update fonts:
+
+1. **Generate new embedded fonts**:
+   ```bash
+   python3 scripts/generate_embedded_fonts.py
+   ```
+2. **Regenerate all SVG images** to use the new fonts:
+   ```bash
+   python3 scripts/generate_images_only.py --force
+   ```
+
+### CSS Architecture
+
+The project uses a separated CSS architecture:
+- **`assets/css/mermaid.css`**: Web-specific styles for interactive diagrams
+- **`assets/css/embedded-svg.css`**: SVG-specific styles with embedded fonts
+- **`assets/css/embedded-fonts.css`**: Base64-embedded font definitions (auto-generated)
+
+### Theme Configuration
+
+Mermaid theme settings are stored in `gitfichas-mermaid-theme.json` for consistent SVG generation.
 
 ## The Basics of Contributing
 
@@ -339,6 +395,62 @@ docker build -t gitfichas .
 ```console
 docker run --rm --volume="$PWD:/srv/jekyll"  -p 4001:4000 -it gitfichas jekyll serve --livereload
 ```
+
+## Trabalhando com Diagramas Mermaid
+
+GitFichas usa diagramas Mermaid para visualizar conceitos e comandos Git. O projeto inclui scripts para gerar imagens SVG estáticas desses diagramas.
+
+> 📖 **Para informações técnicas detalhadas** sobre o sistema de conversão Mermaid, veja o [Mermaid Converter README](MERMAID_CONVERTER_README.md).
+
+### Scripts de Geração de Imagens
+
+O projeto inclui scripts Python na pasta `scripts/`:
+
+- **`scripts/generate_images_only.py`**: Script principal para gerar imagens SVG dos diagramas Mermaid
+- **`scripts/generate_embedded_fonts.py`**: Script utilitário para incorporar fontes no CSS (execute quando as fontes precisarem ser atualizadas)
+
+### Fluxo de Desenvolvimento
+
+Ao trabalhar em fichas com diagramas Mermaid:
+
+1. **Adicione/edite seu diagrama Mermaid** no front matter do post
+2. **Gere imagens SVG** para suas mudanças:
+   ```bash
+   # Gerar imagens para todos os posts
+   python3 scripts/generate_images_only.py
+   
+   # Gerar imagens para post específico (mais rápido para testes)
+   python3 scripts/generate_images_only.py "053.md"
+   
+   # Forçar regeneração de imagens existentes
+   python3 scripts/generate_images_only.py --force
+   ```
+3. **Teste localmente** usando Jekyll serve para ver as versões interativas e estáticas
+4. **Comite tanto** as mudanças do post quanto os arquivos SVG gerados
+
+### Gerenciamento de Fontes
+
+O projeto usa Google Fonts incorporadas (Chilanka e Borel) para renderização consistente. Se você precisar atualizar as fontes:
+
+1. **Gere novas fontes incorporadas**:
+   ```bash
+   python3 scripts/generate_embedded_fonts.py
+   ```
+2. **Regenere todas as imagens SVG** para usar as novas fontes:
+   ```bash
+   python3 scripts/generate_images_only.py --force
+   ```
+
+### Arquitetura CSS
+
+O projeto usa uma arquitetura CSS separada:
+- **`assets/css/mermaid.css`**: Estilos específicos para web para diagramas interativos
+- **`assets/css/embedded-svg.css`**: Estilos específicos para SVG com fontes incorporadas
+- **`assets/css/embedded-fonts.css`**: Definições de fontes em base64 incorporadas (gerado automaticamente)
+
+### Configuração de Tema
+
+As configurações do tema Mermaid estão armazenadas em `gitfichas-mermaid-theme.json` para geração consistente de SVG.
 
 ## Fazendo Contribuições
 

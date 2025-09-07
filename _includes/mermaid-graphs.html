@@ -4,7 +4,23 @@
     <h1>{{ page.title }}</h1>
     {% if page.subtitle %}<p class="subtitle">{{ page.subtitle }}</p>{% endif %}
   </div>
-{% if page.command %}
+
+{% comment %}
+  Check if static image exists - use that instead of dynamic rendering
+{% endcomment %}
+{% assign image_filename = page.number %}
+{% if page.lang == 'en' %}
+  {% assign image_filename = page.number | append: '-en' %}
+{% endif %}
+{% assign static_image_path = '/assets/img/mermaid/' | append: image_filename | append: '.svg' %}
+
+{% comment %}
+  For now, we'll use a simple approach - if you want to use static images,
+  set page.use_static_image to true in the front matter
+{% endcomment %}
+{% if page.use_static_image %}
+  <img src="{{ static_image_path }}" alt="{{ page.title }}" class="mermaid-image" />
+{% elsif page.command %}
   {% assign command_parts = page.command | split: " " %}
   <div class="mermaid">
     block-beta
