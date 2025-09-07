@@ -46,6 +46,7 @@ class MermaidDiagramGenerator:
 
         # Use a strategy pattern based on command parts count
         generators = {
+            2: cls._generate_2_part_command,
             3: cls._generate_3_part_command,
             4: cls._generate_4_part_command,
             5: cls._generate_5_part_command,
@@ -58,6 +59,30 @@ class MermaidDiagramGenerator:
             return cls._generate_generic_command_diagram(fm)
 
         return generator(command_parts, descriptors, info)
+
+    @classmethod
+    def _generate_2_part_command(cls, command_parts: List[str], descriptors: List[Dict], info: str) -> str:
+        """Generate diagram for 2-part commands."""
+        command_desc = cls.escape_quotes(descriptors[0].get('command', '')) if len(descriptors) > 0 else ''
+
+        mermaid = "block-beta\ncolumns 1\n\n"
+        mermaid += f"""block:notes
+  space:1 f["{command_desc}"]
+end
+block:command
+  a("{cls.escape_quotes(command_parts[0])}") b("{cls.escape_quotes(command_parts[1])}")
+end
+"""
+
+        if info:
+            mermaid += f"""
+block:info
+  j["{cls.escape_quotes(info)}"]
+end
+"""
+
+        mermaid += cls._get_command_styling(len(command_parts))
+        return mermaid
 
     @classmethod
     def _generate_3_part_command(cls, command_parts: List[str], descriptors: List[Dict], info: str) -> str:
@@ -211,18 +236,18 @@ end
     def _get_command_styling(cls, num_parts: int) -> str:
         """Get styling for command diagrams based on number of parts."""
         base_styling = """
-%% arrows %%
-b --> g
-c --> f
-classDef textFont font-family:'Chilanka', font-size:1.2em, color:#000, line-height:2em;
-"""
+%% arrows %%"""
 
-        if num_parts == 4:
-            base_styling += "d --> h\n"
+        if num_parts == 2:
+            base_styling += "\nb -->f\n"
+        elif num_parts == 3:
+            base_styling += "\nb --> g\nc --> f\nclassDef textFont font-family:'Chilanka', font-size:1.2em, color:#000, line-height:2em;\n"
+        elif num_parts == 4:
+            base_styling += "\nd --> h\n"
         elif num_parts == 5:
-            base_styling += "d --> h\ne --> i\n"
+            base_styling += "\nd --> h\ne --> i\n"
         elif num_parts == 6:
-            base_styling += "d --> h\ne --> i\nk --> l\nclassDef textFont font-family:'Chilanka', font-size:1.2em, color:#000, line-height:2.2em;\n"
+            base_styling += "\nd --> h\ne --> i\nk --> l\nclassDef textFont font-family:'Chilanka', font-size:1.2em, color:#000, line-height:2.2em;\n"
 
         base_styling += """
 %% styling %%
