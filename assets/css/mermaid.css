@@ -10,6 +10,12 @@
     gap: 50px;
 }
 
+.mermaid-container-post {
+    border: 1px solid #c0c0c0;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
 .title-container {
     display: flex;
     flex-direction: column;
