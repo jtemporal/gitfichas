@@ -4,15 +4,8 @@ This tool converts dynamic Mermaid diagrams to static SVG images for better perf
 
 ## ⚡ Quick Start
 
-### Devcontainer Setup (Recommended)
-The easiest way to get started is using the provided devcontainer configuration:
-
-1. **Open in Codespace/Devcontainer**: The setup will run automatically via `.devcontainer/devcontainer.json`
-2. **Automatic Installation**: All dependencies (Node.js, Python, Chrome libs, Mermaid CLI) are installed automatically
-3. **Ready to Use**: Scripts are immediately available in the `scripts/` directory
-
-### Manual Setup
-If not using devcontainers, run the setup script:
+### Automated Setup (Recommended)
+The easiest way to get started is using the setup script:
 
 ```bash
 bash scripts/setup.sh
@@ -70,7 +63,7 @@ python3 scripts/generate_images_only.py
 │   ├── mermaid_generator.py          # Mermaid diagram generation logic
 │   ├── config_manager.py             # Configuration and path management
 │   ├── utils.py                      # Statistics tracking and logging
-│   └── setup-mermaid.sh              # Automated setup script for new codespaces
+│   └── setup.sh                      # Automated setup script
 ├── requirements.txt                  # Python dependencies
 ├── generate_mermaid_images.py        # Original script (destructive)
 ├── generate_mermaid_images_v2.py     # Enhanced original (destructive)
@@ -164,9 +157,9 @@ This separation ensures:
 
 ## 📋 Requirements
 
-### Quick Setup for New Codespaces
+### Quick Setup
 
-If you're setting up in a fresh codespace, you can use the automated setup script:
+If you're setting up in a fresh environment, you can use the automated setup script:
 
 ```bash
 # Automated setup (recommended) - can be run from anywhere
@@ -176,7 +169,7 @@ scripts/setup.sh
 Or manually run this setup sequence:
 
 ```bash
-# 1. Ensure Node.js and npm are available (usually pre-installed in Codespaces)
+# 1. Ensure Node.js and npm are available
 node --version && npm --version
 
 # 2. Install Python dependencies
@@ -193,7 +186,7 @@ python3 scripts/generate_images_only.py --help
 ```
 
 ### System Dependencies
-- **Node.js and npm** (usually pre-installed in GitHub Codespaces)
+- **Node.js and npm**
 - **System libraries for headless Chrome/Puppeteer:**
   ```bash
   sudo apt-get update
@@ -325,11 +318,11 @@ The include automatically detects the flag and serves the static image!
    scripts/setup.sh
    ```
 
-2. **Import errors in new codespace:**
+2. **Import errors in new environment:**
    ```bash
    # Error: ModuleNotFoundError: No module named 'config_manager'
    # Solution: The script now auto-fixes Python path, but ensure you're running from project root
-   cd /workspaces/gitfichas
+   cd /path/to/gitfichas
    python3 scripts/generate_images_only.py --help
    ```
 
