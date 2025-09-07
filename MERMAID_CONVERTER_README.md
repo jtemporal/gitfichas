@@ -2,6 +2,24 @@
 
 This tool converts dynamic Mermaid diagrams to static SVG images for better performance and accessibility.
 
+## ⚡ Quick Start
+
+### Devcontainer Setup (Recommended)
+The easiest way to get started is using the provided devcontainer configuration:
+
+1. **Open in Codespace/Devcontainer**: The setup will run automatically via `.devcontainer/devcontainer.json`
+2. **Automatic Installation**: All dependencies (Node.js, Python, Chrome libs, Mermaid CLI) are installed automatically
+3. **Ready to Use**: Scripts are immediately available in the `scripts/` directory
+
+### Manual Setup
+If not using devcontainers, run the setup script:
+
+```bash
+bash .devcontainer/scripts/post-create.sh
+```
+
+This will install all required dependencies and test the setup.
+
 ## 🎯 Key Benefits
 
 - ✅ **Non-destructive**: Original markdown files remain untouched
@@ -176,11 +194,23 @@ python3 scripts/generate_images_only.py --help
 
 ### System Dependencies
 - **Node.js and npm** (usually pre-installed in GitHub Codespaces)
-- **System libraries for headless Chrome:**
+- **System libraries for headless Chrome/Puppeteer:**
   ```bash
   sudo apt-get update
-  sudo apt-get install -y libasound2t64 libatk-bridge2.0-0t64 libatk1.0-0t64 libdrm2 libgtk-3-0t64 libgbm1
+  sudo apt-get install -y \
+    libasound2t64 \
+    libatk-bridge2.0-0t64 \
+    libatk1.0-0t64 \
+    libdrm2 \
+    libgtk-3-0t64 \
+    libgbm1 \
+    libnss3 \
+    libxss1 \
+    libxtst6 \
+    xvfb
   ```
+  
+  > ⚠️ **Important**: These libraries are **automatically installed** by the setup script. Missing these will cause the error: `libatk-1.0.so.0: cannot open shared object file`
 
 ### Python Dependencies
 - **PyYAML** (usually pre-installed)
@@ -283,7 +313,19 @@ The include automatically detects the flag and serves the static image!
 
 ### Common Issues
 
-1. **Import errors in new codespace:**
+1. **Chrome/Puppeteer browser launch fails:**
+   ```bash
+   # Error: libatk-1.0.so.0: cannot open shared object file: No such file or directory
+   # Error: Failed to launch the browser process!
+   # Solution: Install system dependencies for headless Chrome
+   sudo apt-get update
+   sudo apt-get install -y libasound2t64 libatk-bridge2.0-0t64 libatk1.0-0t64 libdrm2 libgtk-3-0t64 libgbm1 libnss3 libxss1 libxtst6 xvfb
+   
+   # Or run the setup script which handles this automatically:
+   scripts/setup-mermaid.sh
+   ```
+
+2. **Import errors in new codespace:**
    ```bash
    # Error: ModuleNotFoundError: No module named 'config_manager'
    # Solution: The script now auto-fixes Python path, but ensure you're running from project root
@@ -291,21 +333,21 @@ The include automatically detects the flag and serves the static image!
    python3 scripts/generate_images_only.py --help
    ```
 
-2. **Missing embedded-fonts.css:**
+3. **Missing embedded-fonts.css:**
    ```bash
    # Error: FileNotFoundError: embedded-fonts.css not found
    # Solution: Generate the embedded fonts first
    python3 scripts/generate_embedded_fonts.py
    ```
 
-3. **Missing theme configuration:**
+4. **Missing theme configuration:**
    ```bash
    # Error: Theme file not found: gitfichas-mermaid-theme.json
    # Solution: Ensure the theme file exists in project root
    ls -la gitfichas-mermaid-theme.json
    ```
 
-4. **Mermaid CLI not found:**
+5. **Mermaid CLI not found:**
    ```bash
    # Error: npx: @mermaid-js/mermaid-cli command not found
    # Solution: Install Mermaid CLI globally

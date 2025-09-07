@@ -114,6 +114,20 @@ nt:
 
 The website runs on Jekyll but it is prepared to run on docker as well (although it has been a while since I used it for development).
 
+### Devcontainer way (Recommended)
+
+The fastest way to get started is using the provided devcontainer configuration:
+
+1. **Open in GitHub Codespace or VS Code with Dev Containers extension**
+2. **Automatic Setup**: Dependencies are installed automatically via `.devcontainer/devcontainer.json`
+3. **Jekyll + Mermaid Ready**: Both Jekyll and Mermaid SVG generation are pre-configured
+
+The devcontainer includes:
+- Ruby and Jekyll dependencies
+- Node.js and Mermaid CLI
+- Python scripts for SVG generation
+- All system dependencies for headless Chrome
+
 ### Local way
 
 Install [Bundler](https://bundler.io/guides/getting_started.html) follow the steps below.
@@ -368,6 +382,20 @@ nt:
 ## Rodando o Projeto
 
 O site é executado no Jekyll, mas também está preparado para rodar no Docker (embora já faz um tempo desde que eu usei o Dockerfile para desenvolvimento).
+
+### Com Devcontainer (Recomendado)
+
+A maneira mais rápida de começar é usando a configuração de devcontainer fornecida:
+
+1. **Abra no GitHub Codespace ou VS Code com extensão Dev Containers**
+2. **Configuração Automática**: Dependências são instaladas automaticamente via `.devcontainer/devcontainer.json`
+3. **Jekyll + Mermaid Prontos**: Tanto Jekyll quanto geração de SVG Mermaid estão pré-configurados
+
+O devcontainer inclui:
+- Ruby e dependências do Jekyll
+- Node.js e Mermaid CLI
+- Scripts Python para geração de SVG
+- Todas as dependências do sistema para Chrome headless
 
 ### Localmente
 
