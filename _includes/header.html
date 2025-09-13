@@ -1,12 +1,25 @@
 <header>
+  <!-- Language detection logic -->
+  {% include language-detection.html %}
   <div class="logo">
-    {% if page.lang == "pt" %}
-    <a href="{{ site.github.url }}/">{{ site.title }}</a>
+    {% if current_lang == "en" %}
+    <a href="{{ site.url }}{{ site.baseurl }}/en/">{{ site.title_en }}</a>
+    {% elsif current_lang == "es" %}
+    <a href="{{ site.url }}{{ site.baseurl }}/es/">{{ site.title }}</a>
     {% else %}
-    <a href="{{ site.github.url }}/">{{ site.title_en }}</a>
+    <a href="{{ site.url }}{{ site.baseurl }}/">{{ site.title }}</a>
     {% endif %}
   </div>
   <nav>
+    <div class="main-menu">
+      {% for item in site.data.settings.menu[current_lang] %}
+        {% if item.url contains "https" %}
+          <a href="{{ item.url }}">{{ item.name }}</a>
+        {% else %}
+          <a href="{{ site.url }}{{ site.baseurl }}/{{ item.url }}">{{ item.name }}</a>
+        {% endif %}
+      {% endfor %}
+    </div>
     {% include language-switch.html %}
   </nav>
 </header>
