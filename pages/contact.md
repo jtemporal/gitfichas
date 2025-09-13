@@ -2,8 +2,12 @@
 layout: page
 title: Contact
 permalink: /contact
-translated: /contato
 lang: "en"
+translations:
+  - lang: pt
+    url: "/contato"
+  - lang: es
+    url: "/contacto"
 ---
 
 # Contact

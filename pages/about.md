@@ -2,8 +2,12 @@
 layout: page
 title: About
 permalink: /about
-translated: /sobre
 lang: "en"
+translations:
+  - lang: pt
+    url: "/sobre"
+  - lang: es
+    url: "/acerca"
 ---
 
 # About GitFichas
