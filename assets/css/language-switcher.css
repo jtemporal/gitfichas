@@ -1,0 +1,218 @@
+/* Multi-Language Switcher Styles for GitFichas */
+.language-switcher {
+    margin-left: 10px;
+}
+
+.language-switcher .dropdown-toggle {
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    min-width: 60px;
+    text-align: center;
+    border-radius: 3px;
+    background: none;
+    border: 1px solid #ddd;
+    color: #333;
+    text-decoration: none;
+}
+
+.language-switcher .dropdown-toggle:hover,
+.language-switcher .dropdown-toggle:focus {
+    background-color: #f5f5f5;
+    text-decoration: none;
+    color: #333;
+    border-color: #BD5248;
+}
+
+.language-switcher .dropdown-toggle .caret {
+    margin-left: 5px;
+}
+
+.language-switcher .dropdown-menu {
+    min-width: 140px;
+    max-width: 200px;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+    border: 1px solid #ddd;
+    right: 0;
+    left: auto;
+    padding: 5px 0;
+    z-index: 1000;
+}
+
+.language-switcher .dropdown-menu li a {
+    padding: 8px 15px;
+    font-size: 13px;
+    line-height: 1.5;
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+    color: #333;
+    text-decoration: none;
+    display: block;
+}
+
+.language-switcher .dropdown-menu li a:hover,
+.language-switcher .dropdown-menu li a:focus {
+    background-color: #f8f9fa;
+    color: #333;
+    text-decoration: none;
+}
+
+.language-switcher .dropdown-menu .current-language {
+    color: #BD5248 !important;
+    font-weight: 600;
+    cursor: default;
+    background-color: #f8f9fa;
+}
+
+.language-switcher .dropdown-menu .current-language:hover,
+.language-switcher .dropdown-menu .current-language:focus {
+    background-color: #f8f9fa;
+    color: #BD5248 !important;
+}
+
+.language-switcher .dropdown-menu .divider {
+    margin: 5px 0;
+    border-top: 1px solid #e5e5e5;
+    height: 1px;
+    overflow: hidden;
+    background-color: #e5e5e5;
+}
+
+/* Main menu styles */
+.main-menu {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.main-menu a {
+    margin-right: 15px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.main-menu a:hover {
+    color: #BD5248;
+    text-decoration: none;
+}
+
+/* Header layout improvements */
+header nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+    /* Header adjustments for mobile */
+    header {
+        height: auto !important;
+        min-height: 90px;
+        padding: 10px 0;
+    }
+    
+    header .logo {
+        float: none !important;
+        margin: 10px 20px !important;
+        text-align: center;
+        width: 100%;
+    }
+    
+    header nav {
+        float: none !important;
+        margin: 10px 20px !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        width: 100%;
+    }
+    
+    .main-menu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin: 0;
+        width: 100%;
+        order: 1;
+    }
+    
+    .main-menu a {
+        margin: 0;
+        padding: 8px 12px;
+        font-size: 16px !important;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        background: transparent;
+        text-align: center;
+        min-width: 80px;
+    }
+    
+    .main-menu a:hover {
+        background: #f8f9fa;
+        border-color: #BD5248;
+    }
+    
+    /* Language switcher mobile adjustments */
+    .language-switcher {
+        margin: 0;
+        width: auto;
+        flex-shrink: 0;
+        order: 2;
+    }
+    
+    .language-switcher .dropdown-toggle {
+        min-width: auto;
+        padding: 8px 15px;
+        font-size: 16px;
+        background: transparent;
+        color: #333;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+    
+    .language-switcher .dropdown-toggle:hover,
+    .language-switcher .dropdown-toggle:focus {
+        background: #f8f9fa;
+        color: #333;
+        border-color: #BD5248;
+    }
+    
+    .navbar-right {
+        float: none !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        width: 100%;
+        order: 2;
+    }
+    
+    /* Dropdown menu mobile adjustments */
+    .language-switcher .dropdown-menu {
+        min-width: 140px;
+        border-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0,0,0,.15);
+        border: 1px solid #ddd;
+    }
+}
+
+@media (max-width: 480px) {
+    header .logo {
+        margin: 10px 15px !important;
+    }
+    
+    header nav {
+        margin: 10px 15px !important;
+    }
+    
+    .main-menu a {
+        padding: 6px 10px;
+        font-size: 14px !important;
+        min-width: 70px;
+    }
+}
