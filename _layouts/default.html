@@ -4,19 +4,26 @@
 <!DOCTYPE html>
 <html class="">
   <head>
+    <!-- Language detection for meta tags -->
+    {% include language-detection.html %}
     <meta charset="UTF-8">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% if page.lang == "pt" %}
-    <meta name="description" content="{{ site.data.settings.seo.pt.description }}">
-    <meta rel="author" href="{{ site.data.settings.seo.pt.rel-author }}">
-    <meta rel="publisher" href="{{ site.data.settings.seo.pt.rel-publisher }}">
-    {% assign main_title = site.title %}
-    {% else %}
+    {% if current_lang == "en" %}
     <meta name="description" content="{{ site.data.settings.seo.en.description }}">
     <meta rel="author" href="{{ site.data.settings.seo.en.rel-author }}">
     <meta rel="publisher" href="{{ site.data.settings.seo.en.rel-publisher }}">
     {% assign main_title = site.title_en %}
+    {% elsif current_lang == "es" %}
+    <meta name="description" content="{{ site.data.settings.seo.es.description }}">
+    <meta rel="author" href="{{ site.data.settings.seo.es.rel-author }}">
+    <meta rel="publisher" href="{{ site.data.settings.seo.es.rel-publisher }}">
+    {% assign main_title = site.title %}
+    {% else %}
+    <meta name="description" content="{{ site.data.settings.seo.pt.description }}">
+    <meta rel="author" href="{{ site.data.settings.seo.pt.rel-author }}">
+    <meta rel="publisher" href="{{ site.data.settings.seo.pt.rel-publisher }}">
+    {% assign main_title = site.title %}
     {% endif %}
     <title>
       {% if page.layout == "home" %}
