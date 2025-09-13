@@ -3,11 +3,11 @@
   {% include language-detection.html %}
   <div class="logo">
     {% if current_lang == "en" %}
-    <a href="{{ site.url }}{{ site.baseurl }}/en/">{{ site.title_en }}</a>
+    <a href="{{ site.github.url }}/en/">{{ site.title_en }}</a>
     {% elsif current_lang == "es" %}
-    <a href="{{ site.url }}{{ site.baseurl }}/es/">{{ site.title }}</a>
+    <a href="{{ site.github.url }}/es/">{{ site.title }}</a>
     {% else %}
-    <a href="{{ site.url }}{{ site.baseurl }}/">{{ site.title }}</a>
+    <a href="{{ site.github.url }}/">{{ site.title }}</a>
     {% endif %}
   </div>
   <nav>
@@ -16,7 +16,7 @@
         {% if item.url contains "https" %}
           <a href="{{ item.url }}">{{ item.name }}</a>
         {% else %}
-          <a href="{{ site.url }}{{ site.baseurl }}/{{ item.url }}">{{ item.name }}</a>
+          <a href="{{ site.github.url }}{{ site.baseurl }}/{{ item.url }}">{{ item.name }}</a>
         {% endif %}
       {% endfor %}
     </div>
