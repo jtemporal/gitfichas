@@ -12,6 +12,11 @@ menu:
   - {name: 'Blog',     url: 'https://jtemporal.com/en?utm_source=gitfichas'}
   - {name: 'About',    url: 'about'}
   - {name: 'Book',    url: 'https://jtemporal.com/gitmicrobook?utm_source=gitfichas'}
+  es:
+  - {name: 'Tarjetas', url: 'es'}
+  - {name: 'Blog',     url: 'https://jtemporal.com/es?utm_source=gitfichas'}
+  - {name: 'Acerca',   url: 'acerca'}
+#  - {name: 'Libro',    url: 'https://jtemporal.com/microlivrodegit?utm_source=gitfichas'}
 
 #-------------------------------
 # Contact Section
@@ -37,6 +42,10 @@ seo:
     rel-publisher: 'https://jtemporal.com'
   en:
     description: 'Git study cards in English 🇺🇸'
+    rel-author: 'https://jtemporal.com'
+    rel-publisher: 'https://jtemporal.com'
+  es:
+    description: 'Tarjetas de estudio de Git en Español 🇪🇸'
     rel-author: 'https://jtemporal.com'
     rel-publisher: 'https://jtemporal.com'
 
