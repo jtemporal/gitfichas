@@ -44,8 +44,8 @@ Here's a list of all fields you could find in both types:
 | `author` | `mandatory` | `mandatory` | GitHub username of person who created the card e.g.: `@jtemporal` |
 | `number` | `mandatory` | `mandatory` |  Number of the card e.g.: `"001"`. Quotes are necessary for the leading zero |
 | `mermaid` | `mandatory` | `mandatory` |  Always `true` |
-| `permalink` |  `mandatory` | `mandatory` |  Folows `/projects/{number}` for pt cards and `/en/{number}` for en cards |
-| `lang` | `mandatory` | `mandatory` | Either `"pt"` or `"en"`. These are the only languages supported at the moment |
+| `permalink` |  `mandatory` | `mandatory` |  Follows `/projects/{number}` for pt cards, `/en/{number}` for en cards, and `/es/{number}` for es cards |
+| `lang` | `mandatory` | `mandatory` | Either `"pt"`, `"en"`, or `"es"`. These are the currently supported languages |
 | `translated` | `optional` | `optional` |  Path to translated card e.g.: `/projects/{number}` |
 | `pv` | `mandatory` | `mandatory` | information about the previous card for arrow linking |
 | `pv.url` | `mandatory` | `mandatory` | Path to previous card e.g.: `/projects/{number}` |
@@ -321,8 +321,8 @@ Aqui está uma lista de todos os campos que você pode encontrar em ambos os tip
 | `author` | `obrigatório` | `obrigatório` | Nome de usuário do GitHub da pessoa que criou a ficha, por exemplo: `@jtemporal` |
 | `number` | `obrigatório` | `obrigatório` | Número da ficha, por exemplo: `"001"`. As aspas são necessárias para o zero à esquerda |
 | `mermaid` | `obrigatório` | `obrigatório` | Sempre presente `true` |
-| `permalink` | `obrigatório` | `obrigatório` | Segue `/projects/{number}` para fichas em pt e `/en/{number}` para fichas em en |
-| `lang` | `obrigatório` | `obrigatório` | `"pt"` ou `"en"`. Estes são os únicos idiomas suportados no momento |
+| `permalink` | `obrigatório` | `obrigatório` | Segue `/projects/{number}` para fichas em pt, `/en/{number}` para fichas em en, e `/es/{number}` para fichas em es |
+| `lang` | `obrigatório` | `obrigatório` | `"pt"`, `"en"`, ou `"es"`. Estes são os idiomas atualmente suportados |
 | `translated` | `opcional` | `opcional` | Caminho para a ficha traduzida, por exemplo: `/projects/{number}` |
 | `pv` | `obrigatório` | `obrigatório` | Informação sobre a ficha anterior para linkagem com setas |
 | `pv.url` | `obrigatório` | `obrigatório` | Caminho para a ficha anterior, por exemplo: `/projects/{number}` |
