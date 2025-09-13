@@ -2,6 +2,9 @@
 layout: default
 ---
 
+<!-- Language detection -->
+{% include language-detection.html %}
+
 <section>
   <div class="post-container">
     {% if page.mermaid %}
@@ -13,7 +16,11 @@ layout: default
     {% endif %}
     {% if page.related %}
     <br>
-    {% if page.lang == "pt"%}
+    {% if current_lang == "en" %}
+    <p>Read also:</p>
+    {% elsif current_lang == "es" %}
+    <p>Lee también:</p>
+    {% else %}
     <p>Leia também:</p>
     {% endif %}
     <a href="{{page.related_url}}">
