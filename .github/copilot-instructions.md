@@ -71,7 +71,7 @@ Follow the templates from CONTRIBUTING.md exactly:
 - Use `lang: "pt"` for Portuguese cards in `_posts/`
 - Use `lang: "en"` for English cards in `en/_posts/`
 - Use `lang: "es"` for Spanish cards in `es/_posts/`
-- Include `translated` field linking to other language versions when available
+- Include `translations` array linking to other language versions when available
 - Supported language codes: "pt", "en", "es"
 
 ### Code Quality
