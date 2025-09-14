@@ -7,7 +7,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 50px;
+    gap: 20px;
 }
 
 .mermaid-container-post {
@@ -37,7 +37,7 @@
 
 .title-container .pretitle {
     font-family: 'Shadows Into Light Two';
-    font-size: 2vw;
+    font-size: 1.6vw;
     color: #C67D9B;
     margin: 0;
     position: absolute;
@@ -82,6 +82,7 @@
     object-fit: contain;
     text-align: center;
     width: 100%;
+    padding-bottom: 30px;
     /* SVG-specific styling for better accessibility */
     overflow: visible;
 }
