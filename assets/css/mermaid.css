@@ -7,7 +7,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 50px;
+    gap: 20px;
 }
 
 .mermaid-container-post {
@@ -28,7 +28,7 @@
 .title-container h1 {
     font-family: 'Londrina Solid'; /*Londrina Shadow*/
     color: #D88FB7;
-    font-size: 7vw;
+    font-size: 5vw;
     letter-spacing: 5px;
     margin: 0;
     text-align: center;
@@ -37,7 +37,7 @@
 
 .title-container .pretitle {
     font-family: 'Shadows Into Light Two';
-    font-size: 2vw;
+    font-size: 1.6vw;
     color: #C67D9B;
     margin: 0;
     position: absolute;
@@ -58,14 +58,14 @@
     right: 0;
     text-align: right;
     padding-right: calc(50% - (var(--h1-width) / 2));
-    top: 7vw;
+    top: 5vw;
 }
 
 .mermaid {
     margin-top: 2vh;
     background-color: transparent;
     border: none;
-    font-size: 2rem;
+    font-size: 1.6rem;
     width: 80vw;
     max-height: 65vh;
     overflow: hidden;
@@ -82,6 +82,7 @@
     object-fit: contain;
     text-align: center;
     width: 100%;
+    padding-bottom: 50px;
     /* SVG-specific styling for better accessibility */
     overflow: visible;
 }
