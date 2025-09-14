@@ -94,24 +94,27 @@
   %% arrows %%
   {% if command_parts.size == 2 %}
   b --> f
+  classDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#000, line-height:2em;
   {% elsif command_parts.size == 3 %}
   b --> g
   c --> f
-  classDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#fff, line-height:2em;
+  classDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#000, line-height:2em;
   {% elsif command_parts.size == 4 %}
   c --> f
   b --> g
   d --> h
+  classDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#000, line-height:2em;
   {% elsif command_parts.size == 5 %}
   d --> h
   e --> i
+  classDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#000, line-height:2em;
   {% elsif command_parts.size == 6 %}
   b --> g
   c --> f
   d --> h
   e --> i
   k --> l
-  classDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#fff, line-height:2.2em;
+  classDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#000, line-height:2.2em;
   {% endif %}
 
   %% styling %%
@@ -150,7 +153,7 @@
   %% styling %%
   classDef transparent fill:#fff, stroke:#fff;
   class a,b,c,notes,notes2,notes3,info transparent
-  classDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#fff, line-height:1.4em;
+  classDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#000, line-height:1.4em;
   class a,b,c,notes,notes2,notes3,info textFont
   </div> 
 {% endif %}

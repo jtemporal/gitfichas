@@ -239,15 +239,15 @@ end
 %% arrows %%"""
 
         if num_parts == 2:
-            base_styling += "\nb -->f\n"
+            base_styling += "\nb --> f\nclassDef textFont font-family:'Chilanka', font-size:1em, color:#000, line-height:2em;\n"
         elif num_parts == 3:
-            base_styling += "\nb --> g\nc --> f\nclassDef textFont font-family:'Chilanka', font-size:1.2em, color:#000, line-height:2em;\n"
+            base_styling += "\nb --> g\nc --> f\nclassDef textFont font-family:'Chilanka', font-size:1em, color:#000, line-height:2em;\n"
         elif num_parts == 4:
-            base_styling += "\nd --> h\n"
+            base_styling += "\nc --> f\nb --> g\nd --> h\nclassDef textFont font-family:'Chilanka', font-size:1em, color:#000, line-height:2em;\n"
         elif num_parts == 5:
-            base_styling += "\nd --> h\ne --> i\n"
+            base_styling += "\nd --> h\ne --> i\nclassDef textFont font-family:'Chilanka', font-size:1em, color:#000, line-height:2em;\n"
         elif num_parts == 6:
-            base_styling += "\nd --> h\ne --> i\nk --> l\nclassDef textFont font-family:'Chilanka', font-size:1.2em, color:#000, line-height:2.2em;\n"
+            base_styling += "\nb --> g\nc --> f\nd --> h\ne --> i\nk --> l\nclassDef textFont font-family:'Chilanka', font-size:1em, color:#000, line-height:2.2em;\n"
 
         base_styling += """
 %% styling %%
@@ -267,7 +267,7 @@ class f,g,h,i,j,l textFont
 %% styling %%
 classDef transparent fill:#fff, stroke:#fff;
 class a,j,command,info transparent
-classDef textFont font-family:'Chilanka', font-size:1.2em, color:#000, line-height:1.4em;
+classDef textFont font-family:'Chilanka', font-size:1em, color:#000, line-height:1.4em;
 class a,j textFont
 """
 
@@ -311,7 +311,7 @@ end
 %% styling %%
 classDef transparent fill:#fff, stroke:#fff;
 class a,b,c,notes,notes2,notes3,info transparent
-classDef textFont font-family:'Chilanka', font-size:1.2em, color:#000, line-height:1.4em;
+classDef textFont font-family:'Chilanka', font-size:1em, color:#000, line-height:1.4em;
 class a,b,c,notes,notes2,notes3,info textFont
 """
 
