@@ -18,7 +18,7 @@ GitFichas is a collection of study cards about git!
 
 Its name comes from Portuguese version of the project and literary means GitCards. Feel free to refer to it either way.
 
-This project was created and is mantained by [Jessica Temporal](https://jtemporal.com/).
+This project was created and is maintained by [Jessica Temporal](https://jtemporal.com/).
 
 If have any doubts about git, or any idea of a card that should exist here, don't be shy [send me a tweet](https://twitter.com/jesstemporal), my DM is open 😉.
 
