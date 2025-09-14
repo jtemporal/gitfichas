@@ -12,3 +12,6 @@ translations:
 
 # Contato
 
+- **Twitter/X**: [@jesstemporal](https://twitter.com/jesstemporal)
+- **GitHub**: [@jtemporal](https://github.com/jtemporal)
+- **Email**: `gitfichas arroba jtemporal.com`
