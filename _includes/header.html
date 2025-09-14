@@ -16,7 +16,7 @@
         {% if item.url contains "https" %}
           <a href="{{ item.url }}">{{ item.name }}</a>
         {% else %}
-          <a href="{{ site.github.url }}{{ site.baseurl }}/{{ item.url }}">{{ item.name }}</a>
+git           <a href="{{ site.github.url }}/{{ item.url }}">{{ item.name }}</a>
         {% endif %}
       {% endfor %}
     </div>
