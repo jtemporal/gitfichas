@@ -13,7 +13,11 @@ layout: default
     {% endif %}
     {% if page.related %}
     <br>
-    {% if page.lang == "pt"%}
+    {% if current_lang == "en" %}
+    <p>Read also:</p>
+    {% elsif current_lang == "es" %}
+    <p>Lee también:</p>
+    {% else %}
     <p>Leia também:</p>
     {% endif %}
     <a href="{{page.related_url}}">

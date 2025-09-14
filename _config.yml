@@ -14,6 +14,31 @@ collections:
 
 title:       "GitFichas"
 title_en:    "GitStudyCards"
+title_es:    "GitTarjetas"
 author:      "Jessica Temporal"
+
+# Multi-language configuration
+languages:
+  pt:
+    flag: "🇧🇷"
+    name: "Português"
+    code: "pt"
+    locale: "pt_BR"
+    url: "/"
+  en:
+    flag: "🇺🇸"
+    name: "English"
+    code: "en"
+    locale: "en_US"
+    url: "/en/"
+  es:
+    flag: "🇪🇸"
+    name: "Español"
+    code: "es"
+    locale: "es_ES"
+    url: "/es/"
+
+# Default language
+default_language: pt
 
 include: [.well-known]

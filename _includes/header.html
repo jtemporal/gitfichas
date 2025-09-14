@@ -1,12 +1,23 @@
 <header>
   <div class="logo">
-    {% if page.lang == "pt" %}
-    <a href="{{ site.github.url }}/">{{ site.title }}</a>
+    {% if current_lang == "en" %}
+    <a href="{{ site.github.url }}/en/">{{ site.title_en }}</a>
+    {% elsif current_lang == "es" %}
+    <a href="{{ site.github.url }}/es/">{{ site.title_es }}</a>
     {% else %}
-    <a href="{{ site.github.url }}/">{{ site.title_en }}</a>
+    <a href="{{ site.github.url }}/">{{ site.title }}</a>
     {% endif %}
   </div>
   <nav>
+    <div class="main-menu">
+      {% for item in site.data.settings.menu[current_lang] %}
+        {% if item.url contains "https" %}
+          <a href="{{ item.url }}">{{ item.name }}</a>
+        {% else %}
+           <a href="{{ site.github.url }}/{{ item.url }}">{{ item.name }}</a>
+        {% endif %}
+      {% endfor %}
+    </div>
     {% include language-switch.html %}
   </nav>
 </header>

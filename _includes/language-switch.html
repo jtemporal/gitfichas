@@ -1,29 +1,72 @@
-{% if page.lang == "pt" %}
-  <!-- for portuguese pages provide the english version -->
-  {% for item in site.data.settings.menu.pt %}
-    {% if item.url contains "https" %}
-      <a href="{{ item.url }}">{{ item.name }}</a>
-    {% else %}
-      <a href="{{ site.github.url }}/{{ item.url }}">{{ item.name }}</a>
-    {% endif %}
-  {% endfor %}
-  {% if page.translated %}
-    <a href="{{ site.github.url }}{{ page.translated }}"> 🇺🇸 </a>
-  {% else %}
-    <a href="{{ site.github.url }}/en"> 🇺🇸 </a>
-  {% endif %}
-{% else %}
-  <!-- for english pages provide the portuguese version -->
-  {% for item in site.data.settings.menu.en %}
-    {% if item.url contains "https" %}
-      <a href="{{ item.url }}">{{ item.name }}</a>
-    {% else %}
-      <a href="{{ site.github.url }}/{{ item.url }}">{{ item.name }}</a>
-    {% endif %}
-  {% endfor %}
-  {% if page.translated %}
-    <a href="{{ site.github.url }}{{ page.translated }}"> 🇧🇷 </a>
-  {% else %}
-    <a href="{{ site.github.url }}/"> 🇧🇷 </a>
-  {% endif %}
-{% endif %}
+{% comment %}
+  Multi-Language Switcher UI Component for GitFichas
+  Usage: {% include language-switch.html %}
+
+  Requires: language-detection.html to be included first
+  Uses existing variables:
+  - {{ current_lang }} - current language code (pt, en, es, etc.)
+  - {{ current_lang_config }} - full language configuration object
+  - {{ available_languages }} - list of all available languages
+{% endcomment %}
+
+{% unless current_lang_config %}
+  {% comment %} Fallback if language detection failed {% endcomment %}
+  {% assign current_lang = site.default_language %}
+  {% assign current_lang_config = site.languages[current_lang] %}
+{% endunless %}
+
+<ul class="nav navbar-nav navbar-right">
+  <li class="dropdown language-switcher">
+    <!-- Dropdown toggle button -->
+    <a href="#"
+       class="dropdown-toggle"
+       data-toggle="dropdown"
+       role="button"
+       aria-haspopup="true"
+       aria-expanded="false">
+      {{ current_lang_config.flag }} {{ current_lang_config.code | upcase }}
+      <span class="caret"></span>
+    </a>
+
+    <!-- Dropdown menu -->
+    <ul class="dropdown-menu dropdown-menu-right">
+      <!-- Current language (highlighted) -->
+      <li class="active">
+        <a href="#" class="current-language">
+          {{ current_lang_config.flag }} {{ current_lang_config.name }} ✓
+        </a>
+      </li>
+
+      <!-- Divider before alternative languages -->
+      <li class="divider"></li>
+
+      <!-- Alternative languages -->
+      {% for lang_pair in available_languages %}
+        {% assign lang_code = lang_pair[0] %}
+        {% assign lang_config = lang_pair[1] %}
+
+        {% unless lang_code == current_lang %}
+          <li>
+            {% comment %} Find translation URL or use language homepage {% endcomment %}
+            {% assign translation_url = lang_config.url %}
+
+            {% if page.translations %}
+              {% for translation in page.translations %}
+                {% if translation.lang == lang_code %}
+                  {% assign translation_url = translation.url %}
+                  {% break %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+
+            <a href="{{ site.github.url }}{{ translation_url }}"
+               title="Switch to {{ lang_config.name }}"
+               hreflang="{{ lang_config.locale }}">
+              {{ lang_config.flag }} {{ lang_config.name }}
+            </a>
+          </li>
+        {% endunless %}
+      {% endfor %}
+    </ul>
+  </li>
+</ul>

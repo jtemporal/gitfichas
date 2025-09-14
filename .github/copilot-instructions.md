@@ -26,8 +26,8 @@ Follow the templates from CONTRIBUTING.md exactly:
 - `author` (mandatory) - GitHub username with @
 - `mermaid: true` (mandatory)
 - `use_static_image: true` (mandatory for new posts)
-- `permalink` (mandatory) - `/projects/{number}` for PT, `/en/{number}` for EN
-- `lang` (mandatory) - either "pt" or "en"
+- `permalink` (mandatory) - `/projects/{number}` for PT, `/en/{number}` for EN, `/es/{number}` for ES
+- `lang` (mandatory) - "pt", "en", or "es"
 - `pv` and `nt` (mandatory) - previous/next card navigation
 - `{% include mermaid-graphs.html %}` at the end
 
@@ -51,6 +51,7 @@ Follow the templates from CONTRIBUTING.md exactly:
 - Posts with mermaid diagrams generate SVG files in `assets/img/mermaid/`
 - Portuguese posts: `{number}.svg` (e.g., `053.svg`)
 - English posts: `{number}-en.svg` (e.g., `053-en.svg`)
+- Spanish posts: `{number}-es.svg` (e.g., `053-es.svg`)
 - Theme configuration: `gitfichas-mermaid-theme.json`
 - CSS files: `assets/css/mermaid.css`, `assets/css/embedded-svg.css`, `assets/css/embedded-fonts.css`
 
@@ -66,10 +67,12 @@ Follow the templates from CONTRIBUTING.md exactly:
 - Update previous/next navigation links appropriately
 
 ### Languages
-- Support PT (Portuguese) and EN (English) only
+- Support multiple languages: PT (Portuguese), EN (English), and ES (Spanish)
 - Use `lang: "pt"` for Portuguese cards in `_posts/`
 - Use `lang: "en"` for English cards in `en/_posts/`
-- Include `translated` field linking to other language version when available
+- Use `lang: "es"` for Spanish cards in `es/_posts/`
+- Include `translations` array linking to other language versions when available
+- Supported language codes: "pt", "en", "es"
 
 ### Code Quality
 - **Remove all trailing whitespaces** from files before committing

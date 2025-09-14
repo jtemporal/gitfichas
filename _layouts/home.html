@@ -2,20 +2,29 @@
 layout: default
 ---
 
+<!-- Language detection -->
+{% include language-detection.html %}
+
 <section>
   <div class="alert">
     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-    {% if page.lang == "pt" or post.lang == "pt" %}
-    O <strong>GitFichas</strong> agora é open-source e está sob construção. Agradecemos a paciência.
-    Você pode <a href="https://github.com/jtemporal/gitfichas" style="color: white; text-decoration: underline;">conferir mais sobre as mudanças aqui</a>.
-    {% else %}
+    {% if current_lang == "en" %}
     <strong>GitFichas</strong> is now open-source and undergoing some construction. Thanks for the patience.
     You can learn more about <a href="https://github.com/jtemporal/gitfichas" style="color: white; text-decoration: underline;">the changes happening here</a>.
+    {% elsif current_lang == "es" %}
+    <strong>GitFichas</strong> ahora es open-source y está en construcción. Gracias por la paciencia.
+    Puedes aprender más sobre <a href="https://github.com/jtemporal/gitfichas" style="color: white; text-decoration: underline;">los cambios que están ocurriendo aquí</a>.
+    ¿Hablas español? ¡Ayúdanos a traducir las fichas! <a href="https://github.com/jtemporal/gitfichas/blob/main/CONTRIBUTING.md" style="color: white; text-decoration: underline;">Consulta la guía de contribución</a>.
+    {% else %}
+    O <strong>GitFichas</strong> agora é open-source e está sob construção. Agradecemos a paciência.
+    Você pode <a href="https://github.com/jtemporal/gitfichas" style="color: white; text-decoration: underline;">conferir mais sobre as mudanças aqui</a>.
     {% endif %}
   </div>
     <div class="project-container">
-      {% if page.lang == "en" %}
+      {% if current_lang == "en" %}
         {% assign sorted = site.posts | where: "lang", "en" | sort: 'date' | reverse %}
+      {% elsif current_lang == "es" %}
+        {% assign sorted = site.posts | where: "lang", "es" | sort: 'date' | reverse %}
       {% else %}
         {% assign sorted = site.posts | where: "lang", "pt" | sort: 'date' | reverse %}
       {% endif %}
