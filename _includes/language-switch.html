@@ -9,6 +9,12 @@
   - {{ available_languages }} - list of all available languages
 {% endcomment %}
 
+{% unless current_lang_config %}
+  {% comment %} Fallback if language detection failed {% endcomment %}
+  {% assign current_lang = site.default_language %}
+  {% assign current_lang_config = site.languages[current_lang] %}
+{% endunless %}
+
 <ul class="nav navbar-nav navbar-right">
   <li class="dropdown language-switcher">
     <!-- Dropdown toggle button -->

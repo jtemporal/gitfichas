@@ -5,7 +5,7 @@
     {% if current_lang == "en" %}
     <a href="{{ site.github.url }}/en/">{{ site.title_en }}</a>
     {% elsif current_lang == "es" %}
-    <a href="{{ site.github.url }}/es/">{{ site.title }}</a>
+    <a href="{{ site.github.url }}/es/">{{ site.title_es }}</a>
     {% else %}
     <a href="{{ site.github.url }}/">{{ site.title }}</a>
     {% endif %}
@@ -16,7 +16,7 @@
         {% if item.url contains "https" %}
           <a href="{{ item.url }}">{{ item.name }}</a>
         {% else %}
-git           <a href="{{ site.github.url }}/{{ item.url }}">{{ item.name }}</a>
+           <a href="{{ site.github.url }}/{{ item.url }}">{{ item.name }}</a>
         {% endif %}
       {% endfor %}
     </div>
