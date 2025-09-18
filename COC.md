@@ -25,4 +25,4 @@ Respeito em primeiro lugar. Sem assédio, discriminação ou grosseria. Feedback
 2. **Espaço seguro:** Assédio, discriminação ou linguagem ofensiva não serão tolerados.
 3. **Colaboração acima do ego:** Erros acontecem, então parta do princípio da boa intenção. Feedback deve construir, não destruir.
 4. **A honestidade importa:** Seja transparente nas contribuições e aja sempre de boa fé.
-5. **Responsabilidade compartilhada:** Cabe à nós manter a comunidade saudável. Se notar algo fora do tom, sinalize. Em caso de dúvidas ou problemas, entre em contato com @jtemporal por [algumas das redes sociais](https://jtemporal.com/sociais).
+5. **Responsabilidade compartilhada:** Cabe à nós manter a comunidade saudável. Se notar algo fora do tom, sinalize. Em caso de dúvidas ou problemas, entre em contato com @jtemporal pela sua [rede social](https://jtemporal.com/sociais) preferida.
