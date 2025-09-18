@@ -20,6 +20,10 @@ You'll find details on how to run the website and how to contribute in [CONTRIBU
 
 If you have any questions open an issue and I'll be happy to answer.
 
+## Code of Conduct
+
+Please read [`COC.md`](COC.md).
+
 ## Credits
 
 ### Creator of this template
