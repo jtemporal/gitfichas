@@ -40,6 +40,8 @@
     margin: 0;
     text-align: center;
     text-transform: uppercase;
+    -webkit-text-stroke: 2px var(--subtitle-color);
+    text-stroke: 1px var(--subtitle-color);
 }
 
 .title-container .pretitle {
