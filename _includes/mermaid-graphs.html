@@ -1,4 +1,35 @@
-<div class="mermaid-container">
+{% comment %}
+  Calculate color scheme based on card number (modulo 6)
+  Define the 6 color schemes
+{% endcomment %}
+{% assign card_num = page.number | plus: 0 %}
+{% assign color_scheme_index = card_num | modulo: 6 %}
+
+{% comment %}
+  Set colors based on the scheme index
+{% endcomment %}
+{% case color_scheme_index %}
+  {% when 1 %} {% comment %} Light Blue scheme {% endcomment %}
+    {% assign title_color = '#5096d0' %}
+    {% assign subtitle_color = '#006a98' %}
+  {% when 2 %} {% comment %} Dark Green scheme {% endcomment %}
+    {% assign title_color = '#1f584d' %}
+    {% assign subtitle_color = '#273535' %}
+  {% when 3 %} {% comment %} Light Blue scheme {% endcomment %}
+    {% assign title_color = '#7592e2' %}
+    {% assign subtitle_color = '#333c7d' %}
+  {% when 4 %} {% comment %} Pink/Rose scheme {% endcomment %}
+    {% assign title_color = '#e290b9' %}
+    {% assign subtitle_color = '#ad4784' %}
+  {% when 5 %} {% comment %} Purple scheme {% endcomment %}
+    {% assign title_color = '#d581e1' %}
+    {% assign subtitle_color = '#424699' %}
+  {% when 0 %} {% comment %} Light Green scheme {% endcomment %}
+    {% assign title_color = '#689582' %}
+    {% assign subtitle_color = '#152b29' %}
+{% endcase %}
+
+<div class="mermaid-container" style="--title-color: {{ title_color }}; --subtitle-color: {{ subtitle_color }};">
   <div class="title-container">
     {% if page.pretitle %}<p class="pretitle">{{ page.pretitle }}</p>{% endif %}
     <h1>{{ page.title }}</h1>

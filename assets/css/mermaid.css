@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Londrina+Solid&family=Shadows+Into+Light+Two&family=Borel&family=Chilanka');
 
+/* Color scheme definitions - cycling through 6 sets based on card number */
+:root {
+    /* Default colors (Set 4 - Pink/Rose) */
+    --title-color: #e290b9;
+    --subtitle-color: #ad4784;
+}
+
 .mermaid-container {
     padding: 40px;
     margin: 20px auto;
@@ -27,7 +34,7 @@
 
 .title-container h1 {
     font-family: 'Londrina Solid'; /*Londrina Shadow*/
-    color: #D88FB7;
+    color: var(--title-color);
     font-size: 5vw;
     letter-spacing: 5px;
     margin: 0;
@@ -38,7 +45,7 @@
 .title-container .pretitle {
     font-family: 'Shadows Into Light Two';
     font-size: 1.5vw;
-    color: #C67D9B;
+    color: var(--subtitle-color);
     margin: 0;
     position: absolute;
     left: 0;
@@ -51,7 +58,7 @@
 .title-container .subtitle {
     font-family: 'Shadows Into Light Two';
     font-size: 1.5vw;
-    color: #C67D9B;
+    color: var(--subtitle-color);
     margin: 0;
     position: absolute;
     left: 0;
@@ -94,7 +101,7 @@
     padding: 10px 0;
     box-sizing: border-box;
     font-size: 20px;
-    color: #C67D9B;
+    color: var(--subtitle-color);
     font-family: 'Shadows Into Light Two';
     margin-top: -80px;
     margin-bottom: -60px;
