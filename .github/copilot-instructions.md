@@ -19,9 +19,13 @@ Follow the templates from CONTRIBUTING.md exactly:
 
 #### Command Cards Must Include:
 - `layout: post` (mandatory)
-- `title` (mandatory)
+- `pretitle` (optional) - for additional context before the title
+- `title` (mandatory) - main card title
+- `subtitle` (optional) - descriptive subtitle, can be blank
 - `command` (mandatory) - the actual git command
 - `descriptors` (mandatory) - descriptions for command parts
+  - `command`: description of the main git command
+  - `part1`, `part2`, etc.: descriptions for each command part
 - `number` (mandatory) - card number with quotes for leading zeros
 - `author` (mandatory) - GitHub username with @
 - `mermaid: true` (mandatory)
@@ -33,9 +37,12 @@ Follow the templates from CONTRIBUTING.md exactly:
 
 #### Concept Cards Must Include:
 - `layout: post` (mandatory)
-- `title` (mandatory)
+- `pretitle` (optional) - for additional context before the title
+- `title` (mandatory) - main concept title
+- `subtitle` (optional) - can be blank
 - `concept: true` (mandatory)
 - `parts` (mandatory) - concept descriptions
+  - `part1`, `part2`, etc.: individual concept explanations
 - Same metadata as command cards (number, author, mermaid, etc.)
 
 ### Development Workflow
@@ -77,3 +84,128 @@ Follow the templates from CONTRIBUTING.md exactly:
 ### Code Quality
 - **Remove all trailing whitespaces** from files before committing
 - Ensure consistent formatting and clean code standards
+
+## Migrating cards from images to Mermaid
+
+After migrating the content in the markdown files, you need to convert the existing image-based cards to the new Mermaid format.
+
+Make sure to run the image generation script to create the necessary SVG files for the Mermaid diagrams one card at a time instead of regenerating all the images at once:
+
+```bash
+python3 scripts/generate_images_only.py "filename.md"
+```
+
+Then run the server and ask the person to verify that the diagrams render correctly and double check the content for accuracy when compared to the previous image-based cards.
+
+At the end ask to stage the changes and commit both the post changes AND the generated SVG files together
+
+### Command Cards
+This is what a Mermaid card looks like:
+
+```markdown
+---
+layout: post
+pretitle:
+title: Adicionando
+subtitle: arquivos para commit
+command: git add arquivo.txt
+descriptors:
+  - command: comando para adicionar um ou<br>mais arquivos em staging
+  - part1: nome de um ou mais arquivos
+author: "@jtemporal"
+number: "002"
+mermaid: true
+use_static_image: true
+translations:
+- lang: en
+  url: /en/002
+permalink: "/projects/002"
+lang: "pt"
+pv:
+  url: "/projects/001"
+  title: "#001 git init"
+nt:
+  url: "/projects/003"
+  title: "#003 git commit -m 'alterações'"
+---
+
+{% include mermaid-graphs.html %}
+```
+This is the same card using the previous image-based format:
+
+```markdown
+---
+layout: post
+title: '#002 git add arquivo.txt'
+image: "https://res.cloudinary.com/jesstemporal/image/upload/f_auto/v1642878670/gitfichas/pt/002/thumbnail_igi5fw.jpg"
+permalink: "/projects/002"
+translations:
+- lang: en
+  url: /en/002
+lang: "pt"
+pv:
+  url: "/projects/001"
+  title: "#001 git init"
+nt:
+  url: "/projects/003"
+  title: "#003 git commit -m ‘alterações’"
+---
+
+##### Adicionando arquivos para commit
+
+<img alt="Para adicionar arquivos para commit use o git add seguido do nome do arquivo" src="https://res.cloudinary.com/jesstemporal/image/upload/v1642878670/gitfichas/pt/002/full_zy7yy7.jpg"><br><br>
+
+| Comando | Descrição |
+|---------|-------------|
+| `add` | Comando para adicionar um ou mais arquivos em staging |
+| `arquivo.txt` | Nome de um ou mais arquivos |
+{: .styled-table}
+```
+
+Note the differences:
+- The command section is added with the actual git command
+- The descriptors section will hold a command and part1 (and part[index] if needed) for each part of the command
+- Descriptors that are longer than 30 characters should use `<br>` for line breaks in HTML contexts or `\n` for line breaks in other contexts
+- The image section is removed
+- The subtitle is added even if no subtitle is needed (it can be left blank)
+- The pretitle can be used for additional context (also can be left blank)
+- Add `mermaid: true` and `use_static_image: true`
+
+### Concept cards
+
+This is what a Mermaid concept card looks like:
+
+```markdown
+---
+layout: post
+pretitle: o que é o ambiente de
+title: staging
+subtitle:
+concept: true
+parts:
+  - part1: é a área de preparação para commits
+  - part2: onde vemos a coleção de arquivos alterados ou criados \nque farão parte do próximo commit
+number: "005"
+author: "@jtemporal"
+mermaid: true
+permalink: "/projects/005"
+translations:
+- lang: en
+  url: /en/005
+lang: "pt"
+pv:
+  url: "/projects/004"
+  title: "#004 git show"
+nt:
+  url: "/projects/006"
+  title: "#006 git status"
+---
+
+{% include mermaid-graphs.html %}
+```
+
+Note the differences for concept cards:
+- Use `concept: true` instead of `command`
+- Use `parts` array instead of `descriptors`
+- Each part is numbered: `part1`, `part2`, etc.
+- Line breaks in parts use `\n` for longer descriptions

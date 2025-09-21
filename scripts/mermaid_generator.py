@@ -239,15 +239,15 @@ end
 %% arrows %%"""
 
         if num_parts == 2:
-            base_styling += "\nb --> f\nclassDef textFont font-family:'Chilanka', font-size:1em, color:#000, line-height:2em;\n"
+            base_styling += "\nb --> f\nclassDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#000, line-height:2em;\n"
         elif num_parts == 3:
-            base_styling += "\nb --> g\nc --> f\nclassDef textFont font-family:'Chilanka', font-size:1em, color:#000, line-height:2em;\n"
+            base_styling += "\nb --> g\nc --> f\nclassDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#000, line-height:2em;\n"
         elif num_parts == 4:
-            base_styling += "\nc --> f\nb --> g\nd --> h\nclassDef textFont font-family:'Chilanka', font-size:1em, color:#000, line-height:2em;\n"
+            base_styling += "\nc --> f\nb --> g\nd --> h\nclassDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#000, line-height:2em;\n"
         elif num_parts == 5:
-            base_styling += "\nd --> h\ne --> i\nclassDef textFont font-family:'Chilanka', font-size:1em, color:#000, line-height:2em;\n"
+            base_styling += "\nd --> h\ne --> i\nclassDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#000, line-height:2em;\n"
         elif num_parts == 6:
-            base_styling += "\nb --> g\nc --> f\nd --> h\ne --> i\nk --> l\nclassDef textFont font-family:'Chilanka', font-size:1em, color:#000, line-height:2.2em;\n"
+            base_styling += "\nb --> g\nc --> f\nd --> h\ne --> i\nk --> l\nclassDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#000, line-height:2.2em;\n"
 
         base_styling += """
 %% styling %%

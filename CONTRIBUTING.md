@@ -78,7 +78,7 @@ translations:
   url: /projects/052
 permalink: "/en/052"
 lang: "en"
-pv: 
+pv:
   url: "/en/051"
   title: "#051 git commit --allow-empty"
 nt:
@@ -111,7 +111,7 @@ translations:
 - lang: pt
   url: /projects/030
 lang: "en"
-pv: 
+pv:
   url: "/en/029"
   title: "#029 git restore --staged nome"
 nt:
@@ -195,10 +195,10 @@ When working on cards with Mermaid diagrams:
    ```bash
    # Generate images for all posts
    python3 scripts/generate_images_only.py
-   
+
    # Generate images for specific post (faster for testing)
    python3 scripts/generate_images_only.py "053.md"
-   
+
    # Force regeneration of existing images
    python3 scripts/generate_images_only.py --force
    ```
@@ -228,6 +228,82 @@ The project uses a separated CSS architecture:
 ### Theme Configuration
 
 Mermaid theme settings are stored in `gitfichas-mermaid-theme.json` for consistent SVG generation.
+
+## Migrating Cards from Images to Mermaid with Copilot
+
+GitFichas is migrating from image-based cards to dynamic Mermaid diagrams. This guide helps you use GitHub Copilot for efficient migration.
+
+### Quick Migration Examples
+
+**Before (Image-based):**
+```markdown
+---
+layout: post
+title: '#002 git add file.txt'
+image: "https://res.cloudinary.com/.../thumbnail.jpg"
+---
+##### Adding files to a commit
+<img src="...">
+| Command | Description |
+| `add` | Command to add files |
+```
+
+**After (Mermaid):**
+```markdown
+---
+layout: post
+title: Adding
+subtitle: files to a commit
+command: git add file.txt
+descriptors:
+  - command: command to add files<br>to staging
+  - part1: name of the file
+author: "@jtemporal"
+number: "002"
+mermaid: true
+use_static_image: true
+---
+{% include mermaid-graphs.html %}
+```
+
+### Copilot Migration Prompts
+
+**Setup Prompt:**
+```
+Migrate this GitFichas card from image to Mermaid format:
+[paste old card]
+
+Requirements:
+- Extract title → pretitle/title/subtitle
+- Convert table → descriptors array
+- Add: author, number, mermaid: true, use_static_image: true
+- Keep navigation links intact
+- Remove image URLs and HTML
+```
+
+**For Command Cards:** Add `command: git xxx` and `descriptors` with `command` + `part1`, `part2`, etc.
+
+**For Concept Cards:** Use `concept: true` and `parts` array instead of `descriptors`. No `use_static_image: true`.
+
+### Migration Workflow
+
+1. **Migrate with Copilot** using prompts above
+2. **Generate SVG:** `python3 scripts/generate_images_only.py "filename.md"`
+3. **Test locally:** `bundle exec jekyll serve`
+4. **Commit both files:** `git add post.md svg-file.svg`
+
+### Key Patterns
+
+- **Line breaks:** Use `<br>` in command descriptors, `\n` in concept parts
+- **Long descriptions:** Break at ~30 characters without splitting words
+- **Title extraction:** `"#042 git rebase -i HEAD~3"` → `pretitle: "Interactive"`, `title: "Rebase"`, `subtitle: "for last 3 commits"`
+
+### Quality Checklist
+
+- [ ] Content matches original card
+- [ ] SVG generates successfully
+- [ ] Navigation links preserved
+- [ ] No trailing whitespaces
 
 ## The Basics of Contributing
 
@@ -342,7 +418,7 @@ Fichas de comando têm esta estrutura:
 ```yaml
 ---
 layout: post
-pretitle: 
+pretitle:
 title: Renomeando
 subtitle: um arquivo
 command: git mv origem destino
@@ -425,7 +501,7 @@ O devcontainer inclui:
 
 Instale o [Bundler](https://bundler.io/guides/getting_started.html) e siga os passos abaixo.
 
-#### Instalando depedências 
+#### Instalando depedências
 
 ```console
 bundle install
@@ -476,10 +552,10 @@ Ao trabalhar em fichas com diagramas Mermaid:
    ```bash
    # Gerar imagens para todos os posts
    python3 scripts/generate_images_only.py
-   
+
    # Gerar imagens para post específico (mais rápido para testes)
    python3 scripts/generate_images_only.py "053.md"
-   
+
    # Forçar regeneração de imagens existentes
    python3 scripts/generate_images_only.py --force
    ```
@@ -509,6 +585,175 @@ O projeto usa uma arquitetura CSS separada:
 ### Configuração de Tema
 
 As configurações do tema Mermaid estão armazenadas em `gitfichas-mermaid-theme.json` para geração consistente de SVG.
+
+## Migrando Fichas de Imagens para Mermaid com Copilot
+
+O GitFichas está migrando de fichas baseadas em imagens para diagramas Mermaid dinâmicos. O GitHub Copilot pode ajudar a agilizar esse processo de migração com os prompts e fluxo de trabalho corretos.
+
+### Visão Geral da Migração
+
+A migração envolve converter fichas antigas baseadas em imagens para o novo formato Mermaid, preservando a precisão do conteúdo e links de navegação.
+
+#### Antes (formato baseado em imagem):
+```markdown
+---
+layout: post
+title: '#002 git add arquivo.txt'
+image: "https://res.cloudinary.com/.../thumbnail.jpg"
+permalink: "/projects/002"
+lang: "pt"
+---
+##### Adicionando arquivos para commit
+
+<img alt="..." src="https://res.cloudinary.com/.../full.jpg">
+
+| Comando | Descrição |
+|---------|-------------|
+| `add` | Comando para adicionar arquivos em staging |
+| `arquivo.txt` | Nome do arquivo |
+```
+
+#### Depois (formato Mermaid):
+```markdown
+---
+layout: post
+pretitle:
+title: Adicionando
+subtitle: arquivos para commit
+command: git add arquivo.txt
+descriptors:
+  - command: comando para adicionar arquivos<br>em staging
+  - part1: nome do arquivo
+author: "@jtemporal"
+number: "002"
+mermaid: true
+use_static_image: true
+permalink: "/projects/002"
+lang: "pt"
+---
+
+{% include mermaid-graphs.html %}
+```
+
+### Fluxo de Trabalho de Migração com Copilot
+
+#### 1. **Prompt de Configuração Inicial**
+Use este prompt para preparar o Copilot para migração:
+
+```
+Estou migrando fichas do GitFichas do formato baseado em imagens para diagramas Mermaid.
+Ajude-me a converter fichas existentes seguindo estes requisitos:
+- Extrair componentes do título em pretitle/title/subtitle
+- Converter tabelas de comandos em array descriptors
+- Adicionar campos obrigatórios: author, number, mermaid: true, use_static_image: true
+- Preservar todos os links de navegação e traduções
+- Remover URLs de imagens e conteúdo HTML
+```
+
+#### 2. **Prompts para Migração Ficha por Ficha**
+
+**Para Fichas de Comando:**
+```
+Converta esta ficha de comando GitFichas para formato Mermaid:
+[cole o conteúdo da ficha antiga]
+
+Siga esta estrutura:
+- Extrair comando do título
+- Dividir descriptors em command + part1, part2, etc.
+- Usar <br> para quebras de linha em descriptors maiores que 30 caracteres
+- Adicionar campos de metadata faltantes
+- Manter toda navegação intacta
+```
+
+**Para Fichas de Conceito:**
+```
+Converta esta ficha de conceito GitFichas para formato Mermaid:
+[cole o conteúdo da ficha antiga]
+
+Siga esta estrutura:
+- Usar concept: true em vez de command
+- Converter descrições em array parts (part1, part2, etc.)
+- Usar \n para quebras de linha em partes de conceito
+- Não adicionar use_static_image: true para fichas de conceito
+- Manter toda navegação intacta
+```
+
+#### 3. **Prompts de Validação**
+
+**Validação de Estrutura:**
+```
+Revise esta ficha GitFichas migrada para precisão:
+[cole a ficha migrada]
+
+Verificar:
+- Todos os campos obrigatórios presentes
+- Estrutura adequada de descriptor/parts
+- Links de navegação preservados
+- Idioma e permalink corretos
+- Quebras de linha formatadas adequadamente
+```
+
+### Processo de Migração Passo a Passo
+
+#### 1. **Preparar a Migração**
+```bash
+# Verificar estrutura atual da ficha
+git status
+
+# Criar uma branch de feature
+git switch -c migrate-cards-[numeros-das-fichas]
+```
+
+#### 2. **Migrar com Copilot**
+- Abrir o arquivo da ficha antiga
+- Usar os prompts de migração acima com Copilot
+- Revisar e refinar o conteúdo gerado
+- Garantir que todos os campos estejam formatados corretamente
+
+#### 3. **Gerar Arquivos SVG**
+```bash
+# Gerar SVG para ficha específica
+python3 scripts/generate_images_only.py "nome-arquivo-ficha.md"
+
+# Verificar se a geração foi bem-sucedida
+ls -la assets/img/mermaid/ | grep "numero-ficha"
+```
+
+#### 4. **Testar e Verificar**
+```bash
+# Iniciar servidor local
+bundle exec jekyll serve
+
+# Visitar a URL da ficha migrada
+# Comparar com a versão original da imagem
+# Verificar precisão do conteúdo e consistência visual
+```
+
+#### 5. **Fazer Commit das Mudanças**
+```bash
+# Staged tanto arquivos markdown quanto SVG
+git add _posts/nome-arquivo-ficha.md assets/img/mermaid/numero-ficha.svg
+
+# Commit com mensagem descritiva
+git commit -m "Migrar ficha XXX de imagem para formato Mermaid
+
+- Converter [título original] para nova estrutura
+- Preservar toda navegação e traduções
+- Gerar SVG estático para fallback"
+```
+
+### Lista de Verificação de Qualidade da Migração
+
+Antes de fazer commit de uma ficha migrada, verificar:
+
+- [ ] Todos os campos obrigatórios do front matter presentes
+- [ ] Conteúdo reflete com precisão a ficha original
+- [ ] Links de navegação preservados e funcionando
+- [ ] SVG gera com sucesso
+- [ ] Ficha exibe corretamente no servidor local
+- [ ] Quebras de linha formatadas adequadamente para o tipo de ficha
+- [ ] Links de tradução mantidos
+- [ ] Sem espaços em branco finais nos arquivos
 
 ## Fazendo Contribuições
 
