@@ -102,7 +102,7 @@
     width: 100%;
     padding: 10px 0;
     box-sizing: border-box;
-    font-size: 20px;
+    font-size: 25px;
     color: var(--subtitle-color);
     font-family: 'Shadows Into Light Two';
     margin-top: -80px;
@@ -111,6 +111,10 @@
 
 .mermaid-footer .number {
     color: #5f5f5f
+}
+
+.mermaid-footer .author {
+    color: #7a357d
 }
 
 @media screen and (max-width: 768px) {
