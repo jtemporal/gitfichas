@@ -87,6 +87,18 @@ Follow the templates from CONTRIBUTING.md exactly:
 
 ## Migrating cards from images to Mermaid
 
+After migrating the content in the markdown files, you need to convert the existing image-based cards to the new Mermaid format.
+
+Make sure to run the image generation script to create the necessary SVG files for the Mermaid diagrams one card at a time instead of regenerating all the images at once:
+
+```bash
+python3 scripts/generate_images_only.py "filename.md"
+```
+
+Then run the server and ask the person to verify that the diagrams render correctly and double check the content for accuracy when compared to the previous image-based cards.
+
+At the end ask to stage the changes and commit both the post changes AND the generated SVG files together
+
 ### Command Cards
 This is what a Mermaid card looks like:
 
