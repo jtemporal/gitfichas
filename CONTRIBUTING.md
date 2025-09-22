@@ -661,7 +661,7 @@ Siga esta estrutura:
 - Extrair comando do título
 - Dividir descriptors em command + part1, part2, etc.
 - Usar <br> para quebras de linha em descriptors maiores que 30 caracteres
-- Adicionar campos de metadata faltantes
+- Adicionar campos de metadados faltantes
 - Manter toda navegação intacta
 ```
 
@@ -731,7 +731,7 @@ bundle exec jekyll serve
 
 #### 5. **Fazer Commit das Mudanças**
 ```bash
-# Staged tanto arquivos markdown quanto SVG
+# Adicionar ao stage tanto arquivos markdown quanto SVG
 git add _posts/nome-arquivo-ficha.md assets/img/mermaid/numero-ficha.svg
 
 # Commit com mensagem descritiva
@@ -799,7 +799,7 @@ Tente fazer pequenas mudanças por commit, assim é mais fácil entender o que v
 
 **6. Envie as mudanças para o seu fork**
 
-```consle
+```console
 git push -u origin <NOME-DE-USUÁRIO-NO-GITHUB>-<descrição-ou-número-da-issue>
 ```
 
