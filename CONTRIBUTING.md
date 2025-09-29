@@ -391,6 +391,12 @@ Este script configurará automaticamente seu ambiente de desenvolvimento com tod
 
 Se tiver alguma dúvida, crie uma issue.
 
+## Código de Conduta
+
+O GitFichas é um espaço acolhedor e inclusivo para todas pessoas. Isso quer dizer que devemos seguir nosso [Código de Conduta](https://github.com/jtemporal/gitfichas/blob/main/CONTRIBUTING.md). Por favor, leia-o com atenção antes de contribuir.
+
+[Leia o Código de Conduta completo](https://github.com/jtemporal/gitfichas/blob/main/CONTRIBUTING.md).
+
 ## Tipos de Fichas
 
 Existem dois tipos de fichas:
@@ -762,13 +768,9 @@ git commit -m "Migrar ficha XXX de imagem para formato Mermaid
 
 Antes de fazer commit de uma ficha migrada, verificar:
 
-- [ ] Todos os campos obrigatórios do front matter presentes
 - [ ] Conteúdo reflete com precisão a ficha original
 - [ ] Links de navegação preservados e funcionando
 - [ ] SVG gera com sucesso
-- [ ] Ficha exibe corretamente no servidor local
-- [ ] Quebras de linha formatadas adequadamente para o tipo de ficha
-- [ ] Links de tradução mantidos
 - [ ] Sem espaços em branco finais nos arquivos
 
 ## Fazendo Contribuições
@@ -824,3 +826,13 @@ git push -u origin <NOME-DE-USUÁRIO-NO-GITHUB>-<descrição-ou-número-da-issue
 Do seu fork no GitHub, geralmente há um botão para abrir pull requests.
 
 Lembre-se de [linkar a sua issue no seu pull request](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue).
+
+### Atribuição de Issues
+
+Para manter o fluxo de trabalho organizado:
+
+* **Somente mantenedores principais terão atribuição de issues:** Se você quiser trabalhar em algo, basta comentar dizendo que vai pegar a tarefa e abrir seu PR. Não é necessário atribuição formal.
+* **Sem atribuição para eventuais contribuições:** Isso ajuda a manter o processo aberto e acolhedor para todos.
+* **Janela de 2 dias:** Se não houver PR em até 2 dias após alguém demonstrar interesse, a issue fica aberta para qualquer pessoa trabalhar.
+
+Assim, mantemos o processo amigável, com baixa barreira de entrada e evitamos que issues fiquem paradas. Obrigado por fazer parte da comunidade!
