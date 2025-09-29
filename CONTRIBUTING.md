@@ -18,6 +18,12 @@ This script will automatically configure your development environment with all n
 
 If you have any questions create an issue.
 
+## Code of Conduct
+
+GitFichas is a welcoming and inclusive space for everyone. All contributors are expected to follow our [Code of Conduct](https://github.com/jtemporal/gitfichas/blob/main/CONTRIBUTING.md). Please take a moment to read it and help us maintain a positive environment for all.
+
+[Read the full Code of Conduct](https://github.com/jtemporal/gitfichas/blob/main/CONTRIBUTING.md).
+
 ## Cards Types
 
 There are two types of cards:
@@ -358,6 +364,16 @@ git push -u origin <YOUR-GITHUB-USERNAME>-<description-or-issue-number>
 From your fork at GitHub usually there is a button to open pull requests.
 
 Remember to [link your issue in your pull request](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue).
+
+### Issue Assignment
+
+To keep things running smoothly and fair for everyone:
+
+* **Only core maintainers assign issues:** If you’d like to work on something, just drop a comment saying you’re picking it up and go ahead with your PR. No assignment needed!
+* **No assignments for potential contributors:** This helps us welcome all contributions and keeps the contribution process open.
+* **2-day window:** If there’s no PR within 2 days of a comment expressing interest, the issue is open for anyone to jump in.
+
+This way, we keep a friendly, low-barrier process and ensure issues don’t get blocked. Thanks for being part of the community!
 
 ---
 
