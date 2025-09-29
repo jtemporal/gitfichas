@@ -2,7 +2,7 @@
 
 | Table of content | Índice |
 | ------- | --------- |
-| &nbsp;&nbsp;• [Before You Start](#before-you-start)<br>&nbsp;&nbsp;• [Cards Types](#cards-types)<br>&nbsp;&nbsp;• [Running the Project](#running-the-project)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Local way](#local-way)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Install dependencies](#install-dependencies)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Run the project](#run-the-project)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Docker way](#docker-way)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Building image](#building-image)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Serving](#serving)<br>&nbsp;&nbsp;• [Working with Mermaid Diagrams](#working-with-mermaid-diagrams)<br>&nbsp;&nbsp;• [The Basics of Contributing](#the-basics-of-contributing)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [The Git basics](#the-git-basics) | &nbsp;&nbsp;• [Antes de Começar](#antes-de-começar)<br>&nbsp;&nbsp;• [Tipos de Fichas](#tipos-de-fichas)<br>&nbsp;&nbsp;• [Rodando o Projeto](#rodando-o-projeto)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Localmente](#localmente)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Instalando depedências](#instalando-depedências)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Rodar o projeto](#rodar-o-projeto)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Com Docker](#com-docker)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Montando a imagem](#montando-a-imagem)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Servindo](#servindo)<br>&nbsp;&nbsp;• [Trabalhando com Diagramas Mermaid](#trabalhando-com-diagramas-mermaid)<br>&nbsp;&nbsp;• [Fazendo Contribuições](#fazendo-contribuições)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [O básico de git](#o-básico-de-git) |
+| &nbsp;&nbsp;• [Before You Start](#before-you-start)<br>&nbsp;&nbsp;• [Code of Conduct](#code-of-conduct)<br>&nbsp;&nbsp;• [Cards Types](#cards-types)<br>&nbsp;&nbsp;• [Running the Project](#running-the-project)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Local way](#local-way)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Install dependencies](#install-dependencies)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Run the project](#run-the-project)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Docker way](#docker-way)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Building image](#building-image)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Serving](#serving)<br>&nbsp;&nbsp;• [Working with Mermaid Diagrams](#working-with-mermaid-diagrams)<br>&nbsp;&nbsp;• [The Basics of Contributing](#the-basics-of-contributing)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [The Git basics](#the-git-basics)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Issue Assignment](#issue-assignment) | &nbsp;&nbsp;• [Antes de Começar](#antes-de-começar)<br>&nbsp;&nbsp;• [Código de Conduta](#código-de-conduta)<br>&nbsp;&nbsp;• [Tipos de Fichas](#tipos-de-fichas)<br>&nbsp;&nbsp;• [Rodando o Projeto](#rodando-o-projeto)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Localmente](#localmente)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Instalando depedências](#instalando-depedências)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Rodar o projeto](#rodar-o-projeto)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Com Docker](#com-docker)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Montando a imagem](#montando-a-imagem)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Servindo](#servindo)<br>&nbsp;&nbsp;• [Trabalhando com Diagramas Mermaid](#trabalhando-com-diagramas-mermaid)<br>&nbsp;&nbsp;• [Fazendo Contribuições](#fazendo-contribuições)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [O básico de git](#o-básico-de-git)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Atribuição de issues](#atribuição-de-issues) |
 
 ## Before You Start
 
@@ -391,6 +391,12 @@ Este script configurará automaticamente seu ambiente de desenvolvimento com tod
 
 Se tiver alguma dúvida, crie uma issue.
 
+## Código de Conduta
+
+O GitFichas é um espaço acolhedor e inclusivo para todas pessoas. Isso quer dizer que devemos seguir nosso [Código de Conduta](https://github.com/jtemporal/gitfichas/blob/main/CONTRIBUTING.md). Por favor, leia-o com atenção antes de contribuir.
+
+[Leia o Código de Conduta completo](https://github.com/jtemporal/gitfichas/blob/main/CONTRIBUTING.md).
+
 ## Tipos de Fichas
 
 Existem dois tipos de fichas:
@@ -762,13 +768,9 @@ git commit -m "Migrar ficha XXX de imagem para formato Mermaid
 
 Antes de fazer commit de uma ficha migrada, verificar:
 
-- [ ] Todos os campos obrigatórios do front matter presentes
 - [ ] Conteúdo reflete com precisão a ficha original
 - [ ] Links de navegação preservados e funcionando
 - [ ] SVG gera com sucesso
-- [ ] Ficha exibe corretamente no servidor local
-- [ ] Quebras de linha formatadas adequadamente para o tipo de ficha
-- [ ] Links de tradução mantidos
 - [ ] Sem espaços em branco finais nos arquivos
 
 ## Fazendo Contribuições
@@ -824,3 +826,13 @@ git push -u origin <NOME-DE-USUÁRIO-NO-GITHUB>-<descrição-ou-número-da-issue
 Do seu fork no GitHub, geralmente há um botão para abrir pull requests.
 
 Lembre-se de [linkar a sua issue no seu pull request](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue).
+
+### Atribuição de Issues
+
+Para manter o fluxo de trabalho organizado:
+
+* **Somente mantenedores principais terão atribuição de issues:** Se você quiser trabalhar em algo, basta comentar dizendo que vai pegar a tarefa e abrir seu PR. Não é necessário atribuição formal.
+* **Sem atribuição para eventuais contribuições:** Isso ajuda a manter o processo aberto e acolhedor para todos.
+* **Janela de 2 dias:** Se não houver PR em até 2 dias após alguém demonstrar interesse, a issue fica aberta para qualquer pessoa trabalhar.
+
+Assim, mantemos o processo amigável, com baixa barreira de entrada e evitamos que issues fiquem paradas. Obrigado por fazer parte da comunidade!
