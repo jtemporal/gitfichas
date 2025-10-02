@@ -25,7 +25,8 @@ class ConfigManager:
         # Post directories
         self.posts_dirs = [
             self.root_dir / "_posts",
-            self.root_dir / "en" / "_posts"
+            self.root_dir / "en" / "_posts",
+            self.root_dir / "es" / "_posts"
         ]
 
         # Output directory
@@ -110,6 +111,8 @@ class ConfigManager:
 
         if lang == 'en':
             image_filename = f"{number}-en.svg"
+        elif lang == 'es':
+            image_filename = f"{number}-es.svg"
         else:
             image_filename = f"{number}.svg"
 
