@@ -49,7 +49,7 @@
     font-size: 1.5vw;
     color: var(--subtitle-color);
     margin: 0;
-    position: absolute;
+    /* position: absolute; */
     left: 0;
     right: 0;
     text-align: left;
@@ -62,7 +62,7 @@
     font-size: 1.5vw;
     color: var(--subtitle-color);
     margin: 0;
-    position: absolute;
+    /* position: absolute; */
     left: 0;
     right: 0;
     text-align: right;
