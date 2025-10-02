@@ -61,6 +61,26 @@ Here's a list of all fields you could find in both types:
 | `nt.url` | `mandatory` | `mandatory` | Path to next card e.g.: `/projects/{number}` |
 | `nt.title` | `mandatory` | `mandatory` | Command to next card e.g.: `#001 git init` |
 
+## File Naming Convention
+
+**IMPORTANT:** All post files must follow the Jekyll naming convention: `YYYY-MM-DD-XXX.md`
+
+### For New Cards
+- Format: `YYYY-MM-DD-XXX.md` where XXX is the card number with leading zeros
+- Use the current date when creating a new card
+- Example: `2024-10-26-054.md` for card #054
+
+### For Translations
+- **Must use the SAME date as the original post**
+- Portuguese (original): `2024-10-26-054.md` → English: `2024-10-26-054.md` → Spanish: `2024-10-26-054.md`
+- Check the original post's filename to get the correct date
+- **Never use a different date for translations**
+
+### Directory Structure
+- Portuguese cards: `_posts/YYYY-MM-DD-XXX.md`
+- English cards: `en/_posts/YYYY-MM-DD-XXX.md`  
+- Spanish cards: `es/_posts/YYYY-MM-DD-XXX.md`
+
 ### Command Cards Example
 
 Command cards have this structure:
@@ -288,6 +308,7 @@ Requirements:
 - Add: author, number, mermaid: true
 - Keep navigation links intact
 - Remove image URLs and HTML
+- Follow proper file naming: YYYY-MM-DD-XXX.md (use same date as original for translations)
 ```
 
 **For Command Cards:** Add `command: git xxx` and `descriptors` with `command` + `part1`, `part2`, etc.
@@ -297,9 +318,11 @@ Requirements:
 ### Migration Workflow
 
 1. **Migrate with Copilot** using prompts above
-2. **Generate SVG:** `python3 scripts/generate_images_only.py "filename.md"`
-3. **Test locally:** `bundle exec jekyll serve`
-4. **Commit both files:** `git add post.md svg-file.svg`
+2. **Ensure proper file naming**: Use `YYYY-MM-DD-XXX.md` format with same date as original post for translations
+3. **Generate SVG:** `python3 scripts/generate_images_only.py "filename.md"`
+4. **Add `use_static_image: true`** to front matter only after successful SVG generation
+5. **Test locally:** `bundle exec jekyll serve`
+6. **Commit both files:** `git add post.md svg-file.svg`
 
 ### Key Patterns
 
@@ -507,6 +530,26 @@ nt:
 {% include mermaid-graphs.html %}
 ```
 
+## Convenção de Nomes de Arquivos
+
+**IMPORTANTE:** Todos os arquivos de posts devem seguir a convenção de nomenclatura do Jekyll: `YYYY-MM-DD-XXX.md`
+
+### Para Fichas Novas
+- Formato: `YYYY-MM-DD-XXX.md` onde XXX é o número da ficha com zeros à esquerda
+- Use a data atual ao criar uma nova ficha
+- Exemplo: `2024-10-26-054.md` para a ficha #054
+
+### Para Traduções
+- **Deve usar a MESMA data do post original**
+- Português (original): `2024-10-26-054.md` → Inglês: `2024-10-26-054.md` → Espanhol: `2024-10-26-054.md`
+- Verifique o nome do arquivo do post original para obter a data correta
+- **Nunca use uma data diferente para traduções**
+
+### Estrutura de Diretórios
+- Fichas em português: `_posts/YYYY-MM-DD-XXX.md`
+- Fichas em inglês: `en/_posts/YYYY-MM-DD-XXX.md`  
+- Fichas em espanhol: `es/_posts/YYYY-MM-DD-XXX.md`
+
 ## Rodando o Projeto
 
 O site é executado no Jekyll, mas também está preparado para rodar no Docker (embora já faz um tempo desde que eu usei o Dockerfile para desenvolvimento).
@@ -676,6 +719,7 @@ Ajude-me a converter fichas existentes seguindo estes requisitos:
 - Adicionar campos obrigatórios: author, number, mermaid: true
 - Preservar todos os links de navegação e traduções
 - Remover URLs de imagens e conteúdo HTML
+- Seguir convenção de nomes: YYYY-MM-DD-XXX.md (usar mesma data do original para traduções)
 ```
 
 #### 2. **Prompts para Migração Ficha por Ficha**
@@ -738,7 +782,12 @@ git switch -c migrate-cards-[numeros-das-fichas]
 - Revisar e refinar o conteúdo gerado
 - Garantir que todos os campos estejam formatados corretamente
 
-#### 3. **Gerar Arquivos SVG**
+#### 3. **Verificar Convenção de Nomes**
+- Garantir formato `YYYY-MM-DD-XXX.md`
+- Para traduções, usar a MESMA data do post original
+- Verificar se o arquivo está no diretório correto
+
+#### 4. **Gerar Arquivos SVG**
 ```bash
 # Gerar SVG para ficha específica
 python3 scripts/generate_images_only.py "nome-arquivo-ficha.md"
@@ -747,7 +796,10 @@ python3 scripts/generate_images_only.py "nome-arquivo-ficha.md"
 ls -la assets/img/mermaid/ | grep "numero-ficha"
 ```
 
-#### 4. **Testar e Verificar**
+#### 5. **Adicionar use_static_image após SVG**
+- Adicionar `use_static_image: true` ao front matter APENAS após geração bem-sucedida do SVG
+
+#### 6. **Testar e Verificar**
 ```bash
 # Iniciar servidor local
 bundle exec jekyll serve
@@ -757,7 +809,7 @@ bundle exec jekyll serve
 # Verificar precisão do conteúdo e consistência visual
 ```
 
-#### 5. **Fazer Commit das Mudanças**
+#### 7. **Fazer Commit das Mudanças**
 ```bash
 # Adicionar ao stage tanto arquivos markdown quanto SVG
 git add _posts/nome-arquivo-ficha.md assets/img/mermaid/numero-ficha.svg

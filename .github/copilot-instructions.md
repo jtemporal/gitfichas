@@ -82,6 +82,15 @@ Follow the templates from CONTRIBUTING.md exactly:
 - Include `translations` array linking to other language versions when available
 - Supported language codes: "pt", "en", "es"
 
+### File Naming Convention
+- **All files must follow Jekyll naming**: `YYYY-MM-DD-XXX.md`
+- **For translations**: Use the SAME date as the original post
+- Portuguese: `_posts/2024-10-26-054.md`
+- English: `en/_posts/2024-10-26-054.md`
+- Spanish: `es/_posts/2024-10-26-054.md`
+- **Never change the date when creating translations**
+- Check the original post filename to get the correct date
+
 ### Code Quality
 - **Remove all trailing whitespaces** from files before committing
 - Ensure consistent formatting and clean code standards
