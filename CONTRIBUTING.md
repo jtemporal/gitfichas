@@ -547,7 +547,7 @@ nt:
 
 ### Estrutura de Diretórios
 - Fichas em português: `_posts/YYYY-MM-DD-XXX.md`
-- Fichas em inglês: `en/_posts/YYYY-MM-DD-XXX.md`  
+- Fichas em inglês: `en/_posts/YYYY-MM-DD-XXX.md`
 - Fichas em espanhol: `es/_posts/YYYY-MM-DD-XXX.md`
 
 ## Rodando o Projeto
