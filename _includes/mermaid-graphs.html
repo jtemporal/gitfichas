@@ -42,7 +42,10 @@
 {% assign image_filename = page.number %}
 {% if page.lang == 'en' %}
   {% assign image_filename = page.number | append: '-en' %}
+{% elsif page.lang == 'es' %}
+  {% assign image_filename = page.number | append: '-es' %}
 {% endif %}
+
 {% assign static_image_path = '/assets/img/mermaid/' | append: image_filename | append: '.svg' %}
 
 {% comment %}
