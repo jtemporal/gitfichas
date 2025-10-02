@@ -50,6 +50,7 @@ Here's a list of all fields you could find in both types:
 | `author` | `mandatory` | `mandatory` | GitHub username of person who created the card e.g.: `@jtemporal` |
 | `number` | `mandatory` | `mandatory` |  Number of the card e.g.: `"001"`. Quotes are necessary for the leading zero |
 | `mermaid` | `mandatory` | `mandatory` |  Always `true` |
+| `use_static_image` | `mandatory*` | `mandatory*` | Always `true` when SVG image is generated. *Only required if an SVG file is created for the card |
 | `permalink` |  `mandatory` | `mandatory` |  Follows `/projects/{number}` for pt cards, `/en/{number}` for en cards, and `/es/{number}` for es cards |
 | `lang` | `mandatory` | `mandatory` | Either `"pt"`, `"en"`, or `"es"`. These are the currently supported languages |
 | `translations` | `optional` | `optional` |  Array of translation links e.g.: `- lang: en` `url: /en/{number}` `- lang: es` `url: /es/{number}` |
@@ -79,6 +80,7 @@ info: this command can be used to move files between folders
 author: "@jtemporal"
 number: "052"
 mermaid: true
+use_static_image: true
 translations:
 - lang: pt
   url: /projects/052
@@ -112,6 +114,7 @@ parts:
 number: "030"
 author: "@jtemporal"
 mermaid: true
+use_static_image: true
 permalink: "/en/030"
 translations:
 - lang: pt
@@ -282,14 +285,14 @@ Migrate this GitFichas card from image to Mermaid format:
 Requirements:
 - Extract title → pretitle/title/subtitle
 - Convert table → descriptors array
-- Add: author, number, mermaid: true, use_static_image: true
+- Add: author, number, mermaid: true
 - Keep navigation links intact
 - Remove image URLs and HTML
 ```
 
 **For Command Cards:** Add `command: git xxx` and `descriptors` with `command` + `part1`, `part2`, etc.
 
-**For Concept Cards:** Use `concept: true` and `parts` array instead of `descriptors`. No `use_static_image: true`.
+**For Concept Cards:** Use `concept: true` and `parts` array instead of `descriptors`. Add `use_static_image: true` only after SVG is generated.
 
 ### Migration Workflow
 
@@ -423,6 +426,7 @@ Aqui está uma lista de todos os campos que você pode encontrar em ambos os tip
 | `author` | `obrigatório` | `obrigatório` | Nome de usuário do GitHub da pessoa que criou a ficha, por exemplo: `@jtemporal` |
 | `number` | `obrigatório` | `obrigatório` | Número da ficha, por exemplo: `"001"`. As aspas são necessárias para o zero à esquerda |
 | `mermaid` | `obrigatório` | `obrigatório` | Sempre presente `true` |
+| `use_static_image` | `obrigatório*` | `obrigatório*` | Sempre `true` quando imagem SVG é gerada. *Obrigatório apenas se um arquivo SVG for criado para a ficha |
 | `permalink` | `obrigatório` | `obrigatório` | Segue `/projects/{number}` para fichas em pt, `/en/{number}` para fichas em en, e `/es/{number}` para fichas em es |
 | `lang` | `obrigatório` | `obrigatório` | `"pt"`, `"en"`, ou `"es"`. Estes são os idiomas atualmente suportados |
 | `translations` | `opcional` | `opcional` | Array de links de tradução, por exemplo: `- lang: en` `url: /en/{number}` `- lang: es` `url: /es/{number}` |
@@ -452,6 +456,7 @@ info: esse comando pode ser usado \npara mover arquivos entre pastas
 number: "052"
 author: "@jtemporal"
 mermaid: true
+use_static_image: true
 permalink: "/projects/052"
 lang: "pt"
 translations:
@@ -485,6 +490,7 @@ parts:
 number: "030"
 author: "@jtemporal"
 mermaid: true
+use_static_image: true
 permalink: "/projects/030"
 translations:
 - lang: en
@@ -667,7 +673,7 @@ Estou migrando fichas do GitFichas do formato baseado em imagens para diagramas 
 Ajude-me a converter fichas existentes seguindo estes requisitos:
 - Extrair componentes do título em pretitle/title/subtitle
 - Converter tabelas de comandos em array descriptors
-- Adicionar campos obrigatórios: author, number, mermaid: true, use_static_image: true
+- Adicionar campos obrigatórios: author, number, mermaid: true
 - Preservar todos os links de navegação e traduções
 - Remover URLs de imagens e conteúdo HTML
 ```
@@ -696,7 +702,7 @@ Siga esta estrutura:
 - Usar concept: true em vez de command
 - Converter descrições em array parts (part1, part2, etc.)
 - Usar \n para quebras de linha em partes de conceito
-- Não adicionar use_static_image: true para fichas de conceito
+- Adicionar `use_static_image: true` apenas se um SVG for gerado com sucesso
 - Manter toda navegação intacta
 ```
 
