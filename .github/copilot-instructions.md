@@ -2,6 +2,7 @@
 - Always start the jekyll server with `bundle exec jekyll serve` no extra flags.
 
 ## Contributing Guidelines for GitFichas
+
 When working on this GitFichas (Git Study Cards) project, follow these guidelines:
 
 ### New Mermaid Posts
@@ -29,7 +30,7 @@ Follow the templates from CONTRIBUTING.md exactly:
 - `number` (mandatory) - card number with quotes for leading zeros
 - `author` (mandatory) - GitHub username with @
 - `mermaid: true` (mandatory)
-- `use_static_image: true` (mandatory for new posts)
+- `use_static_image: true` (mandatory only when SVG image is generated)
 - `permalink` (mandatory) - `/projects/{number}` for PT, `/en/{number}` for EN, `/es/{number}` for ES
 - `lang` (mandatory) - "pt", "en", or "es"
 - `pv` and `nt` (mandatory) - previous/next card navigation
@@ -81,6 +82,15 @@ Follow the templates from CONTRIBUTING.md exactly:
 - Include `translations` array linking to other language versions when available
 - Supported language codes: "pt", "en", "es"
 
+### File Naming Convention
+- **All files must follow Jekyll naming**: `YYYY-MM-DD-XXX.md`
+- **For translations**: Use the SAME date as the original post
+- Portuguese: `_posts/2024-10-26-054.md`
+- English: `en/_posts/2024-10-26-054.md`
+- Spanish: `es/_posts/2024-10-26-054.md`
+- **Never change the date when creating translations**
+- Check the original post filename to get the correct date
+
 ### Code Quality
 - **Remove all trailing whitespaces** from files before committing
 - Ensure consistent formatting and clean code standards
@@ -89,13 +99,16 @@ Follow the templates from CONTRIBUTING.md exactly:
 
 After migrating the content in the markdown files, you need to convert the existing image-based cards to the new Mermaid format.
 
-Make sure to run the image generation script to create the necessary SVG files for the Mermaid diagrams one card at a time instead of regenerating all the images at once:
+**Important workflow:**
 
-```bash
-python3 scripts/generate_images_only.py "filename.md"
-```
-
-Then run the server and ask the person to verify that the diagrams render correctly and double check the content for accuracy when compared to the previous image-based cards.
+1. **Ensure proper file naming**: Use `YYYY-MM-DD-XXX.md` format with same date as original post for translations
+2. **Generate SVG first**: Run image generation script one card at a time:
+   ```bash
+   python3 scripts/generate_images_only.py "filename.md"
+   ```
+3. **Add use_static_image only after successful SVG generation**: Add `use_static_image: true` to front matter ONLY after SVG is successfully created
+4. **Test locally**: Run server and verify diagrams render correctly compared to previous image-based cards
+5. **Commit together**: Stage and commit both the post changes AND the generated SVG files together
 
 At the end ask to stage the changes and commit both the post changes AND the generated SVG files together
 
@@ -169,7 +182,7 @@ Note the differences:
 - The image section is removed
 - The subtitle is added even if no subtitle is needed (it can be left blank)
 - The pretitle can be used for additional context (also can be left blank)
-- Add `mermaid: true` and `use_static_image: true`
+- Add `mermaid: true` and `use_static_image: true` (only after SVG is generated)
 
 ### Concept cards
 

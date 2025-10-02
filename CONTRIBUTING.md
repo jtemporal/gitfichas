@@ -2,7 +2,7 @@
 
 | Table of content | Índice |
 | ------- | --------- |
-| &nbsp;&nbsp;• [Before You Start](#before-you-start)<br>&nbsp;&nbsp;• [Code of Conduct](#code-of-conduct)<br>&nbsp;&nbsp;• [Cards Types](#cards-types)<br>&nbsp;&nbsp;• [Running the Project](#running-the-project)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Local way](#local-way)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Install dependencies](#install-dependencies)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Run the project](#run-the-project)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Docker way](#docker-way)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Building image](#building-image)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Serving](#serving)<br>&nbsp;&nbsp;• [Working with Mermaid Diagrams](#working-with-mermaid-diagrams)<br>&nbsp;&nbsp;• [The Basics of Contributing](#the-basics-of-contributing)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [The Git basics](#the-git-basics)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Issue Assignment](#issue-assignment) | &nbsp;&nbsp;• [Antes de Começar](#antes-de-começar)<br>&nbsp;&nbsp;• [Código de Conduta](#código-de-conduta)<br>&nbsp;&nbsp;• [Tipos de Fichas](#tipos-de-fichas)<br>&nbsp;&nbsp;• [Rodando o Projeto](#rodando-o-projeto)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Localmente](#localmente)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Instalando depedências](#instalando-depedências)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Rodar o projeto](#rodar-o-projeto)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Com Docker](#com-docker)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Montando a imagem](#montando-a-imagem)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Servindo](#servindo)<br>&nbsp;&nbsp;• [Trabalhando com Diagramas Mermaid](#trabalhando-com-diagramas-mermaid)<br>&nbsp;&nbsp;• [Fazendo Contribuições](#fazendo-contribuições)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [O básico de git](#o-básico-de-git)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Atribuição de issues](#atribuição-de-issues) |
+| &nbsp;&nbsp;• [Before You Start](#before-you-start)<br>&nbsp;&nbsp;• [Code of Conduct](#code-of-conduct)<br>&nbsp;&nbsp;• [Cards Types](#cards-types)<br>&nbsp;&nbsp;• [File Naming Convention](#file-naming-convention)<br>&nbsp;&nbsp;• [Running the Project](#running-the-project)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Local way](#local-way)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Install dependencies](#install-dependencies)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Run the project](#run-the-project)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Docker way](#docker-way)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Building image](#building-image)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Serving](#serving)<br>&nbsp;&nbsp;• [Working with Mermaid Diagrams](#working-with-mermaid-diagrams)<br>&nbsp;&nbsp;• [The Basics of Contributing](#the-basics-of-contributing)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [The Git basics](#the-git-basics)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Issue Assignment](#issue-assignment) | &nbsp;&nbsp;• [Antes de Começar](#antes-de-começar)<br>&nbsp;&nbsp;• [Código de Conduta](#código-de-conduta)<br>&nbsp;&nbsp;• [Tipos de Fichas](#tipos-de-fichas)<br>&nbsp;&nbsp;• [Convenção de Nomes de Arquivos](#convenção-de-nomes-de-arquivos)<br>&nbsp;&nbsp;• [Rodando o Projeto](#rodando-o-projeto)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Localmente](#localmente)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Instalando depedências](#instalando-depedências)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Rodar o projeto](#rodar-o-projeto)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Com Docker](#com-docker)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Montando a imagem](#montando-a-imagem)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Servindo](#servindo)<br>&nbsp;&nbsp;• [Trabalhando com Diagramas Mermaid](#trabalhando-com-diagramas-mermaid)<br>&nbsp;&nbsp;• [Fazendo Contribuições](#fazendo-contribuições)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [O básico de git](#o-básico-de-git)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Atribuição de issues](#atribuição-de-issues) |
 
 ## Before You Start
 
@@ -50,6 +50,7 @@ Here's a list of all fields you could find in both types:
 | `author` | `mandatory` | `mandatory` | GitHub username of person who created the card e.g.: `@jtemporal` |
 | `number` | `mandatory` | `mandatory` |  Number of the card e.g.: `"001"`. Quotes are necessary for the leading zero |
 | `mermaid` | `mandatory` | `mandatory` |  Always `true` |
+| `use_static_image` | `mandatory*` | `mandatory*` | Always `true` when SVG image is generated. *Only required if an SVG file is created for the card |
 | `permalink` |  `mandatory` | `mandatory` |  Follows `/projects/{number}` for pt cards, `/en/{number}` for en cards, and `/es/{number}` for es cards |
 | `lang` | `mandatory` | `mandatory` | Either `"pt"`, `"en"`, or `"es"`. These are the currently supported languages |
 | `translations` | `optional` | `optional` |  Array of translation links e.g.: `- lang: en` `url: /en/{number}` `- lang: es` `url: /es/{number}` |
@@ -59,6 +60,26 @@ Here's a list of all fields you could find in both types:
 | `nt` | `mandatory` | `mandatory` | information about the next card for arrow linking |
 | `nt.url` | `mandatory` | `mandatory` | Path to next card e.g.: `/projects/{number}` |
 | `nt.title` | `mandatory` | `mandatory` | Command to next card e.g.: `#001 git init` |
+
+## File Naming Convention
+
+**IMPORTANT:** All post files must follow the Jekyll naming convention: `YYYY-MM-DD-XXX.md`
+
+### For New Cards
+- Format: `YYYY-MM-DD-XXX.md` where XXX is the card number with leading zeros
+- Use the current date when creating a new card
+- Example: `2024-10-26-054.md` for card #054
+
+### For Translations
+- **Must use the SAME date as the original post**
+- Portuguese (original): `2024-10-26-054.md` → English: `2024-10-26-054.md` → Spanish: `2024-10-26-054.md`
+- Check the original post's filename to get the correct date
+- **Never use a different date for translations**
+
+### Directory Structure
+- Portuguese cards: `_posts/YYYY-MM-DD-XXX.md`
+- English cards: `en/_posts/YYYY-MM-DD-XXX.md`
+- Spanish cards: `es/_posts/YYYY-MM-DD-XXX.md`
 
 ### Command Cards Example
 
@@ -79,6 +100,7 @@ info: this command can be used to move files between folders
 author: "@jtemporal"
 number: "052"
 mermaid: true
+use_static_image: true
 translations:
 - lang: pt
   url: /projects/052
@@ -112,6 +134,7 @@ parts:
 number: "030"
 author: "@jtemporal"
 mermaid: true
+use_static_image: true
 permalink: "/en/030"
 translations:
 - lang: pt
@@ -282,21 +305,24 @@ Migrate this GitFichas card from image to Mermaid format:
 Requirements:
 - Extract title → pretitle/title/subtitle
 - Convert table → descriptors array
-- Add: author, number, mermaid: true, use_static_image: true
+- Add: author, number, mermaid: true
 - Keep navigation links intact
 - Remove image URLs and HTML
+- Follow proper file naming: YYYY-MM-DD-XXX.md (use same date as original for translations)
 ```
 
 **For Command Cards:** Add `command: git xxx` and `descriptors` with `command` + `part1`, `part2`, etc.
 
-**For Concept Cards:** Use `concept: true` and `parts` array instead of `descriptors`. No `use_static_image: true`.
+**For Concept Cards:** Use `concept: true` and `parts` array instead of `descriptors`. Add `use_static_image: true` only after SVG is generated.
 
 ### Migration Workflow
 
 1. **Migrate with Copilot** using prompts above
-2. **Generate SVG:** `python3 scripts/generate_images_only.py "filename.md"`
-3. **Test locally:** `bundle exec jekyll serve`
-4. **Commit both files:** `git add post.md svg-file.svg`
+2. **Ensure proper file naming**: Use `YYYY-MM-DD-XXX.md` format with same date as original post for translations
+3. **Generate SVG:** `python3 scripts/generate_images_only.py "filename.md"`
+4. **Add `use_static_image: true`** to front matter only after successful SVG generation
+5. **Test locally:** `bundle exec jekyll serve`
+6. **Commit both files:** `git add post.md svg-file.svg`
 
 ### Key Patterns
 
@@ -423,6 +449,7 @@ Aqui está uma lista de todos os campos que você pode encontrar em ambos os tip
 | `author` | `obrigatório` | `obrigatório` | Nome de usuário do GitHub da pessoa que criou a ficha, por exemplo: `@jtemporal` |
 | `number` | `obrigatório` | `obrigatório` | Número da ficha, por exemplo: `"001"`. As aspas são necessárias para o zero à esquerda |
 | `mermaid` | `obrigatório` | `obrigatório` | Sempre presente `true` |
+| `use_static_image` | `obrigatório*` | `obrigatório*` | Sempre `true` quando imagem SVG é gerada. *Obrigatório apenas se um arquivo SVG for criado para a ficha |
 | `permalink` | `obrigatório` | `obrigatório` | Segue `/projects/{number}` para fichas em pt, `/en/{number}` para fichas em en, e `/es/{number}` para fichas em es |
 | `lang` | `obrigatório` | `obrigatório` | `"pt"`, `"en"`, ou `"es"`. Estes são os idiomas atualmente suportados |
 | `translations` | `opcional` | `opcional` | Array de links de tradução, por exemplo: `- lang: en` `url: /en/{number}` `- lang: es` `url: /es/{number}` |
@@ -452,6 +479,7 @@ info: esse comando pode ser usado \npara mover arquivos entre pastas
 number: "052"
 author: "@jtemporal"
 mermaid: true
+use_static_image: true
 permalink: "/projects/052"
 lang: "pt"
 translations:
@@ -485,6 +513,7 @@ parts:
 number: "030"
 author: "@jtemporal"
 mermaid: true
+use_static_image: true
 permalink: "/projects/030"
 translations:
 - lang: en
@@ -500,6 +529,26 @@ nt:
 
 {% include mermaid-graphs.html %}
 ```
+
+## Convenção de Nomes de Arquivos
+
+**IMPORTANTE:** Todos os arquivos de posts devem seguir a convenção de nomenclatura do Jekyll: `YYYY-MM-DD-XXX.md`
+
+### Para Fichas Novas
+- Formato: `YYYY-MM-DD-XXX.md` onde XXX é o número da ficha com zeros à esquerda
+- Use a data atual ao criar uma nova ficha
+- Exemplo: `2024-10-26-054.md` para a ficha #054
+
+### Para Traduções
+- **Deve usar a MESMA data do post original**
+- Português (original): `2024-10-26-054.md` → Inglês: `2024-10-26-054.md` → Espanhol: `2024-10-26-054.md`
+- Verifique o nome do arquivo do post original para obter a data correta
+- **Nunca use uma data diferente para traduções**
+
+### Estrutura de Diretórios
+- Fichas em português: `_posts/YYYY-MM-DD-XXX.md`
+- Fichas em inglês: `en/_posts/YYYY-MM-DD-XXX.md`
+- Fichas em espanhol: `es/_posts/YYYY-MM-DD-XXX.md`
 
 ## Rodando o Projeto
 
@@ -667,9 +716,10 @@ Estou migrando fichas do GitFichas do formato baseado em imagens para diagramas 
 Ajude-me a converter fichas existentes seguindo estes requisitos:
 - Extrair componentes do título em pretitle/title/subtitle
 - Converter tabelas de comandos em array descriptors
-- Adicionar campos obrigatórios: author, number, mermaid: true, use_static_image: true
+- Adicionar campos obrigatórios: author, number, mermaid: true
 - Preservar todos os links de navegação e traduções
 - Remover URLs de imagens e conteúdo HTML
+- Seguir convenção de nomes: YYYY-MM-DD-XXX.md (usar mesma data do original para traduções)
 ```
 
 #### 2. **Prompts para Migração Ficha por Ficha**
@@ -696,7 +746,7 @@ Siga esta estrutura:
 - Usar concept: true em vez de command
 - Converter descrições em array parts (part1, part2, etc.)
 - Usar \n para quebras de linha em partes de conceito
-- Não adicionar use_static_image: true para fichas de conceito
+- Adicionar `use_static_image: true` apenas se um SVG for gerado com sucesso
 - Manter toda navegação intacta
 ```
 
@@ -732,7 +782,12 @@ git switch -c migrate-cards-[numeros-das-fichas]
 - Revisar e refinar o conteúdo gerado
 - Garantir que todos os campos estejam formatados corretamente
 
-#### 3. **Gerar Arquivos SVG**
+#### 3. **Verificar Convenção de Nomes**
+- Garantir formato `YYYY-MM-DD-XXX.md`
+- Para traduções, usar a MESMA data do post original
+- Verificar se o arquivo está no diretório correto
+
+#### 4. **Gerar Arquivos SVG**
 ```bash
 # Gerar SVG para ficha específica
 python3 scripts/generate_images_only.py "nome-arquivo-ficha.md"
@@ -741,7 +796,10 @@ python3 scripts/generate_images_only.py "nome-arquivo-ficha.md"
 ls -la assets/img/mermaid/ | grep "numero-ficha"
 ```
 
-#### 4. **Testar e Verificar**
+#### 5. **Adicionar use_static_image após SVG**
+- Adicionar `use_static_image: true` ao front matter APENAS após geração bem-sucedida do SVG
+
+#### 6. **Testar e Verificar**
 ```bash
 # Iniciar servidor local
 bundle exec jekyll serve
@@ -751,7 +809,7 @@ bundle exec jekyll serve
 # Verificar precisão do conteúdo e consistência visual
 ```
 
-#### 5. **Fazer Commit das Mudanças**
+#### 7. **Fazer Commit das Mudanças**
 ```bash
 # Adicionar ao stage tanto arquivos markdown quanto SVG
 git add _posts/nome-arquivo-ficha.md assets/img/mermaid/numero-ficha.svg
