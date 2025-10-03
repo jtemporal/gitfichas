@@ -1,200 +1,114 @@
-{% comment %}
-  Calculate color scheme based on card number (modulo 6)
-  Define the 6 color schemes
-{% endcomment %}
-{% assign card_num = page.number | plus: 0 %}
-{% assign color_scheme_index = card_num | modulo: 6 %}
+{% comment %} Calculate color scheme based on card number (modulo 6) Define the
+6 color schemes {% endcomment %} {% assign card_num = page.number | plus: 0 %}
+{% assign color_scheme_index = card_num | modulo: 6 %} {% comment %} Set colors
+based on the scheme index {% endcomment %} {% case color_scheme_index %} {% when
+1 %} {% comment %} Light Blue scheme {% endcomment %} {% assign title_color =
+'#5096d0' %} {% assign subtitle_color = '#006a98' %} {% when 2 %} {% comment %}
+Dark Green scheme {% endcomment %} {% assign title_color = '#1f584d' %} {%
+assign subtitle_color = '#273535' %} {% when 3 %} {% comment %} Light Blue
+scheme {% endcomment %} {% assign title_color = '#7592e2' %} {% assign
+subtitle_color = '#333c7d' %} {% when 4 %} {% comment %} Pink/Rose scheme {%
+endcomment %} {% assign title_color = '#e290b9' %} {% assign subtitle_color =
+'#ad4784' %} {% when 5 %} {% comment %} Purple scheme {% endcomment %} {% assign
+title_color = '#d581e1' %} {% assign subtitle_color = '#424699' %} {% when 0 %}
+{% comment %} Light Green scheme {% endcomment %} {% assign title_color =
+'#689582' %} {% assign subtitle_color = '#152b29' %} {% endcase %}
 
-{% comment %}
-  Set colors based on the scheme index
-{% endcomment %}
-{% case color_scheme_index %}
-  {% when 1 %} {% comment %} Light Blue scheme {% endcomment %}
-    {% assign title_color = '#5096d0' %}
-    {% assign subtitle_color = '#006a98' %}
-  {% when 2 %} {% comment %} Dark Green scheme {% endcomment %}
-    {% assign title_color = '#1f584d' %}
-    {% assign subtitle_color = '#273535' %}
-  {% when 3 %} {% comment %} Light Blue scheme {% endcomment %}
-    {% assign title_color = '#7592e2' %}
-    {% assign subtitle_color = '#333c7d' %}
-  {% when 4 %} {% comment %} Pink/Rose scheme {% endcomment %}
-    {% assign title_color = '#e290b9' %}
-    {% assign subtitle_color = '#ad4784' %}
-  {% when 5 %} {% comment %} Purple scheme {% endcomment %}
-    {% assign title_color = '#d581e1' %}
-    {% assign subtitle_color = '#424699' %}
-  {% when 0 %} {% comment %} Light Green scheme {% endcomment %}
-    {% assign title_color = '#689582' %}
-    {% assign subtitle_color = '#152b29' %}
-{% endcase %}
-
-<div class="mermaid-container" style="--title-color: {{ title_color }}; --subtitle-color: {{ subtitle_color }};">
+<div
+  class="mermaid-container"
+  style="--title-color: {{ title_color }}; --subtitle-color: {{ subtitle_color }};"
+>
   <div class="title-container">
-    {% if page.pretitle %}<p class="pretitle">{{ page.pretitle }}</p>{% endif %}
+    {% if page.pretitle %}
+    <p class="pretitle">{{ page.pretitle }}</p>
+    {% endif %}
     <h1>{{ page.title }}</h1>
-    {% if page.subtitle %}<p class="subtitle">{{ page.subtitle }}</p>{% endif %}
+    {% if page.subtitle %}
+    <p class="subtitle">{{ page.subtitle }}</p>
+    {% endif %}
   </div>
 
-{% comment %}
-  Check if static image exists - use that instead of dynamic rendering
-{% endcomment %}
-{% assign image_filename = page.number %}
-{% if page.lang == 'en' %}
-  {% assign image_filename = page.number | append: '-en' %}
-{% elsif page.lang == 'es' %}
-  {% assign image_filename = page.number | append: '-es' %}
-{% endif %}
-
-{% assign static_image_path = '/assets/img/mermaid/' | append: image_filename | append: '.svg' %}
-
-{% comment %}
-  For now, we'll use a simple approach - if you want to use static images,
-  set page.use_static_image to true in the front matter
-{% endcomment %}
-{% if page.use_static_image %}
-  <img src="{{ static_image_path }}" alt="{{ page.title }}" class="mermaid-image" />
-{% elsif page.command %}
-  {% assign command_parts = page.command | split: " " %}
+  {% comment %} Check if static image exists - use that instead of dynamic
+  rendering {% endcomment %} {% assign image_filename = page.number %} {% if
+  page.lang == 'en' %} {% assign image_filename = page.number | append: '-en' %}
+  {% elsif page.lang == 'es' %} {% assign image_filename = page.number | append:
+  '-es' %} {% endif %} {% assign static_image_path = '/assets/img/mermaid/' |
+  append: image_filename | append: '.svg' %} {% comment %} For now, we'll use a
+  simple approach - if you want to use static images, set page.use_static_image
+  to true in the front matter {% endcomment %} {% if page.use_static_image %}
+  <img
+    src="{{ static_image_path }}"
+    alt="{{ page.title }}"
+    class="mermaid-image"
+  />
+  {% elsif page.command %} {% assign command_parts = page.command | split: " "
+  %}
   <div class="mermaid">
-    block-beta
-    columns 1
-    {% if command_parts.size == 2 %}
-    block:notes
-      space:1 f["{{ page.descriptors[0].command }}"]
-    end
-    block:command
-      a("{{ command_parts[0] }}") b("{{ command_parts[1] }}")
-    end
-    {% elsif command_parts.size == 3 %}
-    block:notes
-      space:2 f["{{ page.descriptors[1].part1 }}"]
-    end
-
-    block:command
-      a("{{ command_parts[0] }}") b("{{ command_parts[1] }}") c("{{ command_parts[2] }}")
-    end
-
-    block:notes2
-      space g["{{ page.descriptors[0].command }}"] space
-    end
-
-    {% elsif command_parts.size == 4 %}
-    block:notes
-      space:2 f["{{ page.descriptors[1].part1 }}"] space
-    end
-
-    block:command
-      a("{{ command_parts[0] }}") b("{{ command_parts[1] }}") c("{{ command_parts[2] }}") d("{{ command_parts[3] }}")
-    end
-
-    block:notes2
-      space g["{{ page.descriptors[0].command }}"] space h["{{ page.descriptors[2].part2 }}"]
-    end
-
-    {% elsif command_parts.size == 5 %}
-    block:notes
-      space:2 f["{{ page.descriptors[1].part1 }}"] space i["{{ page.descriptors[3].part3 }}"]
-    end
-
-    block:command
-      a("{{ command_parts[0] }}") b("{{ command_parts[1] }}") c("{{ command_parts[2] }}") d("{{ command_parts[3] }}") e("{{ command_parts[4] }}")
-    end
-
-    block:notes2
-      space g["{{ page.descriptors[0].command }}"] space h["{{ page.descriptors[2].part2 }}"] space
-    end
-
-    {% elsif command_parts.size == 6 %}
-    block:notes
-      space:2 f["{{ page.descriptors[1].part1 }}"] space i["{{ page.descriptors[3].part3 }}"] space
-    end
-
-    block:command
-      a("{{ command_parts[0] }}") b("{{ command_parts[1] }}") c("{{ command_parts[2] }}") d("{{ command_parts[3] }}") e("{{ command_parts[4] }}") k("{{ command_parts[5] }}")
-    end
-
-    block:notes2
-      space g["{{ page.descriptors[0].command }}"] space h["{{ page.descriptors[2].part2 }}"] space l["{{ page.descriptors[4].part4 }}"] 
-    end
-    {% endif %}
-
-  {% if page.info %}
-  block:info
-    j["{{ page.info }}"]
-  end
-  {% endif %}
-
-  %% arrows %%
-  {% if command_parts.size == 2 %}
-  b --> f
-  classDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#000, line-height:2em;
-  {% elsif command_parts.size == 3 %}
-  b --> g
-  c --> f
-  classDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#000, line-height:2em;
-  {% elsif command_parts.size == 4 %}
-  c --> f
-  b --> g
-  d --> h
-  classDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#000, line-height:2em;
-  {% elsif command_parts.size == 5 %}
-  d --> h
-  e --> i
-  classDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#000, line-height:2em;
-  {% elsif command_parts.size == 6 %}
-  b --> g
-  c --> f
-  d --> h
-  e --> i
-  k --> l
-  classDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#000, line-height:2.2em;
-  {% endif %}
-
-  %% styling %%
-  classDef transparent fill:#fff, stroke:#fff;
-  class a,b,c,d,e,f,g,h,i,j,k,l,notes,notes2,command,info transparent
-  classDef commandFont font-family:'Borel', font-size:1.6em, line-height:2.2em;
-  class a,b,c,d,e,k commandFont
-  class f,g,h,i,j,l textFont
-</div> 
-{% elsif page.concept %}
+    block-beta columns 1 {% if command_parts.size == 2 %} block:notes space:1
+    f["{{ page.descriptors[0].command }}"] end block:command a("{{
+    command_parts[0] }}") b("{{ command_parts[1] }}") end {% elsif
+    command_parts.size == 3 %} block:notes space:2 f["{{
+    page.descriptors[1].part1 }}"] end block:command a("{{ command_parts[0] }}")
+    b("{{ command_parts[1] }}") c("{{ command_parts[2] }}") end block:notes2
+    space g["{{ page.descriptors[0].command }}"] space end {% elsif
+    command_parts.size == 4 %} block:notes space:2 f["{{
+    page.descriptors[1].part1 }}"] space end block:command a("{{
+    command_parts[0] }}") b("{{ command_parts[1] }}") c("{{ command_parts[2]
+    }}") d("{{ command_parts[3] }}") end block:notes2 space g["{{
+    page.descriptors[0].command }}"] space h["{{ page.descriptors[2].part2 }}"]
+    end {% elsif command_parts.size == 5 %} block:notes space:2 f["{{
+    page.descriptors[1].part1 }}"] space i["{{ page.descriptors[3].part3 }}"]
+    end block:command a("{{ command_parts[0] }}") b("{{ command_parts[1] }}")
+    c("{{ command_parts[2] }}") d("{{ command_parts[3] }}") e("{{
+    command_parts[4] }}") end block:notes2 space g["{{
+    page.descriptors[0].command }}"] space h["{{ page.descriptors[2].part2 }}"]
+    space end {% elsif command_parts.size == 6 %} block:notes space:2 f["{{
+    page.descriptors[1].part1 }}"] space i["{{ page.descriptors[3].part3 }}"]
+    space end block:command a("{{ command_parts[0] }}") b("{{ command_parts[1]
+    }}") c("{{ command_parts[2] }}") d("{{ command_parts[3] }}") e("{{
+    command_parts[4] }}") k("{{ command_parts[5] }}") end block:notes2 space
+    g["{{ page.descriptors[0].command }}"] space h["{{ page.descriptors[2].part2
+    }}"] space l["{{ page.descriptors[4].part4 }}"] end {% endif %} {% if
+    page.info %} block:info j["{{ page.info }}"] end {% endif %} %% arrows %% {%
+    if command_parts.size == 2 %} b --> f classDef textFont
+    font-family:'Chilanka', font-size:1.2em, font-color:#000, line-height:2em;
+    {% elsif command_parts.size == 3 %} b --> g c --> f classDef textFont
+    font-family:'Chilanka', font-size:1.2em, font-color:#000, line-height:2em;
+    {% elsif command_parts.size == 4 %} c --> f b --> g d --> h classDef
+    textFont font-family:'Chilanka', font-size:1.2em, font-color:#000,
+    line-height:2em; {% elsif command_parts.size == 5 %} d --> h e --> i
+    classDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#000,
+    line-height:2em; {% elsif command_parts.size == 6 %} b --> g c --> f d --> h
+    e --> i k --> l classDef textFont font-family:'Chilanka', font-size:1.2em,
+    font-color:#000, line-height:2.2em; {% endif %} %% styling %% classDef
+    transparent fill:#fff, stroke:#fff; class
+    a,b,c,d,e,f,g,h,i,j,k,l,notes,notes2,command,info transparent classDef
+    commandFont font-family:'Borel', font-size:1.6em, line-height:2.2em; class
+    a,b,c,d,e,k commandFont class f,g,h,i,j,l textFont
+  </div>
+  {% elsif page.concept %}
   <div class="mermaid">
-  block-beta
-  columns 1
-  block:notes
-    a["{{ page.parts[0].part1 }}"]
-  end
-  {% if page.parts.size == 2 %}
-  block:notes2
-    b["{{ page.parts[1].part2 }}"]
-  end
-  {% elsif page.parts.size == 3 %}
-  block:notes2
-    b["{{ page.parts[1].part2 }}"]
-  end
-
-  block:notes3
-    c["{{ page.parts[2].part3 }}"]
-  end  
-  {% endif %}
-  {% if page.info %}
-  block:info
-    f["{{ page.info }}"]
-  end
+    block-beta columns 1 block:notes a["{{ page.parts[0].part1 }}"] end {% if
+    page.parts.size == 2 %} block:notes2 b["{{ page.parts[1].part2 }}"] end {%
+    elsif page.parts.size == 3 %} block:notes2 b["{{ page.parts[1].part2 }}"]
+    end block:notes3 c["{{ page.parts[2].part3 }}"] end {% endif %} {% if
+    page.info %} block:info f["{{ page.info }}"] end {% endif %} %% styling %%
+    classDef transparent fill:#fff, stroke:#fff; class
+    a,b,c,notes,notes2,notes3,info transparent classDef textFont
+    font-family:'Chilanka', font-size:1.2em, font-color:#000, line-height:1.4em;
+    class a,b,c,notes,notes2,notes3,info textFont
+  </div>
   {% endif %}
 
-  %% styling %%
-  classDef transparent fill:#fff, stroke:#fff;
-  class a,b,c,notes,notes2,notes3,info transparent
-  classDef textFont font-family:'Chilanka', font-size:1.2em, font-color:#000, line-height:1.4em;
-  class a,b,c,notes,notes2,notes3,info textFont
-  </div> 
-{% endif %}
-
-<div class="mermaid-footer">
-<p class="number">#{{ page.number }}</p>
-<p class="author">{{ page.author }}</p>
-</div>
-
+  <div class="mermaid-footer">
+    <p class="number">#{{ page.number }}</p>
+    <p class="author">
+      <a
+        href="https://github.com/{{ page.author | remove: '@' }}"
+        target="_blank"
+        style="color: inherit; text-decoration: none"
+        >{{ page.author }}</a
+      >
+    </p>
+  </div>
 </div>
