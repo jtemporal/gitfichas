@@ -100,15 +100,7 @@ title_color = '#d581e1' %} {% assign subtitle_color = '#424699' %} {% when 0 %}
   </div>
   {% endif %}
 
-  <div class="mermaid-footer">
-    <p class="number">#{{ page.number }}</p>
-    <p class="author">
-      <a
-        href="https://github.com/{{ page.author | remove: '@' }}"
-        target="_blank"
-        style="color: inherit; text-decoration: none"
-        >{{ page.author }}</a
-      >
-    </p>
-  </div>
+<div class="mermaid-footer">
+<p class="number">#{{ page.number }}</p>
+<p class="author"><a href="https://github.com/{{ page.author | remove: '@' }}" target="_blank" style="color: inherit; text-decoration: none" >{{ page.author }}</a></p>
 </div>
