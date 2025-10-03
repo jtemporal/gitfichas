@@ -1,0 +1,24 @@
+### Git ###
+.git
+.gitignore
+.github
+
+### OSX ###
+.AppleDouble
+.LSOverride
+
+### Files ###
+LICENSE.md
+README.md
+LICENSE
+COC.md
+MERMAID_CONVERTER_README.md
+
+### Docker ###
+Dockerfile
+
+### IDE ###
+.vscode
+.idea
+*.DS_Store
+Thumbs.db
