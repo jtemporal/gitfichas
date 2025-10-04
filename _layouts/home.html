@@ -34,7 +34,11 @@ layout: default
             <div class="project-unit card" data-folder="{{ site.github.url }}{{ project.url }}">
               {{ project.content }}
               <div class="project-overlay">
-                <strong>{{ project.number }} {{ project.command }} <i class="fa fa-arrow-right" aria-hidden="true"></i></strong>
+                {% if project.concept %}
+                <strong>#{{ project.number }} {{ project.pretitle }} {{ project.title }} {{ project.subtitle}} <i class="fa fa-arrow-right" aria-hidden="true"></i></strong>
+                {% else %}
+                <strong>#{{ project.number }} {{ project.command }} <i class="fa fa-arrow-right" aria-hidden="true"></i></strong>
+                {% endif %}
               </div>
             </div>
           {% else %}
