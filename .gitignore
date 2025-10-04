@@ -12,6 +12,11 @@
 Icon
 
 
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
 # Thumbnails
 ._*
 
@@ -25,7 +30,6 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
-
 
 ### Jekyll ###
 _site
