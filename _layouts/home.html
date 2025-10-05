@@ -29,22 +29,27 @@ layout: default
         {% assign sorted = site.posts | where: "lang", "pt" | sort: 'date' | reverse %}
       {% endif %}
       {% for project in sorted %}
-        <a href="{{ site.github.url }}{{ project.url }}">
-          {% if project.mermaid %}
-            <div class="project-unit card" data-folder="{{ site.github.url }}{{ project.url }}">
-              {{ project.content }}
-              <div class="project-overlay">
-                <strong>{{ project.number }} {{ project.command }} <i class="fa fa-arrow-right" aria-hidden="true"></i></strong>
-              </div>
-            </div>
-          {% else %}
-          <div class="project-unit" data-folder="{{ site.github.url }}{{ project.url }}" style="background-image: url({{ site.github.url }}{{project.image}})">
-            <div class="project-overlay">
-              <strong>{{ project.title }} <i class="fa fa-arrow-right" aria-hidden="true"></i></strong>
-            </div>
+      {% if project.mermaid %}
+        <div class="project-unit card" data-folder="{{ site.github.url }}{{ project.url }}">
+          {{ project.content }}
+          <a href="{{ site.github.url }}{{ project.url }}">
+          <div class="project-overlay">
+            {% if project.concept %}
+            <strong>#{{ project.number }} {{ project.pretitle }} {{ project.title }} {{ project.subtitle}} <i class="fa fa-arrow-right" aria-hidden="true"></i></strong>
+            {% else %}
+            <strong>#{{ project.number }} {{ project.command }} <i class="fa fa-arrow-right" aria-hidden="true"></i></strong>
+            {% endif %}
           </div>
-          {% endif %}
-        </a>
+        </div>
+      {% else %}
+      <div class="project-unit" data-folder="{{ site.github.url }}{{ project.url }}" style="background-image: url({{ site.github.url }}{{project.image}})">
+        <a href="{{ site.github.url }}{{ project.url }}">
+        <div class="project-overlay">
+          <strong>{{ project.title }} <i class="fa fa-arrow-right" aria-hidden="true"></i></strong>
+        </div>
+      </div>
+      {% endif %}
+      </a>
       {%endfor%}
     </div>
   </section>
