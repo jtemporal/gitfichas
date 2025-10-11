@@ -26,7 +26,7 @@
 /* Mermaid SVG-specific styles for static images */
 .textFont {
     font-family: 'Chilanka', cursive !important;
-    font-size: 1em !important;
+    font-size: 0.95em !important;
     fill: #000 !important;
 }
 
@@ -43,7 +43,7 @@
 /* Mermaid block styling for SVG generation */
 text[class*="textFont"] {
     font-family: 'Chilanka', cursive !important;
-    font-size: 1em !important;
+    font-size: 0.95em !important;
     fill: #000 !important;
 }
 
@@ -56,32 +56,32 @@ text[class*="commandFont"] {
 /* Additional CSS for styling from the original Python script - original fonts for 1200x675 */
 .nodeLabel { 
     font-family: inherit !important; 
-    font-size: 1em !important;
+    font-size: 0.95em !important;
 } 
 
 foreignObject { 
     font-family: inherit !important; 
-    font-size: 1em !important;
+    font-size: 0.95em !important;
 } 
 
 foreignObject div { 
     font-family: inherit !important; 
-    font-size: 1em !important;
+    font-size: 0.95em !important;
 } 
 
 foreignObject span { 
     font-family: inherit !important; 
-    font-size: 1em !important;
+    font-size: 0.95em !important;
 } 
 
 span { 
     font-family: inherit !important; 
-    font-size: 1em !important;
+    font-size: 0.95em !important;
 } 
 
 tspan { 
     fill: inherit !important; 
     font-family: inherit !important; 
-    font-size: 1em !important;
+    font-size: 0.95em !important;
 }
 </style></svg>
