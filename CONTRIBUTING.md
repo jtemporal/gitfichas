@@ -2,7 +2,7 @@
 
 | Table of content | Índice |
 | ------- | --------- |
-| &nbsp;&nbsp;• [Before You Start](#before-you-start)<br>&nbsp;&nbsp;• [Code of Conduct](#code-of-conduct)<br>&nbsp;&nbsp;• [Cards Types](#cards-types)<br>&nbsp;&nbsp;• [File Naming Convention](#file-naming-convention)<br>&nbsp;&nbsp;• [Running the Project](#running-the-project)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Local way](#local-way)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Install dependencies](#install-dependencies)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Run the project](#run-the-project)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Docker way](#docker-way)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Building image](#building-image)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Serving](#serving)<br>&nbsp;&nbsp;• [Working with Mermaid Diagrams](#working-with-mermaid-diagrams)<br>&nbsp;&nbsp;• [The Basics of Contributing](#the-basics-of-contributing)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [The Git basics](#the-git-basics)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Issue Assignment](#issue-assignment) | &nbsp;&nbsp;• [Antes de Começar](#antes-de-começar)<br>&nbsp;&nbsp;• [Código de Conduta](#código-de-conduta)<br>&nbsp;&nbsp;• [Tipos de Fichas](#tipos-de-fichas)<br>&nbsp;&nbsp;• [Convenção de Nomes de Arquivos](#convenção-de-nomes-de-arquivos)<br>&nbsp;&nbsp;• [Rodando o Projeto](#rodando-o-projeto)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Localmente](#localmente)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Instalando depedências](#instalando-depedências)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Rodar o projeto](#rodar-o-projeto)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Com Docker](#com-docker)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Montando a imagem](#montando-a-imagem)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Servindo](#servindo)<br>&nbsp;&nbsp;• [Trabalhando com Diagramas Mermaid](#trabalhando-com-diagramas-mermaid)<br>&nbsp;&nbsp;• [Fazendo Contribuições](#fazendo-contribuições)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [O básico de git](#o-básico-de-git)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Atribuição de issues](#atribuição-de-issues) |
+| &nbsp;&nbsp;• [Before You Start](#before-you-start)<br>&nbsp;&nbsp;• [Code of Conduct](#code-of-conduct)<br>&nbsp;&nbsp;• [Cards Types](#cards-types)<br>&nbsp;&nbsp;• [File Naming Convention](#file-naming-convention)<br>&nbsp;&nbsp;• [Running the Project](#running-the-project)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Local way](#local-way)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Install dependencies](#install-dependencies)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Run the project](#run-the-project)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Docker way](#docker-way)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Building image](#building-image)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Serving](#serving)<br>&nbsp;&nbsp;• [Working with Mermaid Diagrams](#working-with-mermaid-diagrams)<br>&nbsp;&nbsp;• [The Basics of Contributing](#the-basics-of-contributing)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [The Git basics](#the-git-basics)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Issue Assignment and Inactivity](#issue-assignment-and-inactivity) | &nbsp;&nbsp;• [Antes de Começar](#antes-de-começar)<br>&nbsp;&nbsp;• [Código de Conduta](#código-de-conduta)<br>&nbsp;&nbsp;• [Tipos de Fichas](#tipos-de-fichas)<br>&nbsp;&nbsp;• [Convenção de Nomes de Arquivos](#convenção-de-nomes-de-arquivos)<br>&nbsp;&nbsp;• [Rodando o Projeto](#rodando-o-projeto)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Localmente](#localmente)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Instalando dependências](#instalando-dependências)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Rodar o projeto](#rodar-o-projeto)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Com Docker](#com-docker)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Montando a imagem](#montando-a-imagem)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• [Servindo](#servindo)<br>&nbsp;&nbsp;• [Trabalhando com Diagramas Mermaid](#trabalhando-com-diagramas-mermaid)<br>&nbsp;&nbsp;• [Fazendo Contribuições](#fazendo-contribuições)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [O básico de git](#o-básico-de-git)<br>&nbsp;&nbsp;&nbsp;&nbsp;• [Atribuição de issues e inatividade](#atribuição-de-issues-e-inatividade) |
 
 ## Before You Start
 
@@ -20,9 +20,9 @@ If you have any questions create an issue.
 
 ## Code of Conduct
 
-GitFichas is a welcoming and inclusive space for everyone. All contributors are expected to follow our [Code of Conduct](https://github.com/jtemporal/gitfichas/blob/main/CONTRIBUTING.md). Please take a moment to read it and help us maintain a positive environment for all.
+GitFichas is a welcoming and inclusive space for everyone. All contributors are expected to follow our [Code of Conduct](https://github.com/jtemporal/gitfichas/blob/main/COC.md#code-of-conduct). Please take a moment to read it and help us maintain a positive environment for all.
 
-[Read the full Code of Conduct](https://github.com/jtemporal/gitfichas/blob/main/CONTRIBUTING.md).
+[Read the full Code of Conduct](https://github.com/jtemporal/gitfichas/blob/main/COC.md#code-of-conduct).
 
 ## Cards Types
 
@@ -391,15 +391,16 @@ From your fork at GitHub usually there is a button to open pull requests.
 
 Remember to [link your issue in your pull request](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue).
 
-### Issue Assignment
+### Issue Assignment and Inactivity
 
 To keep things running smoothly and fair for everyone:
 
-* **Only core maintainers assign issues:** If you’d like to work on something, just drop a comment saying you’re picking it up and go ahead with your PR. No assignment needed!
+* **Only core maintainers assign issues:** If you'd like to work on something, just drop a comment saying you're picking it up and go ahead with your PR. No assignment needed!
 * **No assignments for potential contributors:** This helps us welcome all contributions and keeps the contribution process open.
-* **2-day window:** If there’s no PR within 2 days of a comment expressing interest, the issue is open for anyone to jump in.
+* **2-day window:** If there's no PR within 2 days of a comment expressing interest, the issue is open for anyone to jump in.
+* **Inactive PR policy:** Pull requests with no response from the contributor for 7 days may be closed to keep the project moving. Don't worry though - you can always reopen your PR or create a new one when you're ready to continue!
 
-This way, we keep a friendly, low-barrier process and ensure issues don’t get blocked. Thanks for being part of the community!
+This way, we keep a friendly, low-barrier process and ensure issues don't get blocked. Thanks for being part of the community!
 
 ---
 
@@ -419,9 +420,9 @@ Se tiver alguma dúvida, crie uma issue.
 
 ## Código de Conduta
 
-O GitFichas é um espaço acolhedor e inclusivo para todas pessoas. Isso quer dizer que devemos seguir nosso [Código de Conduta](https://github.com/jtemporal/gitfichas/blob/main/CONTRIBUTING.md). Por favor, leia-o com atenção antes de contribuir.
+O GitFichas é um espaço acolhedor e inclusivo para todas pessoas. Isso quer dizer que devemos seguir nosso [Código de Conduta](https://github.com/jtemporal/gitfichas/blob/main/COC.md#c%C3%B3digo-de-conduta). Por favor, leia-o com atenção antes de contribuir.
 
-[Leia o Código de Conduta completo](https://github.com/jtemporal/gitfichas/blob/main/CONTRIBUTING.md).
+[Leia o Código de Conduta completo](https://github.com/jtemporal/gitfichas/blob/main/COC.md#c%C3%B3digo-de-conduta).
 
 ## Tipos de Fichas
 
@@ -572,7 +573,7 @@ O devcontainer inclui:
 
 Instale o [Bundler](https://bundler.io/guides/getting_started.html) e siga os passos abaixo.
 
-#### Instalando depedências
+#### Instalando dependências
 
 ```console
 bundle install
@@ -885,12 +886,13 @@ Do seu fork no GitHub, geralmente há um botão para abrir pull requests.
 
 Lembre-se de [linkar a sua issue no seu pull request](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue).
 
-### Atribuição de Issues
+### Atribuição de Issues e Inatividade
 
 Para manter o fluxo de trabalho organizado:
 
 * **Somente mantenedores principais terão atribuição de issues:** Se você quiser trabalhar em algo, basta comentar dizendo que vai pegar a tarefa e abrir seu PR. Não é necessário atribuição formal.
 * **Sem atribuição para eventuais contribuições:** Isso ajuda a manter o processo aberto e acolhedor para todos.
 * **Janela de 2 dias:** Se não houver PR em até 2 dias após alguém demonstrar interesse, a issue fica aberta para qualquer pessoa trabalhar.
+* **Política de PRs inativos:** Pull requests sem resposta do contribuidor por 7 dias podem ser fechados para manter o projeto em movimento. Não se preocupe - você sempre pode reabrir seu PR ou criar um novo quando estiver pronto para continuar!
 
 Assim, mantemos o processo amigável, com baixa barreira de entrada e evitamos que issues fiquem paradas. Obrigado por fazer parte da comunidade!
