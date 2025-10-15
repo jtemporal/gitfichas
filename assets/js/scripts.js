@@ -14,7 +14,6 @@ function searchCards(inputId, cardsSelector) {
   const searchInput = document.getElementById(inputId);
   const cards = document.querySelectorAll(cardsSelector);
 
-  // Get the new message element
   const noResultsMessage = document.getElementById("no-results-message");
 
   searchInput.addEventListener("input", function () {
