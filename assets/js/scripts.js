@@ -16,7 +16,7 @@ function searchCards(inputId, cardsSelector) {
   searchInput.addEventListener("input", function () {
     const query = this.value.toLowerCase();
     cards.forEach((card) => {
-      const text = card.getAttribute("data-title");
+      const text = card.getAttribute("data-title") || "";
       const match = text.includes(query);
       card.style.display = match ? "block" : "none";
     });

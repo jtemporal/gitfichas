@@ -22,8 +22,8 @@ layout: default
   </div>
 
   <!-- Search Bar -->
-  <div style="text-align: center; margin: 20px 0;">
-    <input type="text" id="search-input" placeholder="Search cards..." style="padding: 10px; width: 50%; max-width: 100%; border-radius: 8px;">
+  <div class="search-container">
+      <input type="text" id="search-input" placeholder="Search cards...">
   </div>
 
   <div class="project-container">
@@ -63,12 +63,6 @@ layout: default
     {% endfor %}
   </div>
 </section>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    searchCards('search-input', '.project-unit');
-  });
-</script>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
