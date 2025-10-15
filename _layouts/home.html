@@ -20,19 +20,28 @@ layout: default
     Você pode <a href="https://github.com/jtemporal/gitfichas" style="color: white; text-decoration: underline;">conferir mais sobre as mudanças aqui</a>.
     {% endif %}
   </div>
-    <div class="project-container">
-      {% if current_lang == "en" %}
-        {% assign sorted = site.posts | where: "lang", "en" | sort: 'date' | reverse %}
-      {% elsif current_lang == "es" %}
-        {% assign sorted = site.posts | where: "lang", "es" | sort: 'date' | reverse %}
-      {% else %}
-        {% assign sorted = site.posts | where: "lang", "pt" | sort: 'date' | reverse %}
-      {% endif %}
-      {% for project in sorted %}
+
+  <!-- Search Bar -->
+  <div style="text-align: center; margin: 20px 0;">
+    <input type="text" id="search-input" placeholder="Search cards..." style="padding: 10px; width: 50%; max-width: 100%; border-radius: 8px;">
+  </div>
+
+  <div class="project-container">
+    {% if current_lang == "en" %}
+      {% assign sorted = site.posts | where: "lang", "en" | sort: 'date' | reverse %}
+    {% elsif current_lang == "es" %}
+      {% assign sorted = site.posts | where: "lang", "es" | sort: 'date' | reverse %}
+    {% else %}
+      {% assign sorted = site.posts | where: "lang", "pt" | sort: 'date' | reverse %}
+    {% endif %}
+
+    {% for project in sorted %}
+      {% assign search_data = project.title | append: " " | append: project.command | append: " " | append: project.pretitle | append: " " | append: project.subtitle | downcase %}
+
       {% if project.mermaid %}
-        <div class="project-unit card" data-folder="{{ site.github.url }}{{ project.url }}">
-          {{ project.content }}
-          <a href="{{ site.github.url }}{{ project.url }}">
+      <div class="project-unit card" data-folder="{{ site.github.url }}{{ project.url }}" data-title="{{ search_data }}">
+        {{ project.content }}
+        <a href="{{ site.github.url }}{{ project.url }}">
           <div class="project-overlay">
             {% if project.concept %}
             <strong>#{{ project.number }} {{ project.pretitle }} {{ project.title }} {{ project.subtitle}} <i class="fa fa-arrow-right" aria-hidden="true"></i></strong>
@@ -40,16 +49,29 @@ layout: default
             <strong>#{{ project.number }} {{ project.command }} <i class="fa fa-arrow-right" aria-hidden="true"></i></strong>
             {% endif %}
           </div>
-        </div>
+        </a>
+      </div>
       {% else %}
-      <div class="project-unit" data-folder="{{ site.github.url }}{{ project.url }}" style="background-image: url({{ site.github.url }}{{project.image}})">
+      <div class="project-unit" data-folder="{{ site.github.url }}{{ project.url }}" data-title="{{ search_data }}" style="background-image: url({{ site.github.url }}{{project.image}})">
         <a href="{{ site.github.url }}{{ project.url }}">
-        <div class="project-overlay">
-          <strong>{{ project.title }} <i class="fa fa-arrow-right" aria-hidden="true"></i></strong>
-        </div>
+          <div class="project-overlay">
+            <strong>{{ project.title }} <i class="fa fa-arrow-right" aria-hidden="true"></i></strong>
+          </div>
+        </a>
       </div>
       {% endif %}
-      </a>
-      {%endfor%}
-    </div>
-  </section>
+    {% endfor %}
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    searchCards('search-input', '.project-unit');
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    searchCards('search-input', '.project-unit');
+  });
+</script>
