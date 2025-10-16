@@ -9,36 +9,29 @@ function updateH1Width() {
 
 window.addEventListener("resize", updateH1Width);
 
-// search bar logic
+// Search bar logic
 function searchCards(inputId, cardsSelector) {
   const searchInput = document.getElementById(inputId);
   const cards = document.querySelectorAll(cardsSelector);
-
   const noResultsMessage = document.getElementById("no-results-message");
 
   searchInput.addEventListener("input", function () {
     const query = this.value.toLowerCase();
-    let matchesFound = 0; // Initialize a counter for matches
+    let matchesFound = 0;
 
     cards.forEach((card) => {
-      const text = card.getAttribute("data-title") || "";
+      const text = card.getAttribute("data-title").toLowerCase() || "";
       const match = text.includes(query);
 
-      // Toggle card visibility
       card.style.display = match ? "block" : "none";
 
-      // Increment the counter if a match is found
-      if (match) {
-        matchesFound++;
-      }
+      if (match) matchesFound++;
     });
 
-    if (matchesFound === 0 && query.length > 0) {
-      // If no matches and the user actually typed something, show the message
-      noResultsMessage.style.display = "block";
+    if (query.length > 0 && matchesFound === 0) {
+      noResultsMessage.style.display = "block"; // shows the message
     } else {
-      // Otherwise, hide the message
-      noResultsMessage.style.display = "none";
+      noResultsMessage.style.display = "none"; // hides the message
     }
   });
 }
