@@ -10,7 +10,7 @@ echo "🚀 Setting up GitFichas Mermaid Generator..."
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 
-# Change to the project root directory  
+# Change to the project root directory
 cd "$PROJECT_ROOT"
 
 # Check if we're in the right project structure
@@ -39,28 +39,38 @@ fi
 echo "✅ Node.js $(node --version) and npm $(npm --version) found"
 
 # Install system dependencies for headless Chrome/Puppeteer
-echo "🖥️  Installing system dependencies for headless Chrome..."
-if command -v apt-get &> /dev/null; then
-    # Update package list
-    sudo apt-get update -qq
-    
-    # Install required libraries for Chrome/Puppeteer
-    sudo apt-get install -y -qq \
-        libasound2t64 \
-        libatk-bridge2.0-0t64 \
-        libatk1.0-0t64 \
-        libdrm2 \
-        libgtk-3-0t64 \
-        libgbm1 \
-        libnss3 \
-        libxss1 \
-        libxtst6 \
-        xvfb
-    
-    echo "✅ System dependencies installed"
+echo "🖥️  Checking for OS-specific dependencies for headless Chrome..."
+
+if [[ "$(uname)" == "Linux" ]]; then
+    if command -v apt-get &> /dev/null; then
+        echo "🐧 Detected Debian/Ubuntu-based Linux. Installing dependencies with apt-get..."
+        # Update package list
+        sudo apt-get update -qq
+
+        # Install required libraries for Chrome/Puppeteer
+        sudo apt-get install -y -qq \
+            libasound2t64 \
+            libatk-bridge2.0-0t64 \
+            libatk1.0-0t64 \
+            libdrm2 \
+            libgtk-3-0t64 \
+            libgbm1 \
+            libnss3 \
+            libxss1 \
+            libxtst6 \
+            xvfb
+
+        echo "✅ System dependencies installed for Linux."
+    else
+        echo "⚠️  Detected Linux, but 'apt-get' is not found."
+        echo "   Please manually install the required dependencies for headless Chrome/Puppeteer on your distribution."
+    fi
+elif [[ "$(uname)" == "Darwin" ]]; then
+    echo "🍏 Detected macOS. No special system dependencies are typically required."
+    echo "   The Mermaid CLI will download its own Chromium browser."
+    echo "   If you encounter issues, ensure Xcode Command Line Tools are installed ('xcode-select --install')."
 else
-    echo "⚠️  apt-get not found. Please manually install Chrome dependencies:"
-    echo "   For Ubuntu/Debian: sudo apt-get install libasound2t64 libatk-bridge2.0-0t64 libatk1.0-0t64 libdrm2 libgtk-3-0t64 libgbm1"
+    echo "⚠️  Unsupported OS: $(uname). Please manually install dependencies for headless Chrome/Puppeteer."
 fi
 
 # Install Python dependencies
@@ -103,7 +113,7 @@ fi
 echo "🧪 Testing the setup..."
 if python3 scripts/generate_images_only.py --help &> /dev/null; then
     echo "✅ Script help command works"
-    
+
     # Test actual image generation to catch Chrome/Puppeteer issues
     echo "🧪 Testing image generation..."
     if python3 scripts/generate_images_only.py --help &> /dev/null; then
