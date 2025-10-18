@@ -22,13 +22,14 @@ layout: default
   </div>
 
   <!-- Search Bar -->
+  {% assign search_strings = site.data.settings.search[current_lang] | default: site.data.settings.search[site.default_language] %}
   <div class="search-container">
-      <input type="text" id="search-input" placeholder="Search cards...">
+      <input type="text" id="search-input" placeholder="{{ search_strings.placeholder }}">
   </div>
 
   <!-- hidden by default, visible when no cards match seach query -->
   <div id="no-results-message" class="no-results-message">
-        No cards match your search! 
+        {{ search_strings.no_results }}
   </div>
 
   <div class="project-container">
