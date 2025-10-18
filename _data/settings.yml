@@ -18,6 +18,17 @@ menu:
   - {name: 'Acerca',   url: 'acerca'}
 #  - {name: 'Libro',    url: 'https://jtemporal.com/microlivrodegit?utm_source=gitfichas'}
 
+search:
+  pt:
+    placeholder: 'Busque fichas...'
+    no_results: 'Nenhuma ficha corresponde à sua busca!'
+  en:
+    placeholder: 'Search cards...'
+    no_results: 'No cards match your search!'
+  es:
+    placeholder: 'Busca tarjetas...'
+    no_results: '¡Ninguna tarjeta coincide con tu búsqueda!'
+
 #-------------------------------
 # Contact Section
 
