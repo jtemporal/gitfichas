@@ -71,6 +71,7 @@ elif [[ "$(uname)" == "Darwin" ]]; then
     echo "   If you encounter issues, ensure Xcode Command Line Tools are installed ('xcode-select --install')."
 else
     echo "⚠️  Unsupported OS: $(uname). Please manually install dependencies for headless Chrome/Puppeteer."
+    echo "   For Windows users, it is recommended to use WSL (Windows Subsystem for Linux), as the script is compatible with distributions that use 'apt'."
 fi
 
 # Install Python dependencies
