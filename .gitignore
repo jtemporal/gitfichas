@@ -43,3 +43,8 @@ Gemfile.lock
 
 ### Python ###
 .env
+
+### Node.js ###
+node_modules/
+package.json
+package-lock.json
