@@ -126,6 +126,8 @@ python3 scripts/generate_images_only.py --force
 
 **Debug mode:** Use `--verbose` flag for detailed output
 
+**Sandboxed environments (Docker, CI/CD):** A `puppeteer-config.json` file is included to configure Chrome with `--no-sandbox` flag. Update the `executablePath` if your Chrome/Chromium is in a different location than `/usr/bin/chromium`.
+
 ## License
 
 MIT License - Feel free to adapt for your own Jekyll sites!

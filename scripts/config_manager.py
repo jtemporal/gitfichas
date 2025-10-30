@@ -107,6 +107,8 @@ class ConfigManager:
             '--cssFile', str(self.combined_css_path)
         ]
         # Add puppeteer config if the file exists
+        # Required for sandboxed environments (e.g., Docker containers, CI/CD)
+        # where Chrome needs --no-sandbox flag to run
         if self.puppeteer_config_path.exists():
             cmd.extend(['-p', str(self.puppeteer_config_path)])
         return cmd
