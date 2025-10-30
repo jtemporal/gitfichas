@@ -43,3 +43,4 @@ Gemfile.lock
 
 ### Python ###
 .env
+combined-mermaid.css
