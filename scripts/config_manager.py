@@ -39,7 +39,7 @@ class ConfigManager:
 
         # Theme configuration
         self.theme_path = self.root_dir / 'gitfichas-mermaid-theme.json'
-        
+
         # Puppeteer configuration
         self.puppeteer_config_path = Path('/tmp/puppeteer-config.json')
 
