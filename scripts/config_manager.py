@@ -92,7 +92,7 @@ class ConfigManager:
 
     def get_mermaid_cli_command(self, temp_file: Path, output_path: Path) -> list:
         """Get the Mermaid CLI command arguments."""
-        return [
+        cmd = [
             'npx', '@mermaid-js/mermaid-cli',
             '-i', str(temp_file),
             '-o', str(output_path),
@@ -103,6 +103,13 @@ class ConfigManager:
             '--configFile', str(self.theme_path),
             '--cssFile', str(self.combined_css_path)
         ]
+        
+        # Add puppeteer config if it exists
+        puppeteer_config = self.root_dir / 'puppeteer-config.json'
+        if puppeteer_config.exists():
+            cmd.extend(['-p', str(puppeteer_config)])
+        
+        return cmd
 
     def get_image_path(self, front_matter: Dict[str, Any], file_path: Path) -> Path:
         """Determine the output image path based on front matter and file path."""
