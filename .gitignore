@@ -48,3 +48,4 @@ Gemfile.lock
 node_modules/
 package.json
 package-lock.json
+.puppeteerrc.cjs
