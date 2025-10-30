@@ -43,4 +43,3 @@ Gemfile.lock
 
 ### Python ###
 .env
-.puppeteerrc.json
