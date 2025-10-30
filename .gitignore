@@ -48,3 +48,9 @@ Gemfile.lock
 node_modules/
 package.json
 package-lock.json
+
+### Puppeteer ###
+puppeteer-config.json
+
+### Mermaid Generator ###
+combined-mermaid.css
