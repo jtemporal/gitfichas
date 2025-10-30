@@ -40,9 +40,6 @@ class ConfigManager:
         # Theme configuration
         self.theme_path = self.root_dir / 'gitfichas-mermaid-theme.json'
 
-        # Puppeteer configuration
-        self.puppeteer_config_path = Path('/tmp/puppeteer-config.json')
-
     def _setup_directories(self):
         """Create required directories if they don't exist."""
         self.images_dir.mkdir(parents=True, exist_ok=True)
@@ -95,7 +92,7 @@ class ConfigManager:
 
     def get_mermaid_cli_command(self, temp_file: Path, output_path: Path) -> list:
         """Get the Mermaid CLI command arguments."""
-        cmd = [
+        return [
             'npx', '@mermaid-js/mermaid-cli',
             '-i', str(temp_file),
             '-o', str(output_path),
@@ -106,12 +103,6 @@ class ConfigManager:
             '--configFile', str(self.theme_path),
             '--cssFile', str(self.combined_css_path)
         ]
-
-        # Add puppeteer config if it exists
-        if self.puppeteer_config_path.exists():
-            cmd.extend(['-p', str(self.puppeteer_config_path)])
-
-        return cmd
 
     def get_image_path(self, front_matter: Dict[str, Any], file_path: Path) -> Path:
         """Determine the output image path based on front matter and file path."""
