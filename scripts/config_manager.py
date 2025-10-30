@@ -101,7 +101,8 @@ class ConfigManager:
             '--height', '675',
             '-e', 'svg',
             '--configFile', str(self.theme_path),
-            '--cssFile', str(self.combined_css_path)
+            '--cssFile', str(self.combined_css_path),
+            '--puppeteerConfigFile', str(self.root_dir / 'puppeteer.config.json')
         ]
 
     def get_image_path(self, front_matter: Dict[str, Any], file_path: Path) -> Path:
