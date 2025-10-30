@@ -40,9 +40,6 @@ class ConfigManager:
         # Theme configuration
         self.theme_path = self.root_dir / 'gitfichas-mermaid-theme.json'
 
-        # Puppeteer configuration
-        self.puppeteer_config_path = Path('/tmp/puppeteer-config.json')
-
     def _setup_directories(self):
         """Create required directories if they don't exist."""
         self.images_dir.mkdir(parents=True, exist_ok=True)
@@ -104,8 +101,7 @@ class ConfigManager:
             '--height', '675',
             '-e', 'svg',
             '--configFile', str(self.theme_path),
-            '--cssFile', str(self.combined_css_path),
-            '-p', str(self.puppeteer_config_path)
+            '--cssFile', str(self.combined_css_path)
         ]
 
     def get_image_path(self, front_matter: Dict[str, Any], file_path: Path) -> Path:
