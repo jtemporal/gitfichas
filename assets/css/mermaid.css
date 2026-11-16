@@ -82,18 +82,36 @@
     width: 100%;
 }
 
-.mermaid-image {
-    margin-top: 2vh;
-    background-color: transparent;
-    border: none;
-    width: 80vw;
-    max-height: 65vh;
-    object-fit: contain;
-    text-align: center;
+/* Static 16:9 cards (assets/img/cards), which carry their own title, number and signature */
+.card-container {
+    position: relative;
     width: 100%;
-    padding-bottom: 50px;
-    /* SVG-specific styling for better accessibility */
-    overflow: visible;
+    max-width: 1120px;
+    margin: 0 auto;
+    line-height: 0;
+}
+
+.card-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+}
+
+/* Invisible link over the signature in the bottom right corner of the card */
+.card-author-link {
+    position: absolute;
+    right: 2.5%;
+    bottom: 2.5%;
+    width: 20%;
+    height: 9%;
+    border-radius: 4px;
+}
+
+.card-author-link:focus-visible {
+    outline: 2px solid #7a357d;
+    outline-offset: 2px;
 }
 
 .mermaid-footer {

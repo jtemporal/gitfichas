@@ -86,6 +86,7 @@ class MermaidImageOnlyGenerator:
         """Generate image from Mermaid syntax using Mermaid CLI."""
         try:
             # Create temporary file for mermaid syntax
+            output_path.parent.mkdir(parents=True, exist_ok=True)
             temp_file = output_path.with_suffix('.mmd')
             with open(temp_file, 'w', encoding='utf-8') as f:
                 f.write(mermaid_syntax)

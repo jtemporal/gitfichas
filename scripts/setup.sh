@@ -116,17 +116,17 @@ python3 scripts/generate_cards.py --install-fonts
 
 # Test the setup
 echo "🧪 Testing the setup..."
-if python3 scripts/generate_images_only.py --help &> /dev/null; then
+if python3 scripts/generate_cards.py --help &> /dev/null; then
     echo "✅ Script help command works"
 
     # Test actual image generation to catch Chrome/Puppeteer issues
     echo "🧪 Testing image generation..."
-    if python3 scripts/generate_images_only.py --help &> /dev/null; then
+    if python3 scripts/generate_cards.py 001 --lang pt --force --output "$(mktemp -d)" &> /dev/null; then
         echo "✅ Image generation test passed!"
     else
         echo "⚠️  Image generation test failed, but basic script works."
         echo "   This might be due to missing system dependencies."
-        echo "   Try running: python3 scripts/generate_images_only.py --verbose"
+        echo "   Try running: python3 scripts/generate_cards.py 001 --force --verbose"
         echo "   If you see Chrome/Puppeteer errors, the system dependencies may need updating."
     fi
 else
@@ -136,10 +136,8 @@ fi
 
 echo ""
 echo "🎉 Setup complete! You can now use:"
-echo "   cd $PROJECT_ROOT/scripts"
-echo "   python3 generate_images_only.py --help"
-echo "   python3 generate_images_only.py --verbose"
-echo "   python3 generate_embedded_fonts.py"
-echo "   python3 scripts/generate_cards.py --help   (from the project root)"
+echo "   cd $PROJECT_ROOT"
+echo "   python3 scripts/generate_cards.py --help"
+echo "   python3 scripts/generate_cards.py --verbose"
 echo ""
 echo "📚 For more information, see $PROJECT_ROOT/MERMAID_CONVERTER_README.md"

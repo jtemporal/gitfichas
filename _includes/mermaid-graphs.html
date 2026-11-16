@@ -1,3 +1,52 @@
+{% if page.use_static_image %}
+{% comment %}
+  Static card: a 16:9 SVG from scripts/generate_cards.py that already contains the
+  title, the diagram, the card number and the signature.
+  The image is opaque to screen readers, so the alt text spells out the whole card.
+{% endcomment %}
+{% assign card_filename = page.number %}
+{% if page.lang == 'en' %}
+  {% assign card_filename = page.number | append: '-en' %}
+{% elsif page.lang == 'es' %}
+  {% assign card_filename = page.number | append: '-es' %}
+{% endif %}
+
+{% capture card_alt %}
+  #{{ page.number }}: {{ page.pretitle }} {{ page.title }} {{ page.subtitle }}.
+  {% if page.command %}
+    {% assign command_parts = page.command | split: " " %}
+    {{ page.command }}.
+    {% for descriptor in page.descriptors %}
+      {% for pair in descriptor %}
+        {% assign key = pair[0] %}
+        {% if key == "command" %}
+          {{ command_parts[0] }} {{ command_parts[1] }}: {{ pair[1] }}.
+        {% elsif key == "info" %}
+          {{ pair[1] }}.
+        {% elsif key contains "part" %}
+          {% assign part_index = key | remove: "part" | plus: 1 %}
+          {% if command_parts[part_index] %}
+            {{ command_parts[part_index] }}: {{ pair[1] }}.
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  {% elsif page.concept %}
+    {% for part in page.parts %}
+      {% for pair in part %}
+        {{ pair[1] }}.
+      {% endfor %}
+    {% endfor %}
+  {% endif %}
+  {% if page.info %}{{ page.info }}.{% endif %}
+{% endcapture %}
+{% assign card_alt = card_alt | replace: '\n', ' ' | replace: '<br>', ' ' | replace: '<br/>', ' ' | strip_html | normalize_whitespace | replace: ' .', '.' | replace: '..', '.' | replace: '?.', '?' | replace: ' :', ':' | escape %}
+
+<div class="card-container">
+  <img src="/assets/img/cards/{{ card_filename }}.svg" alt="{{ card_alt }}" class="card-image" width="1120" height="630" />
+  <a class="card-author-link" href="https://github.com/{{ page.author | remove: '@' }}" aria-label="{{ page.author }} (GitHub)"></a>
+</div>
+{% else %}
 {% comment %}
   Calculate color scheme based on card number (modulo 6)
   Define the 6 color schemes
@@ -36,25 +85,7 @@
     {% if page.subtitle %}<p class="subtitle">{{ page.subtitle }}</p>{% endif %}
   </div>
 
-{% comment %}
-  Check if static image exists - use that instead of dynamic rendering
-{% endcomment %}
-{% assign image_filename = page.number %}
-{% if page.lang == 'en' %}
-  {% assign image_filename = page.number | append: '-en' %}
-{% elsif page.lang == 'es' %}
-  {% assign image_filename = page.number | append: '-es' %}
-{% endif %}
-
-{% assign static_image_path = '/assets/img/mermaid/' | append: image_filename | append: '.svg' %}
-
-{% comment %}
-  For now, we'll use a simple approach - if you want to use static images,
-  set page.use_static_image to true in the front matter
-{% endcomment %}
-{% if page.use_static_image %}
-  <img src="{{ static_image_path }}" alt="{{ page.title }}" class="mermaid-image" />
-{% elsif page.command %}
+{% if page.command %}
   {% assign command_parts = page.command | split: " " %}
   <div class="mermaid">
     block-beta
@@ -199,3 +230,4 @@
   <p class="author"><a href="https://github.com/{{ page.author | remove: '@' }}" style="color: inherit; text-decoration: none" >{{ page.author }}</a></p>
   </div>
 </div>
+{% endif %}

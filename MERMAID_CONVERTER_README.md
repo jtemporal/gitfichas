@@ -1,6 +1,6 @@
 # Mermaid to Static SVG Converter
 
-Converts dynamic Mermaid diagrams to static SVG images for better performance and accessibility.
+Converts the Mermaid diagrams in the posts to static 16:9 SVG cards for the site, print and video.
 
 ## Prerequisites
 
@@ -29,9 +29,9 @@ npm install -g @mermaid-js/mermaid-cli
 sudo apt install -y libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1 libasound2
 ```
 
-3. Generate fonts:
+3. Install the card fonts:
 ```bash
-python3 scripts/generate_embedded_fonts.py
+python3 scripts/generate_cards.py --install-fonts
 ```
 
 ## How It Works
@@ -48,7 +48,7 @@ use_static_image: true  # ← Add this line
 2. Generate static images:
 
 ```bash
-python3 scripts/generate_images_only.py "053.md"
+python3 scripts/generate_cards.py "053.md"
 ```
 
 3. Test locally:
@@ -61,25 +61,26 @@ bundle exec jekyll serve
 
 ```bash
 # Generate images for all posts
-python3 scripts/generate_images_only.py
+python3 scripts/generate_cards.py
 
 # Generate for specific posts
-python3 scripts/generate_images_only.py "053.md"
+python3 scripts/generate_cards.py "053.md"
 
 # Force regeneration of all images
-python3 scripts/generate_images_only.py --force
+python3 scripts/generate_cards.py --force
 
 # Force regeneration of specific post
-python3 scripts/generate_images_only.py "053.md" --force
+python3 scripts/generate_cards.py "053.md" --force
 
 # Verbose output
-python3 scripts/generate_images_only.py --verbose
+python3 scripts/generate_cards.py --verbose
 ```
 
-## Standalone 16:9 cards (print and video)
+## The cards
 
 `scripts/generate_cards.py` builds one self-contained card per Mermaid post in `assets/img/cards/`.
-It does not change the posts or the images in `assets/img/mermaid/`, so the site renders as before.
+The site shows these cards through `_includes/mermaid-graphs.html`, which also builds the image alt text
+from the post front matter (command, notes and info).
 
 Every card:
 
@@ -124,8 +125,7 @@ Notes:
 ```
 gitfichas/
 ├── _posts/              # Markdown posts with mermaid diagrams
-├── assets/img/mermaid/  # Generated static SVG files
-├── assets/img/cards/    # Generated standalone 16:9 cards
+├── assets/img/cards/    # Generated 16:9 SVG cards
 ├── assets/fonts/        # Fonts used to build the cards
 ├── scripts/             # Setup and generation scripts
 └── requirements.txt     # Python dependencies
@@ -133,41 +133,48 @@ gitfichas/
 
 ## Example
 
-**Input** (`_posts/2024-01-01-example.md`):
-````markdown
+**Input** (`_posts/2022-01-02-028.md`):
+```yaml
 ---
-title: "My Post"
+pretitle: Usando
+title: rebase
+subtitle: pra corrigir um branch
+command: git rebase --onto origem anterior branch
+descriptors:
+  - command: Comando para reaplicar commits
+  - part1: Flag para indicar\na nova origem
+  - part2: Branch ou commit\nque deve ser a origem
+  - part3: Origem incorreta\ndo branch
+  - part4: Branch que precisa\nde correção
+number: "028"
+author: "@jtemporal"
 mermaid: true
 use_static_image: true
+lang: "pt"
 ---
-
-```mermaid
-graph TD
-    A[Start] --> B[End]
 ```
-````
 
-**Output**: Creates `assets/img/mermaid/2024-01-01-example-0.svg`
+**Output**: `assets/img/cards/028.svg` (`028-en.svg` and `028-es.svg` for the translations)
 
 ## Maintenance
 
 Remove all generated images:
 ```bash
-rm -rf assets/img/mermaid/*.svg
+rm -rf assets/img/cards/*.svg
 ```
 
 Regenerate everything:
 ```bash
-python3 scripts/generate_images_only.py --force
+python3 scripts/generate_cards.py --force
 ```
 
 ## Troubleshooting
 
 **Browser launch fails:** Run `scripts/setup.sh` to install Chrome dependencies
 
-**Missing fonts:** Run `python3 scripts/generate_embedded_fonts.py`
+**Missing fonts:** Run `python3 scripts/generate_cards.py --install-fonts`
 
-**Image not showing:** Verify `use_static_image: true` is in front matter and SVG exists in `assets/img/mermaid/`
+**Image not showing:** Verify `use_static_image: true` is in front matter and SVG exists in `assets/img/cards/`
 
 **Debug mode:** Use `--verbose` flag for detailed output
 

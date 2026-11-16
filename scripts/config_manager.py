@@ -18,7 +18,6 @@ class ConfigManager:
     def __init__(self, root_dir: str = "."):
         self.root_dir = Path(root_dir)
         self._setup_paths()
-        self._setup_directories()
 
     def _setup_paths(self):
         """Setup all required paths."""
@@ -43,10 +42,6 @@ class ConfigManager:
         # Standalone 16:9 cards (scripts/generate_cards.py)
         self.cards_dir = self.root_dir / "assets" / "img" / "cards"
         self.fonts_dir = self.root_dir / "assets" / "fonts"
-
-    def _setup_directories(self):
-        """Create required directories if they don't exist."""
-        self.images_dir.mkdir(parents=True, exist_ok=True)
 
     def validate_theme_file(self) -> None:
         """Validate that the standalone theme file exists and is valid JSON."""

@@ -209,8 +209,8 @@ GitFichas uses Mermaid diagrams for visualizing Git concepts and commands. The p
 
 The project includes Python scripts in the `scripts/` folder:
 
-- **`scripts/generate_images_only.py`**: Main script for generating SVG images from Mermaid diagrams
-- **`scripts/generate_embedded_fonts.py`**: Utility script for embedding fonts into CSS (run when fonts need updating)
+- **`scripts/generate_cards.py`**: Main script. Generates one 16:9 SVG card per post in `assets/img/cards/`, with the title, diagram, number and signature (add `--png` for 1920x1080 exports)
+- **`scripts/card_generator.py`**: Layout, sizes and colors used by `generate_cards.py`
 - **`scripts/setup.sh`**: Automated setup script for new codespaces (installs dependencies and configures the environment)
 
 > 💡 **New to the project?** Run `scripts/setup.sh` to automatically set up all dependencies and test the environment.
@@ -223,36 +223,35 @@ When working on cards with Mermaid diagrams:
 2. **Generate SVG images** for your changes:
    ```bash
    # Generate images for all posts
-   python3 scripts/generate_images_only.py
+   python3 scripts/generate_cards.py
 
    # Generate images for specific post (faster for testing)
-   python3 scripts/generate_images_only.py "053.md"
+   python3 scripts/generate_cards.py "053.md"
 
    # Force regeneration of existing images
-   python3 scripts/generate_images_only.py --force
+   python3 scripts/generate_cards.py --force
    ```
 3. **Test locally** using Jekyll serve to see both interactive and static versions
 4. **Commit both** the post changes and generated SVG files
 
 ### Font Management
 
-The project uses embedded Google Fonts (Chilanka and Borel) for consistent rendering. If you need to update fonts:
+The card fonts (Borel, Chilanka, Londrina Solid and Shadows Into Light Two) live in `assets/fonts/`. Mermaid measures text while it lays out a card, so the fonts must be installed on the machine that generates the images:
 
-1. **Generate new embedded fonts**:
+1. **Install the fonts** (once per machine, `scripts/setup.sh` does this for you):
    ```bash
-   python3 scripts/generate_embedded_fonts.py
+   python3 scripts/generate_cards.py --install-fonts
    ```
-2. **Regenerate all SVG images** to use the new fonts:
+2. **Regenerate all SVG images** if a font file changes:
    ```bash
-   python3 scripts/generate_images_only.py --force
+   python3 scripts/generate_cards.py --force
    ```
 
 ### CSS Architecture
 
 The project uses a separated CSS architecture:
-- **`assets/css/mermaid.css`**: Web-specific styles for interactive diagrams
-- **`assets/css/embedded-svg.css`**: SVG-specific styles with embedded fonts
-- **`assets/css/embedded-fonts.css`**: Base64-embedded font definitions (auto-generated)
+- **`assets/css/mermaid.css`**: Styles for the cards on the site and for interactive diagrams
+- **`assets/css/embedded-svg.css`** and **`assets/css/embedded-fonts.css`**: Only used by the previous generator (`scripts/generate_images_only.py`)
 
 ### Theme Configuration
 
@@ -319,7 +318,7 @@ Requirements:
 
 1. **Migrate with Copilot** using prompts above
 2. **Ensure proper file naming**: Use `YYYY-MM-DD-XXX.md` format with same date as original post for translations
-3. **Generate SVG:** `python3 scripts/generate_images_only.py "filename.md"`
+3. **Generate SVG:** `python3 scripts/generate_cards.py "filename.md"`
 4. **Add `use_static_image: true`** to front matter only after successful SVG generation
 5. **Test locally:** `bundle exec jekyll serve`
 6. **Commit both files:** `git add post.md svg-file.svg`
@@ -609,8 +608,8 @@ GitFichas usa diagramas Mermaid para visualizar conceitos e comandos Git. O proj
 
 O projeto inclui scripts Python na pasta `scripts/`:
 
-- **`scripts/generate_images_only.py`**: Script principal para gerar imagens SVG dos diagramas Mermaid
-- **`scripts/generate_embedded_fonts.py`**: Script utilitário para incorporar fontes no CSS (execute quando as fontes precisarem ser atualizadas)
+- **`scripts/generate_cards.py`**: Script principal. Gera uma ficha SVG 16:9 por post em `assets/img/cards/`, com título, diagrama, número e assinatura (use `--png` para exportar em 1920x1080)
+- **`scripts/card_generator.py`**: Layout, tamanhos e cores usados pelo `generate_cards.py`
 - **`scripts/setup.sh`**: Script automatizado de configuração para novos codespaces (instala dependências e configura o ambiente)
 
 > 💡 **Novo no projeto?** Execute `scripts/setup.sh` para configurar automaticamente todas as dependências e testar o ambiente.
@@ -623,36 +622,35 @@ Ao trabalhar em fichas com diagramas Mermaid:
 2. **Gere imagens SVG** para suas mudanças:
    ```bash
    # Gerar imagens para todos os posts
-   python3 scripts/generate_images_only.py
+   python3 scripts/generate_cards.py
 
    # Gerar imagens para post específico (mais rápido para testes)
-   python3 scripts/generate_images_only.py "053.md"
+   python3 scripts/generate_cards.py "053.md"
 
    # Forçar regeneração de imagens existentes
-   python3 scripts/generate_images_only.py --force
+   python3 scripts/generate_cards.py --force
    ```
 3. **Teste localmente** usando Jekyll serve para ver as versões interativas e estáticas
 4. **Comite tanto** as mudanças do post quanto os arquivos SVG gerados
 
 ### Gerenciamento de Fontes
 
-O projeto usa Google Fonts incorporadas (Chilanka e Borel) para renderização consistente. Se você precisar atualizar as fontes:
+As fontes das fichas (Borel, Chilanka, Londrina Solid e Shadows Into Light Two) ficam em `assets/fonts/`. O Mermaid mede o texto ao montar a ficha, então as fontes precisam estar instaladas na máquina que gera as imagens:
 
-1. **Gere novas fontes incorporadas**:
+1. **Instale as fontes** (uma vez por máquina, o `scripts/setup.sh` já faz isso):
    ```bash
-   python3 scripts/generate_embedded_fonts.py
+   python3 scripts/generate_cards.py --install-fonts
    ```
-2. **Regenere todas as imagens SVG** para usar as novas fontes:
+2. **Regenere todas as imagens SVG** se algum arquivo de fonte mudar:
    ```bash
-   python3 scripts/generate_images_only.py --force
+   python3 scripts/generate_cards.py --force
    ```
 
 ### Arquitetura CSS
 
 O projeto usa uma arquitetura CSS separada:
-- **`assets/css/mermaid.css`**: Estilos específicos para web para diagramas interativos
-- **`assets/css/embedded-svg.css`**: Estilos específicos para SVG com fontes incorporadas
-- **`assets/css/embedded-fonts.css`**: Definições de fontes em base64 incorporadas (gerado automaticamente)
+- **`assets/css/mermaid.css`**: Estilos das fichas no site e dos diagramas interativos
+- **`assets/css/embedded-svg.css`** e **`assets/css/embedded-fonts.css`**: Usados apenas pelo gerador anterior (`scripts/generate_images_only.py`)
 
 ### Configuração de Tema
 
@@ -791,10 +789,10 @@ git switch -c migrate-cards-[numeros-das-fichas]
 #### 4. **Gerar Arquivos SVG**
 ```bash
 # Gerar SVG para ficha específica
-python3 scripts/generate_images_only.py "nome-arquivo-ficha.md"
+python3 scripts/generate_cards.py "nome-arquivo-ficha.md"
 
 # Verificar se a geração foi bem-sucedida
-ls -la assets/img/mermaid/ | grep "numero-ficha"
+ls -la assets/img/cards/ | grep "numero-ficha"
 ```
 
 #### 5. **Adicionar use_static_image após SVG**
@@ -813,7 +811,7 @@ bundle exec jekyll serve
 #### 7. **Fazer Commit das Mudanças**
 ```bash
 # Adicionar ao stage tanto arquivos markdown quanto SVG
-git add _posts/nome-arquivo-ficha.md assets/img/mermaid/numero-ficha.svg
+git add _posts/nome-arquivo-ficha.md assets/img/cards/numero-ficha.svg
 
 # Commit com mensagem descritiva
 git commit -m "Migrar ficha XXX de imagem para formato Mermaid

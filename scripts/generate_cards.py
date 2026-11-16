@@ -7,8 +7,8 @@ Generates one standalone card per Mermaid post in assets/img/cards/. Every card 
 the same 16:9 canvas and the same text size, and includes the title, the diagram,
 the card number and the signature.
 
-This does not touch the posts or the images in assets/img/mermaid/, so the site keeps
-rendering exactly as before.
+The site shows these cards through _includes/mermaid-graphs.html for every post with
+use_static_image: true. The posts themselves are never modified.
 
 Usage:
     python3 scripts/generate_cards.py [filter] [options]
