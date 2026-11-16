@@ -17,10 +17,17 @@
     gap: 20px;
 }
 
-.mermaid-container-post {
+/* On a post page the box goes around the card only, so text that follows the card
+   in the post body (for example "read more" links) sits outside the box. */
+.mermaid-container-post > .card-container,
+.mermaid-container-post > .mermaid-container {
     border: 1px solid #c0c0c0;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+}
+
+.mermaid-container-post > .card-container {
+    margin-bottom: 24px;
 }
 
 .title-container {
