@@ -88,7 +88,9 @@ Every card:
 - includes the title block, the diagram, the card number and the signature
 - uses a stacked layout for commands: one row per part with its note to the right, so long
   commands get taller instead of wider (up to 6 parts fit without shrinking)
-- embeds only the glyphs it uses, so each SVG is around 40 to 100 KB
+- has every piece of text converted to outlines, so it needs no fonts and no HTML inside the SVG.
+  Rendering does not depend on browser support for web fonts or HTML inside SVG
+- is around 40 to 100 KB
 
 ```bash
 # Once per machine: Mermaid needs Borel and Chilanka installed to measure text
@@ -110,8 +112,9 @@ How it works:
 2. Mermaid CLI renders it.
 3. The SVG is post-processed: tokens and notes are left-aligned, arrows are redrawn from the end
    of each word to the start of its note, and the diagram is centered on the canvas.
-4. Title, pretitle, subtitle, number and signature are drawn as outlines from the fonts in
-   `assets/fonts/`, using the same six color schemes as the site.
+4. All text (title block, command, notes, number and signature) is drawn as outlines from the fonts
+   in `assets/fonts/`, shaped with HarfBuzz so Borel's joined letters come out right. The title
+   block uses the same six color schemes as the site.
 
 Notes:
 

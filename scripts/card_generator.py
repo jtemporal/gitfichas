@@ -16,16 +16,17 @@ Pipeline for one card:
     3. Post-process the SVG: left-align tokens and notes, redraw the arrows from the end
        of each word to the start of its note, then place the diagram on the canvas
        together with the title, number and signature.
-    4. Optionally export a 1920x1080 PNG with headless Chrome.
+    4. Replace every piece of text with outlines, shaped with HarfBuzz. The final SVG
+       has no fonts and no foreignObject, so it looks the same in every browser,
+       in design tools and in print.
+    5. Optionally export a 1920x1080 PNG with headless Chrome.
 
 Mermaid measures text while laying out the diagram, so Borel and Chilanka must be
 installed on the machine (see install_fonts).
 """
 
-import base64
 import copy
 import glob
-import io
 import json
 import os
 import platform
@@ -37,15 +38,17 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-from fontTools import subset
+import uharfbuzz as hb
 from fontTools.pens.svgPathPen import SVGPathPen
 from fontTools.pens.transformPen import TransformPen
 from fontTools.ttLib import TTFont
 
 SVG_NS = "http://www.w3.org/2000/svg"
 XHTML_NS = "http://www.w3.org/1999/xhtml"
+XLINK_NS = "http://www.w3.org/1999/xlink"
 ET.register_namespace("", SVG_NS)
 ET.register_namespace("xhtml", XHTML_NS)
+ET.register_namespace("xlink", XLINK_NS)
 
 # Canvas, in SVG user units. 1120x630 is 16:9 and scales to 1920x1080.
 CANVAS_W, CANVAS_H = 1120, 630
@@ -61,6 +64,9 @@ ZONE_X, ZONE_Y, ZONE_W, ZONE_H = 70, 168, 980, 392
 COMMAND_SIZE = 30
 NOTE_SIZE = 19
 CONCEPT_SIZE = 24
+COMMAND_LINE_HEIGHT = 1.2
+NOTE_LINE_HEIGHT = 1.35
+CONCEPT_LINE_HEIGHT = 1.4
 TITLE_SIZE = 66
 TITLE_SPACING = 5
 TITLE_MAX_W = 900
@@ -144,11 +150,12 @@ def install_fonts(fonts_dir: Path) -> Path:
 
 
 class FontBook:
-    """Loads the card fonts and turns text into outlines or embeddable subsets."""
+    """Loads the card fonts and turns text into outlines."""
 
     def __init__(self, fonts_dir: Path):
         self.fonts_dir = fonts_dir
         self._fonts: Dict[str, TTFont] = {}
+        self._shapers: Dict[str, "hb.Font"] = {}
 
     def path(self, family: str) -> Path:
         font_path = self.fonts_dir / FONT_FILES[family]
@@ -161,49 +168,74 @@ class FontBook:
             self._fonts[family] = TTFont(str(self.path(family)))
         return self._fonts[family]
 
+    def shaper(self, family: str) -> "hb.Font":
+        if family not in self._shapers:
+            face = hb.Face(hb.Blob.from_file_path(str(self.path(family))))
+            self._shapers[family] = hb.Font(face)
+        return self._shapers[family]
+
+    def metrics(self, family: str, size: float) -> Tuple[float, float]:
+        """Return (ascent, descent) in px, the way browsers size a line box."""
+        font = self.font(family)
+        scale = size / font["head"].unitsPerEm
+        return font["hhea"].ascent * scale, -font["hhea"].descent * scale
+
     def outline(self, family: str, text: str, size: float, spacing: float = 0) -> Tuple[str, float]:
         """Return (SVG path data, width) for text set at the given size.
 
-        The baseline is y=0 and the text starts at x=0.
+        The text is shaped with HarfBuzz, so Borel's joined letters and kerning come out
+        the same as in a browser. The baseline is y=0 and the text starts at x=0.
         """
         font = self.font(family)
         glyphs = font.getGlyphSet()
-        cmap = font.getBestCmap()
+        order = font.getGlyphOrder()
         scale = size / font["head"].unitsPerEm
+
+        buffer = hb.Buffer()
+        buffer.add_str(text)
+        buffer.guess_segment_properties()
+        hb.shape(self.shaper(family), buffer)
+
         x = 0.0
         commands = []
-        for char in text:
-            name = cmap.get(ord(char))
-            if name is None:
-                name = cmap.get(ord(" "), ".notdef") if char.isspace() else ".notdef"
+        for info, position in zip(buffer.glyph_infos or [], buffer.glyph_positions or []):
+            name = order[info.codepoint]
             pen = SVGPathPen(glyphs, ntos=lambda v: f"{v:.2f}".rstrip("0").rstrip("."))
-            glyphs[name].draw(TransformPen(pen, (scale, 0, 0, -scale, x, 0)))
+            offset = (scale, 0, 0, -scale, x + position.x_offset * scale, -position.y_offset * scale)
+            glyphs[name].draw(TransformPen(pen, offset))
             data = pen.getCommands()
             if data:
                 commands.append(data)
-            x += glyphs[name].width * scale + spacing
-        width = x - spacing if text else 0.0
-        return " ".join(commands), width
+            x += position.x_advance * scale + spacing
+        width = x - spacing if commands or text else 0.0
+        return " ".join(commands), max(width, 0.0)
 
     def width(self, family: str, text: str, size: float, spacing: float = 0) -> float:
         return self.outline(family, text, size, spacing)[1]
 
-    def embedded_face(self, family: str, text: str) -> str:
-        """Return an @font-face rule with a WOFF subset that covers the given text."""
-        options = subset.Options()
-        options.layout_features = ["*"]     # keep Borel's joining alternates
-        options.notdef_outline = True
-        options.name_IDs = ["*"]
-        font = TTFont(str(self.path(family)))
-        subsetter = subset.Subsetter(options)
-        subsetter.populate(text=text + " ")
-        subsetter.subset(font)
-        font.flavor = "woff"
-        buffer = io.BytesIO()
-        font.save(buffer)
-        data = base64.b64encode(buffer.getvalue()).decode("ascii")
-        return (f"@font-face{{font-family:'{family}';font-style:normal;font-weight:400;"
-                f"src:url(data:font/woff;base64,{data}) format('woff');}}")
+    def shape(self, family: str, text: str) -> Tuple[List[Tuple[int, int, int]], int]:
+        """Shape text and return ([(glyph id, x, y)], advance), all in font units."""
+        buffer = hb.Buffer()
+        buffer.add_str(text)
+        buffer.guess_segment_properties()
+        hb.shape(self.shaper(family), buffer)
+        x = 0
+        run = []
+        for info, position in zip(buffer.glyph_infos or [], buffer.glyph_positions or []):
+            run.append((info.codepoint, x + position.x_offset, position.y_offset))
+            x += position.x_advance
+        return run, x
+
+    def glyph_outline(self, family: str, glyph_id: int) -> str:
+        """SVG path data for one glyph in font units (y axis pointing up)."""
+        font = self.font(family)
+        glyphs = font.getGlyphSet()
+        pen = SVGPathPen(glyphs, ntos=lambda v: str(int(round(v))))
+        glyphs[font.getGlyphOrder()[glyph_id]].draw(pen)
+        return pen.getCommands()
+
+    def units_per_em(self, family: str) -> int:
+        return self.font(family)["head"].unitsPerEm
 
 
 # ---------------------------------------------------------------------------
@@ -221,9 +253,10 @@ def clean_text(text: Any) -> str:
     return value.replace('"', "#quot;")
 
 
-def plain_text(label: str) -> str:
-    """Characters that end up on the card for a label (used for font subsetting)."""
-    return label.replace("<br/>", " ").replace("#quot;", '"')
+def label_lines(label: str) -> List[str]:
+    """The lines of a Mermaid label as they appear on the card."""
+    lines = label.replace("#quot;", '"').split("<br/>")
+    return [" ".join(line.split()) for line in lines]
 
 
 def descriptor_map(front_matter: Dict[str, Any]) -> Dict[str, Any]:
@@ -268,13 +301,13 @@ def _styling(command_ids: List[str], note_ids: List[str], concept_ids: List[str]
         f"class {','.join(command_ids + note_ids + concept_ids)} transparent",
     ]
     if command_ids:
-        lines.append(f"classDef commandFont font-family:Borel,font-size:{COMMAND_SIZE}px,line-height:1.2;")
+        lines.append(f"classDef commandFont font-family:Borel,font-size:{COMMAND_SIZE}px,line-height:{COMMAND_LINE_HEIGHT};")
         lines.append(f"class {','.join(command_ids)} commandFont")
     if note_ids:
-        lines.append(f"classDef textFont font-family:Chilanka,font-size:{NOTE_SIZE}px,line-height:1.35;")
+        lines.append(f"classDef textFont font-family:Chilanka,font-size:{NOTE_SIZE}px,line-height:{NOTE_LINE_HEIGHT};")
         lines.append(f"class {','.join(note_ids)} textFont")
     if concept_ids:
-        lines.append(f"classDef conceptFont font-family:Chilanka,font-size:{CONCEPT_SIZE}px,line-height:1.4;")
+        lines.append(f"classDef conceptFont font-family:Chilanka,font-size:{CONCEPT_SIZE}px,line-height:{CONCEPT_LINE_HEIGHT};")
         lines.append(f"class {','.join(concept_ids)} conceptFont")
     return lines
 
@@ -352,8 +385,6 @@ class _Node:
         self.box_h = float(rect.get("height"))
         self.label_w = float(self.foreign.get("width"))
         self.label_h = float(self.foreign.get("height"))
-        # Borel has tall ascenders that a tight line box would clip.
-        self.foreign.set("style", "overflow: visible;")
         self.left = self.cx - self.label_w / 2
         self.right = self.cx + self.label_w / 2
 
@@ -380,6 +411,20 @@ class _Node:
         self.group.set("transform", f"translate({self.cx:.3f}, {self.cy:.3f})")
         self.left, self.right = x - self.label_w / 2, x + self.label_w / 2
 
+    def label_origin(self) -> Tuple[float, float]:
+        """Top left corner of the label, relative to the node."""
+        return _translate(self.label.get("transform"))
+
+    def replace_label(self, outlines: ET.Element) -> None:
+        """Swap the HTML label for outlined text.
+
+        Mermaid styles the direct children of a node (the "transparent" class paints them
+        white), so the outlines go one level deeper and set their own fill and stroke.
+        """
+        self.group.remove(self.label)
+        wrapper = ET.SubElement(self.group, _tag("g"))
+        wrapper.append(outlines)
+
 
 def _collect_nodes(svg: ET.Element) -> Dict[str, _Node]:
     nodes = {}
@@ -392,8 +437,8 @@ def _collect_nodes(svg: ET.Element) -> Dict[str, _Node]:
     return nodes
 
 
-def realign(svg: ET.Element) -> Tuple[float, float, float, float]:
-    """Tidy the diagram in place and return its bounding box (x, y, width, height).
+def realign(svg: ET.Element) -> Tuple[Tuple[float, float, float, float], Dict[str, _Node]]:
+    """Tidy the diagram in place. Returns its bounding box (x, y, width, height) and its nodes.
 
     Command cards: tokens and notes are left-aligned in their columns, the note column
     sits a fixed distance after the longest token, and every arrow runs from the end of
@@ -427,7 +472,7 @@ def realign(svg: ET.Element) -> Tuple[float, float, float, float]:
     right = max(n.right for n in everything)
     top = min(n.top for n in everything)
     bottom = max(n.bottom for n in everything)
-    return left, top, right - left, bottom - top
+    return (left, top, right - left, bottom - top), nodes
 
 
 # ---------------------------------------------------------------------------
@@ -443,6 +488,7 @@ class CardBuilder:
         self.theme_path = theme_path
         self.puppeteer_config = puppeteer_config
         self.warnings: List[str] = []
+        self._glyph_defs: Dict[str, str] = {}
 
     # -- Mermaid -----------------------------------------------------------
 
@@ -530,7 +576,9 @@ class CardBuilder:
 
         diagram = self.render_diagram(syntax)
         self._check_measurement(front_matter, diagram)
-        box_x, box_y, box_w, box_h = realign(diagram)
+        self._glyph_defs = {}
+        (box_x, box_y, box_w, box_h), nodes = realign(diagram)
+        self._outline_labels(front_matter, nodes)
         scale = min(1.0, ZONE_W / box_w, ZONE_H / box_h)
         if scale < 1.0:
             self.warnings.append(f"diagram scaled to {scale:.0%} to fit the canvas")
@@ -548,8 +596,12 @@ class CardBuilder:
         })
         label = " ".join(str(front_matter.get(key) or "").strip() for key in ("pretitle", "title", "subtitle"))
         ET.SubElement(root, _tag("title")).text = f"#{number} {' '.join(label.split())}".strip()
-        ET.SubElement(root, _tag("style")).text = self._font_faces(front_matter)
         ET.SubElement(root, _tag("rect"), width=str(CANVAS_W), height=str(CANVAS_H), fill="#ffffff")
+
+        defs = ET.SubElement(root, _tag("defs"))
+        for ref, data in self._glyph_defs.items():
+            if data:
+                ET.SubElement(defs, _tag("path"), id=ref, d=data)
 
         self._title_block(root, front_matter, title_color, sub_color)
 
@@ -577,18 +629,59 @@ class CardBuilder:
                           AUTHOR_COLOR, anchor="end")
         return ET.ElementTree(root)
 
-    def _font_faces(self, front_matter: Dict[str, Any]) -> str:
-        """Embed only the glyphs this card uses, so the SVG renders anywhere and stays small."""
-        faces = []
+    def _outline_labels(self, front_matter: Dict[str, Any], nodes: Dict[str, "_Node"]) -> None:
+        """Replace Mermaid's HTML labels with outlined text in the same position.
+
+        HTML inside foreignObject and embedded web fonts are the two things browsers
+        disagree on in an SVG. Outlines look the same everywhere.
+        """
+        labels: Dict[str, str] = {}
         if front_matter.get("command"):
-            tokens = " ".join(token for token, _ in command_rows(front_matter))
-            faces.append(self.fonts.embedded_face("Borel", tokens))
-            notes = [note for _, note in command_rows(front_matter)]
+            for index, (token, note) in enumerate(command_rows(front_matter)):
+                labels[f"c{index}"] = clean_text(token)
+                labels[f"n{index}"] = note
         else:
-            notes = concept_parts(front_matter)
-        notes.append(card_info(front_matter))
-        faces.append(self.fonts.embedded_face("Chilanka", plain_text(" ".join(notes))))
-        return "".join(faces)
+            for index, part in enumerate(concept_parts(front_matter)):
+                labels[f"p{index}"] = part
+        labels["info"] = card_info(front_matter)
+
+        for key, node in nodes.items():
+            if key.startswith("c"):
+                family, size, line_height, centered = "Borel", COMMAND_SIZE, COMMAND_LINE_HEIGHT, False
+            elif key.startswith("p"):
+                family, size, line_height, centered = "Chilanka", CONCEPT_SIZE, CONCEPT_LINE_HEIGHT, True
+            else:
+                family, size, line_height, centered = "Chilanka", NOTE_SIZE, NOTE_LINE_HEIGHT, key == "info"
+
+            ascent, descent = self.fonts.metrics(family, size)
+            line_px = size * line_height
+            scale = size / self.fonts.units_per_em(family)
+            origin_x, origin_y = node.label_origin()
+            group = ET.Element(_tag("g"), {"class": "card-text", "fill": "#000000", "stroke": "none"})
+            for row, line in enumerate(label_lines(labels.get(key, ""))):
+                run, advance = self.fonts.shape(family, line)
+                x = origin_x + (node.label_w - advance * scale) / 2 if centered else origin_x
+                baseline = origin_y + row * line_px + (line_px - ascent - descent) / 2 + ascent
+                # One group per line in font units; each glyph is drawn once in <defs> and reused.
+                line_group = ET.SubElement(
+                    group, _tag("g"), transform=f"translate({x:.2f}, {baseline:.2f}) scale({scale:.5f}, {-scale:.5f})")
+                for glyph_id, glyph_x, glyph_y in run:
+                    ref = self._glyph_ref(family, glyph_id)
+                    if ref is None:
+                        continue
+                    use = ET.SubElement(line_group, _tag("use"), {f"{{{XLINK_NS}}}href": f"#{ref}"})
+                    if glyph_x:
+                        use.set("x", str(glyph_x))
+                    if glyph_y:
+                        use.set("y", str(glyph_y))
+            node.replace_label(group)
+
+    def _glyph_ref(self, family: str, glyph_id: int) -> Optional[str]:
+        """Id of the shared outline for a glyph, or None when the glyph is blank (a space)."""
+        ref = f"{family[0].lower()}{glyph_id}"
+        if ref not in self._glyph_defs:
+            self._glyph_defs[ref] = self.fonts.glyph_outline(family, glyph_id)
+        return ref if self._glyph_defs[ref] else None
 
     def write_svg(self, front_matter: Dict[str, Any], output: Path) -> None:
         tree = self.build_svg(front_matter)

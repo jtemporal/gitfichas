@@ -3,3 +3,4 @@
 
 PyYAML>=6.0
 fonttools>=4.40
+uharfbuzz>=0.39
