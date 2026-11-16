@@ -56,28 +56,28 @@ PNG_W, PNG_H = 1920, 1080
 MARGIN = 44
 
 # Area the diagram may use. It is centered here and never scaled up.
-ZONE_X, ZONE_Y, ZONE_W, ZONE_H = 70, 168, 980, 392
+ZONE_X, ZONE_Y, ZONE_W, ZONE_H = 70, 162, 980, 406
 
 # Text sizes in px. Mermaid applies a classDef to a node and again to its label,
 # so relative units (em) compound. Absolute sizes keep the measured box and the
 # rendered text in agreement.
-COMMAND_SIZE = 30
-NOTE_SIZE = 19
-CONCEPT_SIZE = 24
+COMMAND_SIZE = 36
+NOTE_SIZE = 23
+CONCEPT_SIZE = 29
 COMMAND_LINE_HEIGHT = 1.2
 NOTE_LINE_HEIGHT = 1.35
 CONCEPT_LINE_HEIGHT = 1.4
 TITLE_SIZE = 66
 TITLE_SPACING = 5
 TITLE_MAX_W = 900
-SMALL_SIZE = 25
-FOOTER_SIZE = 26
+SMALL_SIZE = 28
+FOOTER_SIZE = 28
 
 # Arrows
 ARROW_GAP = 16        # space between text and arrow, on both ends
 ARROW_HEAD = 6        # the marker extends past the end of the path
 MIN_ARROW = 70        # length of the shortest arrow on a card
-TOKEN_DY = 5          # Borel sits a little high in its line box
+TOKEN_DY = 6          # Borel sits a little high in its line box
 
 NUMBER_COLOR = "#5f5f5f"
 AUTHOR_COLOR = "#7a357d"
@@ -580,7 +580,7 @@ class CardBuilder:
         (box_x, box_y, box_w, box_h), nodes = realign(diagram)
         self._outline_labels(front_matter, nodes)
         scale = min(1.0, ZONE_W / box_w, ZONE_H / box_h)
-        if scale < 1.0:
+        if scale < 0.995:
             self.warnings.append(f"diagram scaled to {scale:.0%} to fit the canvas")
 
         number = str(front_matter.get("number", "")).strip()
