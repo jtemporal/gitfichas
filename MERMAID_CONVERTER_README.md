@@ -76,12 +76,57 @@ python3 scripts/generate_images_only.py "053.md" --force
 python3 scripts/generate_images_only.py --verbose
 ```
 
+## Standalone 16:9 cards (print and video)
+
+`scripts/generate_cards.py` builds one self-contained card per Mermaid post in `assets/img/cards/`.
+It does not change the posts or the images in `assets/img/mermaid/`, so the site renders as before.
+
+Every card:
+
+- uses the same 16:9 canvas (1120x630 units, exported as 1920x1080 PNG) and the same text size
+- includes the title block, the diagram, the card number and the signature
+- uses a stacked layout for commands: one row per part with its note to the right, so long
+  commands get taller instead of wider (up to 6 parts fit without shrinking)
+- embeds only the glyphs it uses, so each SVG is around 40 to 100 KB
+
+```bash
+# Once per machine: Mermaid needs Borel and Chilanka installed to measure text
+python3 scripts/generate_cards.py --install-fonts
+
+# All cards that don't exist yet
+python3 scripts/generate_cards.py
+
+# One card in every language, regenerated
+python3 scripts/generate_cards.py 028 --force
+
+# One language, with a 1920x1080 PNG next to each SVG
+python3 scripts/generate_cards.py 028 --lang pt --png
+```
+
+How it works:
+
+1. `scripts/card_generator.py` writes Mermaid `block-beta` syntax from the front matter.
+2. Mermaid CLI renders it.
+3. The SVG is post-processed: tokens and notes are left-aligned, arrows are redrawn from the end
+   of each word to the start of its note, and the diagram is centered on the canvas.
+4. Title, pretitle, subtitle, number and signature are drawn as outlines from the fonts in
+   `assets/fonts/`, using the same six color schemes as the site.
+
+Notes:
+
+- PNG export uses headless Chrome. Set `CHROME_PATH` if it is not found automatically.
+- Set `PUPPETEER_CONFIG` (or add `puppeteer-config.json` to the project root) to pass a Puppeteer
+  config to Mermaid CLI, for example to use `--no-sandbox` in CI.
+- Sizes, spacing and the canvas are constants at the top of `scripts/card_generator.py`.
+
 ## Project Structure
 
 ```
 gitfichas/
 ├── _posts/              # Markdown posts with mermaid diagrams
 ├── assets/img/mermaid/  # Generated static SVG files
+├── assets/img/cards/    # Generated standalone 16:9 cards
+├── assets/fonts/        # Fonts used to build the cards
 ├── scripts/             # Setup and generation scripts
 └── requirements.txt     # Python dependencies
 ```

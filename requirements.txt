@@ -2,3 +2,4 @@
 # Python dependencies for the image generation system
 
 PyYAML>=6.0
+fonttools>=4.40

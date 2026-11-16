@@ -110,6 +110,10 @@ else
     echo "✅ Embedded fonts already exist"
 fi
 
+# Install the card fonts (Mermaid needs them installed to measure text for the 16:9 cards)
+echo "🔤 Installing card fonts..."
+python3 scripts/generate_cards.py --install-fonts
+
 # Test the setup
 echo "🧪 Testing the setup..."
 if python3 scripts/generate_images_only.py --help &> /dev/null; then
@@ -136,5 +140,6 @@ echo "   cd $PROJECT_ROOT/scripts"
 echo "   python3 generate_images_only.py --help"
 echo "   python3 generate_images_only.py --verbose"
 echo "   python3 generate_embedded_fonts.py"
+echo "   python3 scripts/generate_cards.py --help   (from the project root)"
 echo ""
 echo "📚 For more information, see $PROJECT_ROOT/MERMAID_CONVERTER_README.md"
