@@ -39,6 +39,9 @@
   // Without this, a card narrower than 754px leaves blank space under the image.
   .project-unit.card
     min-height: 0
+  // The home page shows only the card. "Read more" text from the post body stays on the post page.
+  .project-unit.card > *:not(.card-container):not(.mermaid-container):not(a)
+    display: none
 
 @media (max-width: 768px)
   .project-container
