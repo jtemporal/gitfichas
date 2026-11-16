@@ -7,13 +7,13 @@ When working on this GitFichas (Git Study Cards) project, follow these guideline
 
 ### New Mermaid Posts
 - **Always run SVG generation** after creating or modifying posts with mermaid diagrams
-- Use the command: `python3 scripts/generate_images_only.py`
-- For specific posts: `python3 scripts/generate_images_only.py "filename.md"`
-- Use `--force` flag to regenerate existing images: `python3 scripts/generate_images_only.py --force`
+- Use the command: `python3 scripts/generate_cards.py`
+- For specific posts: `python3 scripts/generate_cards.py "filename.md"`
+- Use `--force` flag to regenerate existing images: `python3 scripts/generate_cards.py --force`
 - Use `--verbose` flag for detailed debugging output when troubleshooting
 - **Offer to run the script** when helping users create new mermaid posts
 - Commit both the post changes AND the generated SVG files
-- Generated SVG files are stored in `assets/img/mermaid/` directory
+- Generated SVG files are stored in `assets/img/cards/` directory
 
 ### Post Templates
 Follow the templates from CONTRIBUTING.md exactly:
@@ -51,22 +51,24 @@ Follow the templates from CONTRIBUTING.md exactly:
    - This installs Node.js dependencies, Python packages, system libraries for headless Chrome, and Mermaid CLI
    - Auto-configures the entire development environment
 2. **Create/Edit Posts**: Follow templates exactly
-3. **Generate SVGs**: Always run `python3 scripts/generate_images_only.py`
+3. **Generate SVGs**: Always run `python3 scripts/generate_cards.py`
 4. **Test Locally**: Use `bundle exec jekyll serve` (no extra flags)
 5. **Commit**: Include both post and generated SVG files
 
 ### Project Structure
-- Posts with mermaid diagrams generate SVG files in `assets/img/mermaid/`
+- Posts with mermaid diagrams generate SVG files in `assets/img/cards/`
 - Portuguese posts: `{number}.svg` (e.g., `053.svg`)
 - English posts: `{number}-en.svg` (e.g., `053-en.svg`)
 - Spanish posts: `{number}-es.svg` (e.g., `053-es.svg`)
 - Theme configuration: `gitfichas-mermaid-theme.json`
-- CSS files: `assets/css/mermaid.css`, `assets/css/embedded-svg.css`, `assets/css/embedded-fonts.css`
+- CSS file: `assets/css/mermaid.css`
+- Card fonts: `assets/fonts/`
+- Cards are 16:9 and include the title, diagram, card number and signature; the include builds the image alt text from the front matter
 
 ### Troubleshooting
 - If SVG generation fails, ensure system dependencies are installed via `bash scripts/setup.sh`
 - For browser launch errors, check that headless Chrome libraries are installed
-- Missing fonts issue: run `python3 scripts/generate_embedded_fonts.py` first
+- Missing fonts issue: run `python3 scripts/generate_cards.py --install-fonts` first
 - Use `--verbose` flag for detailed debugging information
 
 ### Card Numbering
@@ -104,7 +106,7 @@ After migrating the content in the markdown files, you need to convert the exist
 1. **Ensure proper file naming**: Use `YYYY-MM-DD-XXX.md` format with same date as original post for translations
 2. **Generate SVG first**: Run image generation script one card at a time:
    ```bash
-   python3 scripts/generate_images_only.py "filename.md"
+   python3 scripts/generate_cards.py "filename.md"
    ```
 3. **Add use_static_image only after successful SVG generation**: Add `use_static_image: true` to front matter ONLY after SVG is successfully created
 4. **Test locally**: Run server and verify diagrams render correctly compared to previous image-based cards

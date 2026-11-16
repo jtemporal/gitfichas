@@ -18,7 +18,6 @@ class ConfigManager:
     def __init__(self, root_dir: str = "."):
         self.root_dir = Path(root_dir)
         self._setup_paths()
-        self._setup_directories()
 
     def _setup_paths(self):
         """Setup all required paths."""
@@ -40,9 +39,9 @@ class ConfigManager:
         # Theme configuration
         self.theme_path = self.root_dir / 'gitfichas-mermaid-theme.json'
 
-    def _setup_directories(self):
-        """Create required directories if they don't exist."""
-        self.images_dir.mkdir(parents=True, exist_ok=True)
+        # Standalone 16:9 cards (scripts/generate_cards.py)
+        self.cards_dir = self.root_dir / "assets" / "img" / "cards"
+        self.fonts_dir = self.root_dir / "assets" / "fonts"
 
     def validate_theme_file(self) -> None:
         """Validate that the standalone theme file exists and is valid JSON."""
@@ -103,6 +102,10 @@ class ConfigManager:
             '--configFile', str(self.theme_path),
             '--cssFile', str(self.combined_css_path)
         ]
+
+    def get_card_path(self, front_matter: Dict[str, Any], file_path: Path, extension: str = "svg") -> Path:
+        """Output path for a standalone card, using the same naming as the diagram images."""
+        return self.cards_dir / self.get_image_path(front_matter, file_path).with_suffix(f".{extension}").name
 
     def get_image_path(self, front_matter: Dict[str, Any], file_path: Path) -> Path:
         """Determine the output image path based on front matter and file path."""

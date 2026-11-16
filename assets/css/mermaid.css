@@ -17,10 +17,17 @@
     gap: 20px;
 }
 
-.mermaid-container-post {
+/* On a post page the box goes around the card only, so text that follows the card
+   in the post body (for example "read more" links) sits outside the box. */
+.mermaid-container-post > .card-container,
+.mermaid-container-post > .mermaid-container {
     border: 1px solid #c0c0c0;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+}
+
+.mermaid-container-post > .card-container {
+    margin-bottom: 24px;
 }
 
 .title-container {
@@ -82,18 +89,34 @@
     width: 100%;
 }
 
-.mermaid-image {
-    margin-top: 2vh;
-    background-color: transparent;
-    border: none;
-    width: 80vw;
-    max-height: 65vh;
-    object-fit: contain;
-    text-align: center;
+/* Static 16:9 cards (assets/img/cards), which carry their own title, number and signature */
+.card-container {
+    position: relative;
     width: 100%;
-    padding-bottom: 50px;
-    /* SVG-specific styling for better accessibility */
-    overflow: visible;
+    line-height: 0;
+}
+
+.card-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+}
+
+/* Invisible link over the signature in the bottom right corner of the card */
+.card-author-link {
+    position: absolute;
+    right: 2.5%;
+    bottom: 2.5%;
+    width: 20%;
+    height: 9%;
+    border-radius: 4px;
+}
+
+.card-author-link:focus-visible {
+    outline: 2px solid #7a357d;
+    outline-offset: 2px;
 }
 
 .mermaid-footer {
