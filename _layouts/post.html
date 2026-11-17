@@ -2,15 +2,174 @@
 layout: default
 ---
 
+{% include language-detection.html %}
+{% if page.mermaid %}
+{% include icons.html %}
+{% include card-parts.html %}
+{% assign ui = site.data.settings.ui[current_lang] | default: site.data.settings.ui[site.default_language] %}
+{% assign families = site.data.settings.families[current_lang] | default: site.data.settings.families[site.default_language] %}
+{% capture card_title %}{{ page.pretitle }} {{ page.title }} {{ page.subtitle }}{% endcapture %}
+{% assign card_title = card_title | normalize_whitespace %}
+
+<main class="gf-main gf-wrap gf-post">
+  <div class="gf-post-head">
+    <a class="gf-back" href="{{ site.github.url }}{{ current_lang_config.url }}"><span aria-hidden="true">←</span> {{ ui.back }}</a>
+    <p class="gf-meta">{{ ui.card }} #{{ page.number }}{% if page.family %} · {{ families[page.family] }}{% endif %}<span class="gf-pill" data-study-pill hidden>{{ ui.study_mode }}</span></p>
+    <h1 class="gf-title">{{ card_title }}</h1>
+  </div>
+
+  <div class="gf-post-body" data-study-hide>
+    <div class="gf-post-card project-load mermaid-container-post">{{ content }}</div>
+
+    <aside class="gf-post-side">
+      {% if page.command %}
+      <div class="gf-command">
+        <code>{{ page.command | escape }}</code>
+        <button type="button" class="gf-copy gf-copy-dark" data-copy="{{ page.command | escape }}" data-copied="{{ ui.copied }}" aria-label="{{ ui.copy }}">{{ icon_copy }}{{ icon_check }}</button>
+      </div>
+      {% endif %}
+      <div class="gf-actions">
+        {% if card_rows.size > 0 %}
+        <button type="button" class="gf-btn gf-btn-primary" data-study-open>{{ ui.study }}</button>
+        {% endif %}
+        <button type="button" class="gf-btn" data-copy-url data-copied="{{ ui.copied }}">{{ icon_link }}<span data-copy-label>{{ ui.copy_link }}</span></button>
+      </div>
+      {% if card_rows.size > 0 %}
+      <section class="gf-panel">
+        {% if page.command %}
+        <h2 class="gf-panel-title">{{ ui.parts_title }}</h2>
+        <dl class="gf-parts">
+          {% for row in card_rows %}
+          {% assign cells = row | split: ":::" %}
+          <div class="gf-part">
+            <dt>{{ cells[0] | strip | escape }}</dt>
+            <dd>{{ cells[1] | strip | escape }}</dd>
+          </div>
+          {% endfor %}
+        </dl>
+        {% else %}
+        <h2 class="gf-panel-title">{{ ui.concept_title }}</h2>
+        <div class="gf-summary">
+          {% for row in card_rows %}
+          {% assign cells = row | split: ":::" %}
+          <p>{{ cells | last | strip | escape }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+        {% if card_info != "" %}
+        <p class="gf-info">{{ card_info | escape }}</p>
+        {% endif %}
+      </section>
+      {% endif %}
+    </aside>
+  </div>
+
+  {% if card_rows.size > 0 %}
+  <section class="gf-study" id="study" aria-label="{{ ui.study_mode }}" data-progress-template="{{ ui.progress }}" hidden>
+    <div class="gf-study-main">
+      <p class="gf-study-prompt">{% if page.command %}{{ ui.study_prompt }}{% else %}{{ ui.study_prompt_concept }}{% endif %}</p>
+      <div class="gf-study-rows{% unless page.command %} gf-study-rows-concept{% endunless %}">
+        {% for row in card_rows %}
+        {% assign cells = row | split: ":::" %}
+        <div class="gf-study-row" data-study-row>
+          {% if page.command %}
+          <span class="gf-study-token">{{ cells[0] | strip | escape }}</span>
+          {{ icon_arrow }}
+          {% else %}
+          <span class="gf-study-index" aria-hidden="true">{{ forloop.index }}</span>
+          {% endif %}
+          <span class="gf-study-note" data-study-note hidden>{{ cells | last | strip | escape }}</span>
+          <button type="button" class="gf-reveal" data-study-reveal>{{ ui.reveal }}</button>
+        </div>
+        {% endfor %}
+      </div>
+      {% if card_info != "" %}
+      <p class="gf-info" data-study-info hidden>{{ card_info | escape }}</p>
+      {% endif %}
+      <div class="gf-study-actions">
+        <button type="button" class="gf-btn gf-btn-primary" data-study-next>{{ ui.reveal_next }}</button>
+        <button type="button" class="gf-btn" data-study-all>{{ ui.reveal_all }}</button>
+        <button type="button" class="gf-btn" data-study-reset>{{ ui.reveal_reset }}</button>
+      </div>
+    </div>
+    <aside class="gf-study-side">
+      <section class="gf-panel">
+        <h2 class="gf-panel-title">{{ ui.progress_title }}</h2>
+        <div class="gf-progress" role="progressbar" aria-label="{{ ui.progress_title }}" aria-valuemin="0" aria-valuemax="{{ card_rows.size }}" aria-valuenow="0" data-study-progress>
+          {% for row in card_rows %}<span></span>{% endfor %}
+        </div>
+        <p class="gf-progress-text" data-study-progress-text></p>
+      </section>
+      <nav class="gf-panel gf-study-nav" aria-label="{{ ui.study_mode }}">
+        {% if page.nt.url %}
+        <a class="gf-btn" href="{{ site.github.url }}{{ page.nt.url }}#study">{{ ui.study_next }} <span aria-hidden="true">→</span></a>
+        {% endif %}
+        {% if page.pv.url %}
+        <a class="gf-btn" href="{{ site.github.url }}{{ page.pv.url }}#study"><span aria-hidden="true">←</span> {{ ui.study_prev }}</a>
+        {% endif %}
+        <button type="button" class="gf-btn" data-study-close>{{ ui.study_exit }}</button>
+      </nav>
+    </aside>
+  </section>
+  {% endif %}
+
+  {% if page.related %}
+  <section class="gf-readmore" data-study-hide>
+    <div class="gf-readmore-text">
+      <span class="gf-readmore-label">{{ ui.read_more }}</span>
+      <span class="gf-readmore-title">{{ page.related_title }}</span>
+    </div>
+    <a class="gf-btn" href="{{ page.related_url }}">{{ ui.read_post }} <span aria-hidden="true">→</span></a>
+  </section>
+  {% endif %}
+
+  {% if page.family %}
+  {% assign related_cards = site.posts | where: "lang", current_lang | where: "family", page.family %}
+  {% assign related_shown = 0 %}
+  {% capture related_tiles %}
+    {% for project in related_cards %}
+      {% if project.url != page.url and related_shown < 3 %}
+        {% include card-tile.html %}
+        {% assign related_shown = related_shown | plus: 1 %}
+      {% endif %}
+    {% endfor %}
+  {% endcapture %}
+  {% if related_shown > 0 %}
+  <section class="gf-related" data-study-hide>
+    <h2 class="gf-section-title">{{ ui.related_title }}</h2>
+    <div class="gf-grid">{{ related_tiles }}</div>
+  </section>
+  {% endif %}
+  {% endif %}
+
+  {% if page.pv.url or page.nt.url %}
+  <nav class="gf-pager" aria-label="{{ ui.prev }} / {{ ui.next }}" data-study-hide>
+    {% if page.pv.url %}
+    <a class="gf-pager-link" href="{{ site.github.url }}{{ page.pv.url }}">
+      <span class="gf-pager-label"><span aria-hidden="true">←</span> {{ ui.prev }}</span>
+      <span class="gf-pager-title">{{ page.pv.title }}</span>
+    </a>
+    {% endif %}
+    {% if page.nt.url %}
+    <a class="gf-pager-link gf-pager-next" href="{{ site.github.url }}{{ page.nt.url }}">
+      <span class="gf-pager-label">{{ ui.next }} <span aria-hidden="true">→</span></span>
+      <span class="gf-pager-title">{{ page.nt.title }}</span>
+    </a>
+    {% endif %}
+  </nav>
+  {% endif %}
+</main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    initStudyMode();
+  });
+</script>
+{% else %}
 <section>
   <div class="post-container">
-    {% if page.mermaid %}
-    <h4 class="project-title">{%if page.pretitle %}{{ page.pretitle }} {%endif%}{{ page.title }}{%if page.subtitle %} {{ page.subtitle }}{%endif%}</h4>
-    <div class="project-load mermaid-container-post">{{ content }}</div>
-    {% else %}
     <h4 class="project-title">{{ page.title }}</h4>
     <div class="project-load">{{ content }}</div>
-    {% endif %}
     {% if page.related %}
     <br>
     {% if current_lang == "en" %}
@@ -27,3 +186,4 @@ layout: default
   </div>
 </section>
 {% include arrows.html %}
+{% endif %}
