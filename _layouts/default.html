@@ -1,11 +1,11 @@
 ---
 ---
 
+{% comment %} Language detection for the lang attribute and meta tags {% endcomment %}
+{% include language-detection.html %}
 <!DOCTYPE html>
-<html class="">
+<html lang="{{ current_lang_config.locale | replace: '_', '-' }}">
   <head>
-    <!-- Language detection for meta tags -->
-    {% include language-detection.html %}
     <meta charset="UTF-8">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,12 +34,13 @@
     </title>
     <link rel="stylesheet" href="{{ site.github.url }}/assets/css/all.css">
     <link rel="stylesheet" href="{{ site.github.url }}/assets/css/mermaid.css">
-    <link rel="stylesheet" href="{{ site.github.url }}/assets/css/language-switcher.css">
     <link rel="stylesheet" href="{{ site.github.url }}/assets/css/search.css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <!-- Redesign styles, loaded after Bootstrap so they win -->
+    <link rel="stylesheet" href="{{ site.github.url }}/assets/css/redesign.css">
     <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
     <!-- Use Atom -->
     {% feed_meta %}

@@ -30,6 +30,7 @@ Follow the templates from CONTRIBUTING.md exactly:
 - `number` (mandatory) - card number with quotes for leading zeros
 - `author` (mandatory) - GitHub username with @
 - `mermaid: true` (mandatory)
+- `family`: one of `concepts` (every concept card), `basics`, `commit`, `branch`, `history`, `undo`, `remote`, `stash`, `tag`. Drives the home page filters and related cards; keep it the same across the three languages
 - `use_static_image: true` (mandatory only when SVG image is generated)
 - `permalink` (mandatory) - `/projects/{number}` for PT, `/en/{number}` for EN, `/es/{number}` for ES
 - `lang` (mandatory) - "pt", "en", or "es"

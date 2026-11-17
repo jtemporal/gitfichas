@@ -49,6 +49,7 @@ Here's a list of all fields you could find in both types:
 | `info` | `optional` | `optional` | Extra information for a card. |
 | `author` | `mandatory` | `mandatory` | GitHub username of person who created the card e.g.: `@jtemporal` |
 | `number` | `mandatory` | `mandatory` |  Number of the card e.g.: `"001"`. Quotes are necessary for the leading zero |
+| `family` | `mandatory` | `mandatory` | Groups the card for the home page filters and the related cards. One of `concepts` (every concept card), `basics`, `commit`, `branch`, `history`, `undo`, `remote`, `stash`, `tag`. Labels live in `_data/settings.yml` |
 | `mermaid` | `mandatory` | `mandatory` |  Always `true` |
 | `use_static_image` | `mandatory*` | `mandatory*` | Always `true` when SVG image is generated. *Only required if an SVG file is created for the card |
 | `permalink` |  `mandatory` | `mandatory` |  Follows `/projects/{number}` for pt cards, `/en/{number}` for en cards, and `/es/{number}` for es cards |
@@ -448,6 +449,7 @@ Aqui está uma lista de todos os campos que você pode encontrar em ambos os tip
 | `info` | `opcional` | `opcional` | Informação extra para uma ficha. |
 | `author` | `obrigatório` | `obrigatório` | Nome de usuário do GitHub da pessoa que criou a ficha, por exemplo: `@jtemporal` |
 | `number` | `obrigatório` | `obrigatório` | Número da ficha, por exemplo: `"001"`. As aspas são necessárias para o zero à esquerda |
+| `family` | `obrigatório` | `obrigatório` | Agrupa a ficha para os filtros da página inicial e para as fichas relacionadas. Um de `concepts` (toda ficha de conceito), `basics`, `commit`, `branch`, `history`, `undo`, `remote`, `stash`, `tag`. Os rótulos ficam em `_data/settings.yml` |
 | `mermaid` | `obrigatório` | `obrigatório` | Sempre presente `true` |
 | `use_static_image` | `obrigatório*` | `obrigatório*` | Sempre `true` quando imagem SVG é gerada. *Obrigatório apenas se um arquivo SVG for criado para a ficha |
 | `permalink` | `obrigatório` | `obrigatório` | Segue `/projects/{number}` para fichas em pt, `/en/{number}` para fichas em en, e `/es/{number}` para fichas em es |

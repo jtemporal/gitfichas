@@ -1,23 +1,22 @@
-<header>
-  <div class="logo">
+{% assign header_ui = site.data.settings.ui[current_lang] | default: site.data.settings.ui[site.default_language] %}
+<header class="gf-header">
+  <div class="gf-wrap gf-header-inner">
     {% if current_lang == "en" %}
-    <a href="{{ site.github.url }}/en/">{{ site.title_en }}</a>
+    <a class="gf-logo" href="{{ site.github.url }}/en/">{{ site.title_en }}</a>
     {% elsif current_lang == "es" %}
-    <a href="{{ site.github.url }}/es/">{{ site.title_es }}</a>
+    <a class="gf-logo" href="{{ site.github.url }}/es/">{{ site.title_es }}</a>
     {% else %}
-    <a href="{{ site.github.url }}/">{{ site.title }}</a>
+    <a class="gf-logo" href="{{ site.github.url }}/">{{ site.title }}</a>
     {% endif %}
-  </div>
-  <nav>
-    <div class="main-menu">
+    <nav class="gf-nav" aria-label="{{ header_ui.menu_label }}">
       {% for item in site.data.settings.menu[current_lang] %}
         {% if item.url contains "https" %}
-          <a href="{{ item.url }}">{{ item.name }}</a>
+          <a class="gf-nav-link" href="{{ item.url }}">{{ item.name }}</a>
         {% else %}
-           <a href="{{ site.github.url }}/{{ item.url }}">{{ item.name }}</a>
+          <a class="gf-nav-link" href="{{ site.github.url }}/{{ item.url }}">{{ item.name }}</a>
         {% endif %}
       {% endfor %}
-    </div>
-    {% include language-switch.html %}
-  </nav>
+      {% include language-switch.html %}
+    </nav>
+  </div>
 </header>

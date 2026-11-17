@@ -1,0 +1,10 @@
+{% comment %}
+  Splits the current page's card into rows for the "part by part" list and study mode.
+  Expects `page` to be a card post. Sets:
+  - card_rows: rows joined by "|||", each row is "token:::note" (token is empty on concept cards)
+  - card_info: the extra note of the card, if any
+{% endcomment %}
+{% capture card_rows %}{% if page.command %}{% assign command_parts = page.command | split: " " %}{% for descriptor in page.descriptors %}{% for pair in descriptor %}{% assign key = pair[0] %}{% if key == "command" %}{{ command_parts[0] }} {{ command_parts[1] }}:::{{ pair[1] }}|||{% elsif key contains "part" %}{% assign part_index = key | remove: "part" | plus: 1 %}{% if command_parts[part_index] %}{{ command_parts[part_index] }}:::{{ pair[1] }}|||{% endif %}{% endif %}{% endfor %}{% endfor %}{% elsif page.concept %}{% for part in page.parts %}{% for pair in part %}:::{{ pair[1] }}|||{% endfor %}{% endfor %}{% endif %}{% endcapture %}
+{% assign card_rows = card_rows | replace: '\n', ' ' | replace: '<br>', ' ' | replace: '<br/>', ' ' | strip_html | normalize_whitespace | append: "@@END@@" | remove: "|||@@END@@" | remove: "@@END@@" | split: "|||" %}
+{% capture card_info %}{% if page.info %}{{ page.info }}{% else %}{% for descriptor in page.descriptors %}{% for pair in descriptor %}{% if pair[0] == "info" %}{{ pair[1] }}{% endif %}{% endfor %}{% endfor %}{% endif %}{% endcapture %}
+{% assign card_info = card_info | replace: '\n', ' ' | replace: '<br>', ' ' | replace: '<br/>', ' ' | strip_html | normalize_whitespace %}
